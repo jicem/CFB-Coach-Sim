@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://bup7xq6xol4h2"]
+
+[ext_resource type="Script" path="res://teamselect.gd" id="1_e7n6l"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_e7n6l")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 643.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 639.0
+
+[node name="Title" type="Label" parent="."]
+offset_left = 315.0
+offset_top = 228.0
+offset_right = 885.0
+offset_bottom = 297.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "College Football Coaching Sim"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+offset_left = 519.0
+offset_top = 393.0
+offset_right = 657.0
+offset_bottom = 431.0
+
+[node name="Label" type="Label" parent="OptionButton"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 3.0
+offset_right = 122.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 20
+text = " Select Team"
+
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bup7xq6xol4h2"]
+[gd_scene load_steps=3 format=3 uid="uid://bup7xq6xol4h2"]
 
 [ext_resource type="Script" path="res://teamselect.gd" id="1_e7n6l"]
+[ext_resource type="Texture2D" uid="uid://cjg5hamjqb8wd" path="res://american-football.png" id="2_kvl1d"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_e7n6l")
@@ -13,23 +14,25 @@ offset_bottom = 643.0
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 layout_mode = 0
-offset_right = 1153.0
-offset_bottom = 639.0
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 1183.0
+offset_bottom = 675.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Title" type="Label" parent="."]
-offset_left = 315.0
-offset_top = 228.0
-offset_right = 885.0
-offset_bottom = 297.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+offset_left = 31.0
+offset_top = 23.0
+offset_right = 601.0
+offset_bottom = 92.0
 theme_override_font_sizes/font_size = 40
 text = "College Football Coaching Sim"
 
 [node name="OptionButton" type="OptionButton" parent="."]
-offset_left = 519.0
-offset_top = 393.0
-offset_right = 657.0
-offset_bottom = 431.0
+offset_left = 717.0
+offset_top = 38.0
+offset_right = 1057.0
+offset_bottom = 76.0
 
 [node name="Label" type="Label" parent="OptionButton"]
 unique_name_in_owner = true
@@ -38,6 +41,10 @@ offset_top = 3.0
 offset_right = 122.0
 offset_bottom = 31.0
 theme_override_font_sizes/font_size = 20
-text = " Select Team"
+text = " Select School"
+
+[node name="American-football" type="Sprite2D" parent="."]
+position = Vector2(551, 364)
+texture = ExtResource("2_kvl1d")
 
 [connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]

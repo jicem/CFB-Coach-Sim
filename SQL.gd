@@ -38,8 +38,8 @@ func _on_update_data_button_down():
 
 
 func _on_delete_data_button_down():
-	pass # Replace with function body.
-
+	database.delete_rows("players", "name = '" + playername.text + "'")
 
 func _on_custom_select_button_down():
-	pass # Replace with function body.
+	database.query("select * from players where score > 10")
+	for i in database.query_result: print(i)

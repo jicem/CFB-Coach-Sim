@@ -14,9 +14,9 @@ func _ready():
 	database = SQLite.new()
 	database.path = "res://cfb.db"
 	database.open_db()
-	# Print first 49 schools
+	# Print first 80 schools
 	print("Available schools:")
-	var selected_array : Array = database.select_rows("teams", "tid < 50", ["school"])
+	var selected_array : Array = database.select_rows("teams", "tid < 81", ["school"])
 	for row in selected_array:
 		print("* " + row["school"])
 		option_button.add_item(row["school"])
@@ -34,4 +34,6 @@ func _on_option_button_item_selected(index):
 		var result : Array = database.select_rows("teams", select_condition, ["school"])
 		for row in result:
 			print("Selected school: " + row["school"])
+		Global.team = index
+		get_tree().change_scene_to_file("res://playerlist.tscn")
 	else: pass

@@ -12,6 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_0jkmn")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
 offset_right = 1183.0
@@ -26,6 +27,7 @@ offset_right = 1049.0
 offset_bottom = 539.0
 columns = 5
 column_titles_visible = true
+hide_root = true
 select_mode = 1
 
 [node name="Label" type="Label" parent="."]
@@ -56,4 +58,5 @@ offset_bottom = 621.0
 theme_override_font_sizes/font_size = 40
 text = "Return to School Selection"
 
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

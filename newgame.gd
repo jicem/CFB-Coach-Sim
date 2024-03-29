@@ -54,42 +54,45 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-	
-func _on_button_pressed():
-	# Duplicate teams table when the "Choose School" button is pressed
-	var new_table = {
-		"tid" : {"data_type":"int", "primary_key":true, "not_null":true, "auto_increment":true},
-		"cid" : {"data_type":"int"},
-		"school" : {"data_type":"text"},
-		"state" : {"data_type":"text"},
-		"budget" : {"data_type":"int"},
-		"prestige" : {"data_type":"int"},
-		"ocid" : {"data_type":"int"},
-		"dcid" : {"data_type":"int"},
-		"ranking" : {"data_type":"int"},
-		"wins" : {"data_type":"int"},
-		"losses" : {"data_type":"int"}
-	}
-	database.query("drop table if exists teams1")
-	database.create_table("teams1", new_table)
-	database.query("select * from teams")
-	for i in database.query_result:
-		var data = {
-			"cid" : i["cid"],
-			"school" : i["school"],
-			"state" : i["state"],
-			"budget" : i["budget"],
-			"prestige" : i["prestige"],
-			"ocid" : i["ocid"],
-			"dcid" : i["dcid"],
-			"ranking" : i["ranking"],
-			"wins" : i["wins"],
-			"losses" : i["losses"]
-		}
-		database.insert_row("teams1", data)
-	# Go to offensive coordinator signing
-	get_tree().change_scene_to_file("res://coachinfo.tscn")
 
-func _on_back_pressed():
-	# Return to home screen when the back button is pressed
-	get_tree().change_scene_to_file("res://teamselect.tscn")
+func _on_button_pressed():
+	# Create schedule table as dictionary
+	var new_table = {
+		"gid" : {"data_type":"int", "primary_key":true, "not_null":true, "auto_increment":true},
+		"homeTid" : {"data_type":"int"},
+		"awayTid" : {"data_type":"int"},
+		"conference" : {"data_type":"int"},
+		"week" : {"data_type":"int"},
+		"homeTeamWon" : {"data_type":"tinyint"}
+	}
+	database.query("drop table if exists schedule")
+	database.create_table("schedule", new_table)
+	# Create an array of numbers between 41 and 80
+	var available_ids = []
+	for i in range(41, 81):
+		available_ids.append(i)
+
+	# Create a loop that inserts a new row into the schedule table 40 times
+	for i in range(40):
+		# Get the homeTid
+		var home_tid = i + 1
+		
+		# Select a random index from the available_ids array
+		var random_index = randi() % available_ids.size()
+		
+		# Get the awayTid from the selected index
+		var away_tid = available_ids[random_index]
+		
+		# Remove the used value from the array
+		available_ids.remove_at(random_index)
+
+		# Insert the row into the schedule table
+		var row_data = {
+			"homeTid": home_tid,
+			"awayTid": away_tid,
+			"conference": 0,
+			"week": 1,
+			"homeTeamWon": 0
+		}
+		database.insert_row("schedule", row_data)
+	get_tree().change_scene_to_file("res://season/week1.tscn")

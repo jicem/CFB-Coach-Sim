@@ -65,10 +65,15 @@ func _on_line_edit_text_submitted(new_text):
 			var array2 : Array = database.select_rows("teams1", "tid == " + str(team), ["budget"])
 			for row in array2:
 				var newBudget = row["budget"] - salary
-				database.update_rows("teams1", "tid == " + str(team), {"budget": newBudget})
-				print(newBudget)
-		# Go to defensive coordinator signing
-		get_tree().change_scene_to_file("res://newgame.tscn")
+				if newBudget >= 0:
+					database.update_rows("teams1", "tid == " + str(team), {"budget": newBudget})
+					print(newBudget)
+					# Go to new game screen
+					get_tree().change_scene_to_file("res://newgame.tscn")
+				else:
+					# If newBudget is negative, give user an error
+					selection.text = "ERR"
+					pass
 	else: pass
 
 func _on_button_pressed():
@@ -83,10 +88,15 @@ func _on_button_pressed():
 			var array2 : Array = database.select_rows("teams1", "tid == " + str(team), ["budget"])
 			for row in array2:
 				var newBudget = row["budget"] - salary
-				database.update_rows("teams1", "tid == " + str(team), {"budget": newBudget})
-				print(newBudget)
-		# Go to defensive coordinator signing
-		get_tree().change_scene_to_file("res://newgame.tscn")
+				if newBudget >= 0:
+					database.update_rows("teams1", "tid == " + str(team), {"budget": newBudget})
+					print(newBudget)
+					# Go to new game screen
+					get_tree().change_scene_to_file("res://newgame.tscn")
+				else:
+					# If newBudget is negative, give user an error
+					selection.text = "ERR"
+					pass
 	else: pass
 
 func add_commas(number: int) -> String:

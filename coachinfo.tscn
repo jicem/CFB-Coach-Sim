@@ -1,0 +1,98 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7cn1kfdg3g1v"]
+
+[ext_resource type="Script" path="res://coachinfo.gd" id="1_2fa8r"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2fa8r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 1183.0
+offset_bottom = 675.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 18.0
+offset_right = 671.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 50
+text = "Coach Information"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 102.0
+offset_right = 671.0
+offset_bottom = 171.0
+theme_override_font_sizes/font_size = 40
+text = "Name your coach:"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 180.0
+offset_right = 671.0
+offset_bottom = 249.0
+theme_override_font_sizes/font_size = 40
+text = "Offensive Style:"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 253.0
+offset_right = 671.0
+offset_bottom = 322.0
+theme_override_font_sizes/font_size = 40
+text = "Defensive Style:"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 109.0
+offset_right = 825.0
+offset_bottom = 159.0
+theme_override_font_sizes/font_size = 30
+placeholder_text = "John Doe"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 186.0
+offset_right = 465.0
+offset_bottom = 206.0
+theme_override_font_sizes/font_size = 30
+
+[node name="OptionButton2" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 427.0
+offset_top = 260.0
+offset_right = 472.0
+offset_bottom = 280.0
+theme_override_font_sizes/font_size = 30
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 527.0
+offset_right = 907.0
+offset_bottom = 604.0
+theme_override_font_sizes/font_size = 50
+text = "Go to Coordinator Signings"
+
+[node name="Label5" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 385.0
+offset_right = 260.0
+offset_bottom = 440.0
+theme_override_font_sizes/font_size = 40
+text = "Portrait:"
+
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="OptionButton2" to="." method="_on_option_button_2_item_selected"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

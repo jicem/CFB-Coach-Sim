@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://oxyxl656c04b"]
+[gd_scene load_steps=2 format=3 uid="uid://mcrq5tv8y0tc"]
 
-[ext_resource type="Script" path="res://season/week1.gd" id="1_8xe4l"]
+[ext_resource type="Script" path="res://season/simulation.gd" id="1_upaho"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_8xe4l")
+script = ExtResource("1_upaho")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -37,24 +37,14 @@ offset_top = 130.0
 offset_right = 624.0
 offset_bottom = 172.0
 theme_override_font_sizes/font_size = 30
-text = "Here are your options for Week 1, Coach"
+text = "Coach"
 
-[node name="Button" type="Button" parent="."]
+[node name="Label3" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 471.0
-offset_top = 281.0
-offset_right = 739.0
-offset_bottom = 344.0
-theme_override_font_sizes/font_size = 40
-text = "Run Practices"
-
-[node name="Button2" type="Button" parent="."]
-layout_mode = 0
-offset_left = 324.0
-offset_top = 396.0
-offset_right = 903.0
-offset_bottom = 459.0
-theme_override_font_sizes/font_size = 40
-text = "Simulate First Week of Games"
-
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+offset_left = 92.0
+offset_top = 166.0
+offset_right = 616.0
+offset_bottom = 208.0
+theme_override_font_sizes/font_size = 30
+text = "by a score of"

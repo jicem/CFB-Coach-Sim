@@ -74,5 +74,13 @@ offset_right = 927.0
 offset_bottom = 595.0
 text = "Submit"
 
+[node name="SkipButton" type="Button" parent="."]
+offset_left = 939.0
+offset_top = 558.0
+offset_right = 987.0
+offset_bottom = 595.0
+text = "Skip"
+
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

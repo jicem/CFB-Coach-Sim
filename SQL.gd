@@ -41,5 +41,5 @@ func _on_delete_data_button_down():
 	database.delete_rows("players", "name = '" + playername.text + "'")
 
 func _on_custom_select_button_down():
-	database.query("select * from players where score > 10")
+	database.query("SELECT * FROM players WHERE score > 10")
 	for i in database.query_result: print(i)

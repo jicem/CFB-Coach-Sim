@@ -70,9 +70,9 @@ func _on_button_pressed():
 		"wins" : {"data_type":"int"},
 		"losses" : {"data_type":"int"}
 	}
-	database.query("drop table if exists teams1")
+	database.query("DROP TABLE IF EXISTS teams1")
 	database.create_table("teams1", new_table)
-	database.query("select * from teams")
+	database.query("SELECT * FROM teams")
 	for i in database.query_result:
 		var data = {
 			"cid" : i["cid"],

@@ -65,7 +65,7 @@ func _on_button_pressed():
 		"week" : {"data_type":"int"},
 		"homeTeamWon" : {"data_type":"tinyint"}
 	}
-	database.query("drop table if exists schedule")
+	database.query("DROP TABLE IF EXISTS schedule")
 	database.create_table("schedule", new_table)
 	# Create an array of numbers between 41 and 80
 	var available_ids = []
@@ -92,7 +92,7 @@ func _on_button_pressed():
 			"awayTid": away_tid,
 			"conference": 0,
 			"week": 1,
-			"homeTeamWon": 0
+			"homeTeamWon": -1
 		}
 		database.insert_row("schedule", row_data)
 	get_tree().change_scene_to_file("res://season/week1.tscn")

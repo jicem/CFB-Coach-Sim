@@ -107,3 +107,6 @@ func add_commas(number: int) -> String:
 		comma_index -= 3  # Move to the next comma position
 
 	return formatted_number
+
+func _on_skip_button_pressed():
+	get_tree().change_scene_to_file("res://dclist.tscn")

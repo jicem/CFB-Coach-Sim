@@ -17,3 +17,8 @@ func _process(delta):
 func _on_button_2_pressed():
 	Global.week = 1
 	get_tree().change_scene_to_file("res://season/simulation.tscn")
+
+
+func _on_button_pressed():
+	Global.week = 1
+	get_tree().change_scene_to_file("res://season/practice.tscn")

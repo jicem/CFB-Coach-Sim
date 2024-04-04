@@ -58,5 +58,8 @@ offset_bottom = 621.0
 theme_override_font_sizes/font_size = 40
 text = "Return to School Selection"
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -42,9 +42,27 @@ text = "Coach"
 [node name="Label3" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 92.0
+offset_left = 100.0
 offset_top = 166.0
-offset_right = 616.0
+offset_right = 624.0
 offset_bottom = 208.0
 theme_override_font_sizes/font_size = 30
-text = "by a score of"
+text = "Score:"
+
+[node name="Label4" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 624.0
+offset_bottom = 242.0
+theme_override_font_sizes/font_size = 30
+text = "Record:"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 440.0
+offset_top = 550.0
+offset_right = 719.0
+offset_bottom = 613.0
+theme_override_font_sizes/font_size = 40
+text = "Sim to Week 1"

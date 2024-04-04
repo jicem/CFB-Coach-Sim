@@ -7,11 +7,17 @@ var score : String
 @onready var label = %Label
 @onready var label2 = %Label2
 @onready var label3 = %Label3
+@onready var label4 = %Label4
+@onready var button = $Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Display the current season at the top of the screen
+	var nextWeek = week + 1
+	var wins
+	var losses
+	# Display the current season at the top of the screen and display next week's number in the button
 	label.text = str(season) + " Season"
+	button.text = "Sim to Week " + str(nextWeek)
 	# Open database from cfb.db file
 	database = SQLite.new()
 	database.path = "res://cfb.db"
@@ -44,12 +50,14 @@ func _ready():
 				query = "UPDATE teams1 SET wins = wins + 1 WHERE tid = " + str(homeTid)
 				database.query(query)
 				query = "UPDATE teams1 SET losses = losses + 1 WHERE tid = " + str(awayTid)
+				database.query(query)
 				print("Team " + str(homeTid) + " won")
 			else:
 				team_won = 0
 				query = "UPDATE teams1 SET wins = wins + 1 WHERE tid = " + str(awayTid)
 				database.query(query)
 				query = "UPDATE teams1 SET losses = losses + 1 WHERE tid = " + str(homeTid)
+				database.query(query)
 				print("Team " + str(awayTid) + " won")
 			# Update homeTeamWon in the schedule table
 			database.update_rows("schedule", "gid == " + str(gid), {"homeTeamWon": team_won})
@@ -84,6 +92,10 @@ func _ready():
 						label2.text = "Coach " + Global.coachname + ", you defeated " + ranking + opponent
 					else:
 						label2.text = "Coach " + Global.coachname + ", you were defeated by " + ranking + opponent
+					var array3 : Array = database.select_rows("teams1", "tid == " + str(homeTid), ["*"])
+					for newRow in array3:
+						wins = newRow["wins"]
+						losses = newRow["losses"]
 				# If the coach's team is the away team, display the appropriate result
 				else:
 					var array2 : Array = database.select_rows("teams1", "tid == " + str(homeTid), ["*"])
@@ -96,7 +108,12 @@ func _ready():
 						label2.text = "Coach " + Global.coachname + ", you were defeated by " + ranking + opponent
 					else:
 						label2.text = "Coach " + Global.coachname + ", you defeated " + ranking + opponent
-				label3.text = " by a score of " + score
+					var array3 : Array = database.select_rows("teams1", "tid == " + str(awayTid), ["*"])
+					for newRow in array3:
+						wins = newRow["wins"]
+						losses = newRow["losses"]
+				label3.text = "Score: " + score
+				label4.text = "Record: " + str(wins) + "-" + str(losses)
 				
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

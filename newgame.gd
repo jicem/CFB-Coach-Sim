@@ -3,6 +3,7 @@ var database : SQLite
 var treerow : TreeItem
 var team = Global.team
 @onready var tree = $Tree
+@onready var timer = $Timer
 @onready var label = %Label
 
 # Called when the node enters the scene tree for the first time.
@@ -56,8 +57,12 @@ func _process(delta):
 	pass
 
 func _on_button_pressed():
+	label.text = "Generating schedule/players tables..."
+	timer.start()
+	
+func _on_timer_timeout():
 	# Create schedule table as dictionary
-	var new_table = {
+	var schedule_table = {
 		"gid" : {"data_type":"int", "primary_key":true, "not_null":true, "auto_increment":true},
 		"homeTid" : {"data_type":"int"},
 		"awayTid" : {"data_type":"int"},
@@ -66,7 +71,7 @@ func _on_button_pressed():
 		"homeTeamWon" : {"data_type":"tinyint"}
 	}
 	database.query("DROP TABLE IF EXISTS schedule")
-	database.create_table("schedule", new_table)
+	database.create_table("schedule", schedule_table)
 	# Create an array of numbers between 41 and 80
 	var available_ids = []
 	for i in range(41, 81):
@@ -95,4 +100,31 @@ func _on_button_pressed():
 			"homeTeamWon": -1
 		}
 		database.insert_row("schedule", row_data)
+	# Duplicate players table
+	var player_table = {
+		"pid" : {"data_type":"int", "primary_key":true, "not_null":true, "auto_increment":true},
+		"firstname" : {"data_type":"text"},
+		"lastname" : {"data_type":"text"},
+		"tid" : {"data_type":"int"},
+		"birthyear" : {"data_type":"int"},
+		"position" : {"data_type":"text"},
+		"jersey" : {"data_type":"int"},
+		"state" : {"data_type":"text"},
+		"rating" : {"data_type":"int"}
+	}
+	database.query("DROP TABLE IF EXISTS players1")
+	database.create_table("players1", player_table)
+	database.query("SELECT * FROM players")
+	for i in database.query_result:
+		var data = {
+			"firstname" : i["firstname"],
+			"lastname" : i["lastname"],
+			"tid" : i["tid"],
+			"birthyear" : i["birthyear"],
+			"position" : i["position"],
+			"jersey" : i["jersey"],
+			"state" : i["state"],
+			"rating" : i["rating"]
+		}
+		database.insert_row("players1", data)
 	get_tree().change_scene_to_file("res://season/week1.tscn")

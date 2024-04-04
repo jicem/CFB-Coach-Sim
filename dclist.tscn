@@ -75,6 +75,7 @@ offset_bottom = 595.0
 text = "Submit"
 
 [node name="SkipButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 939.0
 offset_top = 558.0
 offset_right = 987.0

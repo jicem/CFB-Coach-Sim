@@ -3,6 +3,7 @@ var database : SQLite
 var treerow : TreeItem
 var team = Global.team
 @onready var tree = $Tree
+@onready var timer = $Timer
 @onready var label = %Label
 
 # Called when the node enters the scene tree for the first time.
@@ -56,6 +57,14 @@ func _process(delta):
 	pass
 	
 func _on_button_pressed():
+	label.text = "Generating new teams table..."
+	timer.start()
+
+func _on_back_pressed():
+	# Return to home screen when the back button is pressed
+	get_tree().change_scene_to_file("res://teamselect.tscn")
+
+func _on_timer_timeout():
 	# Duplicate teams table when the "Choose School" button is pressed
 	var new_table = {
 		"tid" : {"data_type":"int", "primary_key":true, "not_null":true, "auto_increment":true},
@@ -89,7 +98,3 @@ func _on_button_pressed():
 		database.insert_row("teams1", data)
 	# Go to offensive coordinator signing
 	get_tree().change_scene_to_file("res://coachinfo.tscn")
-
-func _on_back_pressed():
-	# Return to home screen when the back button is pressed
-	get_tree().change_scene_to_file("res://teamselect.tscn")

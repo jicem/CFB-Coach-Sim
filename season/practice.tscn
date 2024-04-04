@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://br38lue2pd58o"]
+[gd_scene load_steps=2 format=3 uid="uid://frhnpjxk3af4"]
 
-[ext_resource type="Script" path="res://newgame.gd" id="1_326hh"]
+[ext_resource type="Script" path="res://season/practice.gd" id="1_e8xu1"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_326hh")
+script = ExtResource("1_e8xu1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -19,37 +19,34 @@ offset_right = 1183.0
 offset_bottom = 675.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 14.0
+offset_right = 272.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 50
+text = "Season"
+
 [node name="Tree" type="Tree" parent="."]
 layout_mode = 0
 offset_left = 96.0
 offset_top = 97.0
 offset_right = 1049.0
 offset_bottom = 539.0
-columns = 5
+columns = 6
 column_titles_visible = true
 hide_root = true
 select_mode = 1
 
-[node name="Label" type="Label" parent="."]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 100.0
-offset_top = 14.0
-offset_right = 258.0
-offset_bottom = 83.0
-theme_override_font_sizes/font_size = 50
-text = "Roster"
-
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 440.0
-offset_top = 550.0
-offset_right = 719.0
-offset_bottom = 613.0
+offset_left = 290.0
+offset_top = 560.0
+offset_right = 877.0
+offset_bottom = 623.0
 theme_override_font_sizes/font_size = 40
-text = "Sim to Week 1"
-
-[node name="Timer" type="Timer" parent="."]
+text = "Simulate Next Week of Games"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

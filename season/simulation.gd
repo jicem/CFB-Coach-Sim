@@ -2,6 +2,7 @@ extends Control
 var season = 2024 + Global.season
 var team = Global.team
 var week = Global.week
+var nextWeek = week + 1
 var database : SQLite
 var score : String
 @onready var label = %Label
@@ -12,7 +13,6 @@ var score : String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var nextWeek = week + 1
 	var wins
 	var losses
 	# Display the current season at the top of the screen and display next week's number in the button
@@ -64,6 +64,7 @@ func _ready():
 			# Display the result message based on whether the coach's team played
 			if homeTid == team || awayTid == team:
 				var opponent
+				var oppRanking
 				var ranking
 				# Calculate the difference between home and away sums
 				var score_difference = abs(home_result - away_result)
@@ -79,19 +80,19 @@ func _ready():
 				database.query(score_query)
 				for i in database.query_result:
 					score = i["Score"]
-					print(score)
 				# If the coach's team is the home team, display the appropriate result
 				if homeTid == team:
 					var array2 : Array = database.select_rows("teams1", "tid == " + str(awayTid), ["*"])
 					for newRow in array2:
 						opponent = newRow["school"]
+						oppRanking = newRow["ranking"]
 						if newRow["ranking"] > 0 and newRow["ranking"] < 26:
-							ranking = "# " + newRow["ranking"]
+							ranking = "# " + str(oppRanking)
 						else: ranking = ""
 					if team_won == 1:
-						label2.text = "Coach " + Global.coachname + ", you defeated " + ranking + opponent
+						label2.text = "Coach " + Global.coachname + ", your team defeated " + ranking + opponent
 					else:
-						label2.text = "Coach " + Global.coachname + ", you were defeated by " + ranking + opponent
+						label2.text = "Coach " + Global.coachname + ", your team was defeated by " + ranking + opponent
 					var array3 : Array = database.select_rows("teams1", "tid == " + str(homeTid), ["*"])
 					for newRow in array3:
 						wins = newRow["wins"]
@@ -101,13 +102,14 @@ func _ready():
 					var array2 : Array = database.select_rows("teams1", "tid == " + str(homeTid), ["*"])
 					for newRow in array2:
 						opponent = newRow["school"]
+						oppRanking = newRow["ranking"]
 						if newRow["ranking"] > 0 and newRow["ranking"] < 26:
-							ranking = newRow["ranking"]
+							ranking = "#" + str(oppRanking)
 						else: ranking = ""
 					if team_won == 1:
-						label2.text = "Coach " + Global.coachname + ", you were defeated by " + ranking + opponent
+						label2.text = "Coach " + Global.coachname + ", your team was defeated by " + ranking + " " + opponent
 					else:
-						label2.text = "Coach " + Global.coachname + ", you defeated " + ranking + opponent
+						label2.text = "Coach " + Global.coachname + ", your team defeated " + ranking + " " + opponent
 					var array3 : Array = database.select_rows("teams1", "tid == " + str(awayTid), ["*"])
 					for newRow in array3:
 						wins = newRow["wins"]
@@ -119,3 +121,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_button_pressed():
+	if nextWeek == 2:
+		get_tree().change_scene_to_file("res://season/week2.tscn")

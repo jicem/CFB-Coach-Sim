@@ -51,11 +51,12 @@ func _ready():
 		treerow.set_text(3, textJersey)
 		treerow.set_text(4, textRating)
 		# Determine whether to increase the rating by 1
-		if rng.randf() < 0.5:
+		if rng.randf() < 0.5 and rating < 99:
 			rating += 1
 		textRating = str(rating)
 		print("New Rating: " + textRating)
 		database.update_rows("players1", "pid == " + str(row["pid"]), {"rating": rating})
+		# Display the new rating in the table
 		treerow.set_text(5, textRating)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

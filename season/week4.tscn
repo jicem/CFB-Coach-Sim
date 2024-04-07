@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjam7nmn6sm6m"]
+[gd_scene load_steps=2 format=3 uid="uid://b8gstus2hso5d"]
 
-[ext_resource type="Script" path="res://season/week3.gd" id="1_bkwuj"]
+[ext_resource type="Script" path="res://season/week4.gd" id="1_gtjpj"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bkwuj")
+script = ExtResource("1_gtjpj")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -37,7 +37,7 @@ offset_top = 130.0
 offset_right = 624.0
 offset_bottom = 172.0
 theme_override_font_sizes/font_size = 30
-text = "Here are your options for Week 3, Coach"
+text = "Here are your options for Week 4, Coach"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -55,7 +55,7 @@ offset_top = 396.0
 offset_right = 903.0
 offset_bottom = 459.0
 theme_override_font_sizes/font_size = 40
-text = "Simulate Third Week of Games"
+text = "Simulate Fourth Week of Games"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

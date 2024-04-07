@@ -104,7 +104,7 @@ func _ready():
 				else:
 					var array2 : Array = database.select_rows("teams1", "tid == " + str(homeTid), ["*"])
 					for newRow in array2:
-						school = newRow["school"]
+						opponent = newRow["school"]
 						oppRanking = newRow["ranking"]
 						if newRow["ranking"] > 0 and newRow["ranking"] < 26:
 							ranking = "#" + str(oppRanking) + " "
@@ -132,3 +132,5 @@ func _on_button_pressed():
 		get_tree().change_scene_to_file("res://season/week2.tscn")
 	elif nextWeek == 3:
 		get_tree().change_scene_to_file("res://season/week3.tscn")
+	elif nextWeek == 4:
+		get_tree().change_scene_to_file("res://season/week4.tscn")

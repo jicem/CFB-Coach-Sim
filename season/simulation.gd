@@ -134,3 +134,9 @@ func _on_button_pressed():
 		get_tree().change_scene_to_file("res://season/week3.tscn")
 	elif nextWeek == 4:
 		get_tree().change_scene_to_file("res://season/week4.tscn")
+	elif nextWeek == 5:
+		get_tree().change_scene_to_file("res://season/week5.tscn")
+	elif nextWeek == 6:
+		get_tree().change_scene_to_file("res://season/week6.tscn")
+	elif nextWeek == 7:
+		get_tree().change_scene_to_file("res://season/week7.tscn")

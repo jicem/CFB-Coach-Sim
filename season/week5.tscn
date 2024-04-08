@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8gstus2hso5d"]
+[gd_scene load_steps=2 format=3 uid="uid://lvso7i60t05y"]
 
-[ext_resource type="Script" path="res://season/week4.gd" id="1_gtjpj"]
+[ext_resource type="Script" path="res://season/week5.gd" id="1_tevo2"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_gtjpj")
+script = ExtResource("1_tevo2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -37,7 +37,7 @@ offset_top = 130.0
 offset_right = 624.0
 offset_bottom = 172.0
 theme_override_font_sizes/font_size = 30
-text = "Here are your options for Week 4, Coach"
+text = "Here are your options for Week 5, Coach"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -52,10 +52,20 @@ text = "Run Practices"
 layout_mode = 0
 offset_left = 316.0
 offset_top = 396.0
-offset_right = 939.0
+offset_right = 899.0
 offset_bottom = 459.0
 theme_override_font_sizes/font_size = 40
-text = "Simulate Fourth Week of Games"
+text = "Simulate Fifth Week of Games"
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 513.0
+offset_right = 782.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 40
+text = "View CFI Rankings"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]

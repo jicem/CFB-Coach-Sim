@@ -152,7 +152,7 @@ func _ready():
 	# Create a loop that inserts a new row into the schedule table 20 times
 	for i in range(41, 61):
 		# Hard coding certain matchups
-		if i == 44:
+		if i == 45:
 			# Team 5 will always play Team 8 in week 2
 			row_data = {
 				"homeTid": 45,
@@ -163,8 +163,8 @@ func _ready():
 			}
 			database.insert_row("schedule", row_data)
 			continue
-		if i == 47: continue
-		if i == 45:
+		if i == 48: continue
+		if i == 46:
 			# Team 6 will always play Team 9 in week 2
 			row_data = {
 				"homeTid": 46,
@@ -175,8 +175,8 @@ func _ready():
 			}
 			database.insert_row("schedule", row_data)
 			continue
-		if i == 48: continue
-		if i == 54:
+		if i == 49: continue
+		if i == 55:
 			# Team 15 will always play Team 18 in week 2
 			row_data = {
 				"homeTid": 55,
@@ -187,8 +187,8 @@ func _ready():
 			}
 			database.insert_row("schedule", row_data)
 			continue
-		if i == 57: continue
-		if i == 55:
+		if i == 58: continue
+		if i == 56:
 			# Team 16 will always play Team 19 in week 2
 			row_data = {
 				"homeTid": 56,
@@ -199,10 +199,10 @@ func _ready():
 			}
 			database.insert_row("schedule", row_data)
 			continue
-		if i == 58: continue
+		if i == 59: continue
 		
 		# Get the homeTid
-		var home_tid = i + 1
+		var home_tid = i
 		
 		# Get the awayTid from the current index
 		var away_tid = available_ids[awayCount]

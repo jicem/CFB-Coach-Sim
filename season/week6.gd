@@ -39,3 +39,7 @@ func _on_button_2_pressed():
 func _on_button_3_pressed():
 	Global.week = 6
 	get_tree().change_scene_to_file("res://season/ranking.tscn")
+
+
+func _on_coach_button_pressed():
+	pget_tree().change_scene_to_file("res://coachoffice.tscn")

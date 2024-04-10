@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8gstus2hso5d"]
+[gd_scene load_steps=3 format=3 uid="uid://b8gstus2hso5d"]
 
 [ext_resource type="Script" path="res://season/week4.gd" id="1_gtjpj"]
+[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_wr1ri"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -57,5 +58,17 @@ offset_bottom = 459.0
 theme_override_font_sizes/font_size = 40
 text = "Simulate Fourth Week of Games"
 
+[node name="CoachButton" type="Button" parent="."]
+offset_left = 1011.0
+offset_top = 8.0
+offset_right = 1141.0
+offset_bottom = 71.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "Office"
+icon = ExtResource("2_wr1ri")
+flat = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CoachButton" to="." method="_on_coach_button_pressed"]

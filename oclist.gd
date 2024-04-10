@@ -13,7 +13,8 @@ func _ready():
 	tree.set_column_title(1, "First Name")
 	tree.set_column_title(2, "Last Name")
 	tree.set_column_title(3, "Rating")
-	tree.set_column_title(4, "Desired Salary")
+	tree.set_column_title(4, "Preferred Style")
+	tree.set_column_title(5, "Desired Salary")
 	# The root node is hidden in the tree
 	treerow = tree.create_item()
 	treerow.set_text(0, "Hidden")
@@ -21,6 +22,7 @@ func _ready():
 	treerow.set_text(2, "Hidden")
 	treerow.set_text(3, "Hidden")
 	treerow.set_text(4, "Hidden")
+	treerow.set_text(5, "Hidden")
 	# Open database from cfb.db file
 	database = SQLite.new()
 	database.path = "res://cfb.db"
@@ -34,12 +36,20 @@ func _ready():
 	# Select all rows from the table
 	var array2 : Array = database.select_rows("offcoordinators", "", ["*"])
 	for row in array2:
+		var scheme
 		# Create variable for tree row
 		treerow = tree.create_item()
 		# Convert jersey number to string
 		var textID = str(row["ocid"])
 		# Convert rating to string
 		var textRating = str(row["rating"])
+		# Convert scheme number to text
+		if row["scheme"] == 0:
+			scheme = "Balanced"
+		elif row["scheme"] == 1:
+			scheme = "Pass First"
+		else:
+			scheme = "Run First"
 		# Convert salary to string
 		var textSalary = str(row["salary"])
 		# Add data to tree
@@ -47,7 +57,8 @@ func _ready():
 		treerow.set_text(1, row["firstname"])
 		treerow.set_text(2, row["lastname"])
 		treerow.set_text(3, textRating)
-		treerow.set_text(4, textSalary)
+		treerow.set_text(4, scheme)
+		treerow.set_text(5, textSalary)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -66,6 +77,8 @@ func _on_line_edit_text_submitted(new_text):
 			for row in array2:
 				var newBudget = row["budget"] - salary
 				if newBudget >= 0:
+					# Update ocid and budget values in the new teams table for the player's team
+					database.update_rows("teams1", "tid == " + str(team), {"ocid": id})
 					database.update_rows("teams1", "tid == " + str(team), {"budget": newBudget})
 					print(newBudget)
 					# Go to defensive coordinator signing
@@ -88,6 +101,8 @@ func _on_button_pressed():
 			for row in array2:
 				var newBudget = row["budget"] - salary
 				if newBudget >= 0:
+					# Update ocid and budget values in the new teams table for the player's team
+					database.update_rows("teams1", "tid == " + str(team), {"ocid": id})
 					database.update_rows("teams1", "tid == " + str(team), {"budget": newBudget})
 					print(newBudget)
 					# Go to defensive coordinator signing
@@ -109,4 +124,5 @@ func add_commas(number: int) -> String:
 	return formatted_number
 
 func _on_skip_button_pressed():
+	database.update_rows("teams1", "tid == " + str(team), {"ocid": 0})
 	get_tree().change_scene_to_file("res://dclist.tscn")

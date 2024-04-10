@@ -33,7 +33,6 @@ func _on_button_pressed():
 	Global.face = portrait.frame
 	get_tree().change_scene_to_file("res://oclist.tscn")
 
-
 func _on_prev_button_pressed():
 	# If the previous button is pressed, the previous face will be displayed
 	if portrait.frame == 0: portrait.frame = 20

@@ -26,10 +26,10 @@ func _ready():
 		var teams = 10
 		
 		# Generate the (mostly) round-robin schedule
-		for i in range(8):
+		for i in range(9):
 			var conference = i + 1
 			var multiple = i * 10
-			for week in range(8):
+			for week in range(9):
 				# Reset the array for the new week
 				var played_teams = []
 				

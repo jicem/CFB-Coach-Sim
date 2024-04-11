@@ -52,3 +52,7 @@ func _on_button_pressed():
 
 func _on_button_2_pressed():
 	get_tree().change_scene_to_file("res://season/simulation.tscn")
+
+
+func _on_coach_button_pressed():
+	get_tree().change_scene_to_file("res://coachoffice.tscn")

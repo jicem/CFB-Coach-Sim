@@ -9,7 +9,7 @@ var database : SQLite
 func _ready():
 	# Display the current season at the top of the screen
 	label.text = str(season) + " Season"
-	label2.text = "Here are your options for Week 6, Coach " + Global.coachname + ":"
+	label2.text = "Here are your options for Week 9, Coach " + Global.coachname + ":"
 	# Open database from cfb.db file
 	database = SQLite.new()
 	database.path = "res://cfb.db"
@@ -22,22 +22,22 @@ func _ready():
 		database.update_rows("teams1", "tid == " + str(i["tid"]), {"ranking": ranking})
 		# Increase ranking for next iteration
 		ranking += 1
-
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 
 func _on_button_pressed():
-	Global.week = 6
+	Global.week = 9
 	get_tree().change_scene_to_file("res://season/practice.tscn")
 
 func _on_button_2_pressed():
-	Global.week = 6
+	Global.week = 9
 	get_tree().change_scene_to_file("res://season/simulation.tscn")
 
 func _on_button_3_pressed():
-	Global.week = 6
+	Global.week = 9
 	get_tree().change_scene_to_file("res://season/ranking.tscn")
 
 

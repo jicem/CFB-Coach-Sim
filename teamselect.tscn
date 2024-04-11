@@ -21,12 +21,13 @@ offset_bottom = 675.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Title" type="Label" parent="."]
-offset_left = 31.0
+offset_left = 118.0
 offset_top = 23.0
-offset_right = 601.0
-offset_bottom = 92.0
+offset_right = 688.0
+offset_bottom = 136.0
 theme_override_font_sizes/font_size = 40
-text = "College Football Coaching Sim"
+text = "Armchair Coach:
+College Football"
 
 [node name="OptionButton" type="OptionButton" parent="."]
 offset_left = 717.0

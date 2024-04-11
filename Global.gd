@@ -10,6 +10,7 @@ var state : int
 var schedule1complete : bool
 var schedule2complete : bool
 var schedule3complete : bool
+var ccschedulecomplete : bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,6 +24,7 @@ func _ready():
 	schedule1complete = false
 	schedule2complete = false
 	schedule3complete = false
+	ccschedulecomplete = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

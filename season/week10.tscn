@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://weq7ye5drd5x"]
+[gd_scene load_steps=3 format=3 uid="uid://dtuqdm210v4l3"]
 
-[ext_resource type="Script" path="res://season/ranking.gd" id="1_8vo2b"]
-[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_6gwjn"]
+[ext_resource type="Script" path="res://season/week10.gd" id="1_tj5qm"]
+[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_n66bh"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_8vo2b")
+script = ExtResource("1_tj5qm")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -38,36 +38,34 @@ offset_top = 130.0
 offset_right = 624.0
 offset_bottom = 172.0
 theme_override_font_sizes/font_size = 30
-text = "College Football Invitational Rankings:"
-
-[node name="Tree" type="Tree" parent="."]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 195.0
-offset_right = 901.0
-offset_bottom = 539.0
-columns = 4
-column_titles_visible = true
-hide_root = true
-select_mode = 1
+text = "Here are your options for Week 10, Coach"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 95.0
-offset_top = 563.0
-offset_right = 363.0
-offset_bottom = 626.0
+offset_left = 471.0
+offset_top = 281.0
+offset_right = 739.0
+offset_bottom = 344.0
 theme_override_font_sizes/font_size = 40
 text = "Run Practices"
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 399.0
-offset_top = 563.0
-offset_right = 986.0
-offset_bottom = 626.0
+offset_left = 290.0
+offset_top = 396.0
+offset_right = 906.0
+offset_bottom = 459.0
 theme_override_font_sizes/font_size = 40
-text = "Simulate Next Week of Games"
+text = "Simulate Tenth Week of Games"
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 513.0
+offset_right = 782.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 40
+text = "View CFI Rankings"
 
 [node name="CoachButton" type="Button" parent="."]
 layout_mode = 0
@@ -78,9 +76,10 @@ offset_bottom = 71.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
 text = "Office"
-icon = ExtResource("2_6gwjn")
+icon = ExtResource("2_n66bh")
 flat = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="CoachButton" to="." method="_on_coach_button_pressed"]

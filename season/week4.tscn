@@ -59,6 +59,7 @@ theme_override_font_sizes/font_size = 40
 text = "Simulate Fourth Week of Games"
 
 [node name="CoachButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1011.0
 offset_top = 8.0
 offset_right = 1141.0

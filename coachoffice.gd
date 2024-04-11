@@ -45,3 +45,15 @@ func _on_button_pressed():
 		get_tree().change_scene_to_file("res://season/week6.tscn")
 	elif Global.state == 7:
 		get_tree().change_scene_to_file("res://season/week7.tscn")
+	elif Global.state == 8:
+		get_tree().change_scene_to_file("res://season/week8.tscn")
+	elif Global.state == 9:
+		get_tree().change_scene_to_file("res://season/week9.tscn")
+	elif Global.state == 10:
+		get_tree().change_scene_to_file("res://season/week10.tscn")
+	elif Global.state == 11:
+		get_tree().change_scene_to_file("res://season/week11.tscn")
+	elif Global.state == 12:
+		get_tree().change_scene_to_file("res://season/week12.tscn")
+	elif Global.state == 13:
+		get_tree().change_scene_to_file("res://season/week13.tscn")

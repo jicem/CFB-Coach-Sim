@@ -136,23 +136,104 @@ func _ready():
 			database.query(query)
 			for i in database.query_result:
 				if awayTid == team:
-					pass
+					query = "SELECT ocid FROM teams1 WHERE tid = " + str(awayTid)
+					database.query(query)
+					for j in database.query_result:
+						oc = j["ocid"]
+					query = "SELECT dcid FROM teams1 WHERE tid = " + str(awayTid)
+					database.query(query)
+					for j in database.query_result:
+						dc = j["dcid"]
+					# If the player's team doesn't have an offensive or defensive coordinator, simply do the player ratings
+					if oc == 0 and dc == 0:
+						away_result = i["total_ratings"]
+					# If the player's team only has an offensive coordinator, add his rating to the result
+					elif oc != 0 and dc == 0:
+						query = "SELECT rating, scheme FROM offcoordinators WHERE ocid = " + str(oc)
+						database.query(query)
+						for j in database.query_result:
+							# If the scheme for the coordinator and head coach are the same, double the rating
+							if j["scheme"] == Global.offense:
+								# Query to add the ratings of the offensive and defensive coordinators
+								var newRating = j["rating"] * 2
+								away_result = i["total_ratings"] + newRating
+							# If the scheme for the coordinator and head coach are not the same, use the normal rating
+							else:
+								away_result = i["total_ratings"] + j["rating"]
+					# If the player's team only has a defensive coordinator, add his rating to the result
+					elif oc == 0 and dc != 0:
+						query = "SELECT rating, scheme FROM defcoordinators WHERE dcid = " + str(dc)
+						database.query(query)
+						for j in database.query_result:
+							# If the scheme for the coordinator and head coach are the same, double the rating
+							if j["scheme"] == Global.defense:
+								var newRating = j["rating"] * 2
+								away_result = i["total_ratings"] + newRating
+							# If the scheme for the coordinator and head coach are not the same, use the normal rating
+							else:
+								away_result = i["total_ratings"] + j["rating"]
+					# If the player's team has both coordinators, add both ratings to tne result
+					else:
+						query = "SELECT scheme FROM offcoordinators WHERE ocid = " + str(oc)
+						database.query(query)
+						for j in database.query_result:
+							if j["scheme"] == Global.offense:
+								query = "SELECT scheme FROM defcoordinators WHERE dcid = " + str(dc)
+								database.query(query)
+								for k in database.query_result:
+									if k["scheme"] == Global.defense:
+										# If both schemes are equal to the player's schemes, both ratings will be doubled
+										query = "SELECT (o.rating + d.rating) * 2 AS coord_ratings FROM teams1 t
+												JOIN offcoordinators o ON o.ocid = t.ocid
+												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(awayTid)
+										database.query(query)
+										for l in database.query_result:
+											away_result = i["total_ratings"] + l["coord_ratings"]
+									else:
+										# If only the offensive coordinator's scheme is equal to the player's, double one rating
+										query = "SELECT (o.rating * 2) + d.rating AS coord_ratings FROM teams1 t
+												JOIN offcoordinators o ON o.ocid = t.ocid
+												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(awayTid)
+										database.query(query)
+										for l in database.query_result:
+											away_result = i["total_ratings"] + l["coord_ratings"]
+							else:
+								query = "SELECT scheme FROM defcoordinators WHERE dcid = " + str(dc)
+								database.query(query)
+								for k in database.query_result:
+									if k["scheme"] == Global.defense:
+										# If only the defensive coordinator's scheme is equal to the player's, double one rating
+										query = "SELECT o.rating + (d.rating * 2) AS coord_ratings FROM teams1 t
+												JOIN offcoordinators o ON o.ocid = t.ocid
+												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(awayTid)
+										database.query(query)
+										for l in database.query_result:
+											away_result = i["total_ratings"] + l["coord_ratings"]
+									else:
+										# If neither scheme is equal to the player's, add the normal ratings
+										query = "SELECT (o.rating + d.rating) AS coord_ratings FROM teams1 t
+												JOIN offcoordinators o ON o.ocid = t.ocid
+												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(awayTid)
+										database.query(query)
+										for l in database.query_result:
+											away_result = i["total_ratings"] + l["coord_ratings"]
 				else:
 					# Query to add the ratings of the offensive and defensive coordinators
 					query = "SELECT (o.rating + d.rating) AS coord_ratings FROM teams1 t JOIN offcoordinators o ON o.ocid = t.ocid
 							JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(homeTid)
 					database.query(query)
 					for j in database.query_result:
-						away_result = i["total_ratings"] + j["coord_ratings"]
+						away_result = i["total_ratings"] + j["coord_ratings"]		
 			var team_won
 			# Update wins and losses in the teams1 table based on the result
-			if home_result > away_result:
+			if home_result > 0:
 				team_won = 1
 				query = "UPDATE teams1 SET wins = wins + 1 WHERE tid = " + str(homeTid)
 				database.query(query)
 				query = "UPDATE teams1 SET losses = losses + 1 WHERE tid = " + str(awayTid)
 				database.query(query)
 				print("Team " + str(homeTid) + " won")
+				print(away_result)
 			else:
 				team_won = 0
 				query = "UPDATE teams1 SET wins = wins + 1 WHERE tid = " + str(awayTid)
@@ -165,9 +246,8 @@ func _ready():
 			# Display the result message based on whether the coach's team played
 			if homeTid == team || awayTid == team:
 				# Calculate the difference between home and away sums
-				var score_difference = abs(home_result - away_result)
+				var score_difference = abs(home_result - 0)
 				var score_query
-				var score
 				# Select a random score based on the score difference
 				if score_difference > 400:
 					score_query = "SELECT Score FROM blowoutscores ORDER BY RANDOM() LIMIT 1"
@@ -189,7 +269,7 @@ func _ready():
 					for newRow in array2:
 						opponent = newRow["school"]
 						oppRanking = newRow["ranking"]
-						if newRow["ranking"] > 0 and newRow["ranking"] < 26:
+						if oppRanking > 0 and oppRanking < 26:
 							ranking = "#" + str(oppRanking) + " "
 						else: ranking = ""
 					if team_won == 1:
@@ -207,7 +287,7 @@ func _ready():
 					for newRow in array2:
 						opponent = newRow["school"]
 						oppRanking = newRow["ranking"]
-						if newRow["ranking"] > 0 and newRow["ranking"] < 26:
+						if oppRanking > 0 and oppRanking < 26:
 							ranking = "#" + str(oppRanking) + " "
 						else: ranking = ""
 					if team_won == 1:
@@ -241,6 +321,18 @@ func _on_button_pressed():
 		get_tree().change_scene_to_file("res://season/week6.tscn")
 	elif nextWeek == 7:
 		get_tree().change_scene_to_file("res://season/week7.tscn")
+	elif nextWeek == 8:
+		get_tree().change_scene_to_file("res://season/week8.tscn")
+	elif nextWeek == 9:
+		get_tree().change_scene_to_file("res://season/week9.tscn")
+	elif nextWeek == 10:
+		get_tree().change_scene_to_file("res://season/week10.tscn")
+	elif nextWeek == 11:
+		get_tree().change_scene_to_file("res://season/week11.tscn")
+	elif nextWeek == 12:
+		get_tree().change_scene_to_file("res://season/week12.tscn")
+	elif nextWeek == 13:
+		get_tree().change_scene_to_file("res://season/week13.tscn")
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")

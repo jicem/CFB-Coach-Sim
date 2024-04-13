@@ -54,7 +54,6 @@ func _ready():
 				"week": 13,
 				"homeTeamWon": -1
 			}
-			
 			database.insert_row("schedule", row_data)
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -73,7 +72,6 @@ func _on_button_2_pressed():
 func _on_button_3_pressed():
 	Global.week = 13
 	get_tree().change_scene_to_file("res://season/ranking.tscn")
-
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")

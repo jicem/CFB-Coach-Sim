@@ -3,8 +3,11 @@ var season = 2024 + Global.season
 var team = Global.team
 var week = Global.week
 var nextWeek = week + 1
+var hasPlayed = false
 var database : SQLite
 var score : String
+var treerow : TreeItem
+@onready var tree = $Tree
 @onready var label = %Label
 @onready var label2 = %Label2
 @onready var label3 = %Label3
@@ -14,9 +17,17 @@ var score : String
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Global.state += 1
-	# Display the current season at the top of the screen and display next week's number in the button
+	# Display the current season at the top of the screen
 	label.text = str(season) + " Season"
-	button.text = "Sim to Week " + str(nextWeek)
+	# Add column names for tree
+	tree.set_column_title(0, "Bowl Game")
+	tree.set_column_title(1, "Winning Team")
+	tree.set_column_title(2, "Losing Team")
+	# The root node is hidden in the tree
+	treerow = tree.create_item()
+	treerow.set_text(0, "Hidden")
+	treerow.set_text(1, "Hidden")
+	treerow.set_text(2, "Hidden")
 	# Open database from cfb.db file
 	database = SQLite.new()
 	database.path = "res://cfb.db"
@@ -243,6 +254,7 @@ func _ready():
 			database.update_rows("schedule", "gid == " + str(gid), {"homeTeamWon": team_won})
 			# Display the result message based on whether the coach's team played
 			if homeTid == team || awayTid == team:
+				hasPlayed = true
 				# Calculate the difference between home and away sums
 				var score_difference = abs(home_result - away_result)
 				var score_query
@@ -259,9 +271,6 @@ func _ready():
 				# Variables for displaying the result and other useful info
 				var opponent
 				var oppRanking
-				var school
-				var wins
-				var losses
 				var ranking
 				# If the coach's team is the home team, display the appropriate result
 				if homeTid == team:
@@ -276,11 +285,6 @@ func _ready():
 						label2.text = "Coach " + Global.coachname + ", your team defeated"
 					else:
 						label2.text = "Coach " + Global.coachname + ", your team was defeated by"
-					var array3 : Array = database.select_rows("teams1", "tid == " + str(homeTid), ["*"])
-					for newRow in array3:
-						school = newRow["school"]
-						wins = newRow["wins"]
-						losses = newRow["losses"]
 				# If the coach's team is the away team, display the appropriate result
 				else:
 					var array2 : Array = database.select_rows("teams1", "tid == " + str(homeTid), ["*"])
@@ -294,45 +298,50 @@ func _ready():
 						label2.text = "Coach " + Global.coachname + ", your team was defeated by"
 					else:
 						label2.text = "Coach " + Global.coachname + ", your team defeated"
-					var array3 : Array = database.select_rows("teams1", "tid == " + str(awayTid), ["*"])
-					for newRow in array3:
-						school = newRow["school"]
-						wins = newRow["wins"]
-						losses = newRow["losses"]
 				label3.text = ranking + opponent + " by a score of " + score
-				label4.text = school + " Record: " + str(wins) + "-" + str(losses)
-				
-
+	if hasPlayed == false:
+		label2.text = "Coach " + Global.coachname + ", your team didn't play this week."
+		label3.text = ""
+		
+	# Define conference names
+	var bowlNames = ['1v8 Game', '2v7 Game', '3v6 Game', '4v5 Game',
+						'Tulip Bowl', 'Apple Bowl', 'Honey Bowl', 'Silk Bowl',
+						'Pear Bowl', 'Piñata Bowl', 'Star Bowl', 'Croc Bowl',
+						'Mandarin Bowl', 'Freedom Bowl', 'Sin City Bowl', 'Texas Bowl',
+						'Potato Bowl', 'Country Bowl', 'Ranch Bowl', 'Carolina Bowl']
+	var rowCounter = 0; # Initialize a counter for rows
+	var query = "SELECT s.homeTid, s.awayTid, s.homeTeamWon, t1.school AS homeSchool, t2.school AS awaySchool FROM schedule s
+				LEFT JOIN teams t1 ON s.homeTid = t1.tid LEFT JOIN teams t2 ON s.awayTid = t2.tid WHERE s.week = 14"
+	database.query(query)
+	for i in database.query_result:
+		# Create variable for tree row
+		treerow = tree.create_item()
+		
+		# Assign results from query
+		var homeTeamWon = i['homeTeamWon']
+		var homeSchool = i['homeSchool']
+		var awaySchool = i['awaySchool']
+		
+		# Determine winning and losing teams
+		var winningTeam = homeSchool if homeTeamWon == 1 else awaySchool
+		var losingTeam = homeSchool if homeTeamWon == 0 else awaySchool
+		
+		if rowCounter < 20:
+			# Add data to tree
+			treerow.set_text(0, bowlNames[rowCounter])
+			treerow.set_text(1, winningTeam)
+			treerow.set_text(2, losingTeam)
+			
+			# Increment the row counter
+			rowCounter += 1
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 
 func _on_button_pressed():
-	if nextWeek == 2:
-		get_tree().change_scene_to_file("res://season/week2.tscn")
-	elif nextWeek == 3:
-		get_tree().change_scene_to_file("res://season/week3.tscn")
-	elif nextWeek == 4:
-		get_tree().change_scene_to_file("res://season/week4.tscn")
-	elif nextWeek == 5:
-		get_tree().change_scene_to_file("res://season/week5.tscn")
-	elif nextWeek == 6:
-		get_tree().change_scene_to_file("res://season/week6.tscn")
-	elif nextWeek == 7:
-		get_tree().change_scene_to_file("res://season/week7.tscn")
-	elif nextWeek == 8:
-		get_tree().change_scene_to_file("res://season/week8.tscn")
-	elif nextWeek == 9:
-		get_tree().change_scene_to_file("res://season/week9.tscn")
-	elif nextWeek == 10:
-		get_tree().change_scene_to_file("res://season/week10.tscn")
-	elif nextWeek == 11:
-		get_tree().change_scene_to_file("res://season/week11.tscn")
-	elif nextWeek == 12:
-		get_tree().change_scene_to_file("res://season/week12.tscn")
-	elif nextWeek == 13:
-		get_tree().change_scene_to_file("res://season/week13.tscn")
+	get_tree().change_scene_to_file("res://season/week15.tscn")
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")

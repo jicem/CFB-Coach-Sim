@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4mpdhviitnf4"]
+[gd_scene load_steps=3 format=3 uid="uid://4pbhfibj87gs"]
 
-[ext_resource type="Script" path="res://season/week2.gd" id="1_lrwcc"]
-[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_nrnsh"]
+[ext_resource type="Script" path="res://season/week14.gd" id="1_ko7ls"]
+[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_p6qel"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lrwcc")
+script = ExtResource("1_ko7ls")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -38,7 +38,7 @@ offset_top = 130.0
 offset_right = 624.0
 offset_bottom = 172.0
 theme_override_font_sizes/font_size = 30
-text = "Here are your options for Week 2, Coach"
+text = "Here are your options for Week 14, Coach"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -51,12 +51,21 @@ text = "Run Practices"
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 306.0
+offset_left = 182.0
 offset_top = 396.0
-offset_right = 940.0
+offset_right = 1061.0
 offset_bottom = 459.0
 theme_override_font_sizes/font_size = 40
-text = "Simulate Second Week of Games"
+text = "Simulate First Playoff Round and Bowl Games"
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 393.0
+offset_top = 513.0
+offset_right = 846.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 40
+text = "View Final CFI Rankings"
 
 [node name="CoachButton" type="Button" parent="."]
 layout_mode = 0
@@ -67,9 +76,10 @@ offset_bottom = 71.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
 text = "Office"
-icon = ExtResource("2_nrnsh")
+icon = ExtResource("2_p6qel")
 flat = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="CoachButton" to="." method="_on_coach_button_pressed"]

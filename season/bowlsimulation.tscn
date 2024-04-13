@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4mpdhviitnf4"]
+[gd_scene load_steps=3 format=3 uid="uid://nlwix7o4synp"]
 
-[ext_resource type="Script" path="res://season/week2.gd" id="1_lrwcc"]
-[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_nrnsh"]
+[ext_resource type="Script" path="res://season/bowlsimulation.gd" id="1_fobff"]
+[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_rurmd"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lrwcc")
+script = ExtResource("1_fobff")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -38,25 +38,36 @@ offset_top = 130.0
 offset_right = 624.0
 offset_bottom = 172.0
 theme_override_font_sizes/font_size = 30
-text = "Here are your options for Week 2, Coach"
+text = "Coach"
+
+[node name="Label3" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 166.0
+offset_right = 624.0
+offset_bottom = 208.0
+theme_override_font_sizes/font_size = 30
+text = "by a score of"
+
+[node name="Label4" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 220.0
+offset_right = 624.0
+offset_bottom = 262.0
+theme_override_font_sizes/font_size = 30
+text = "Full Bowl Week/First Round Results:"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 471.0
-offset_top = 281.0
-offset_right = 739.0
-offset_bottom = 344.0
+offset_left = 430.0
+offset_top = 550.0
+offset_right = 732.0
+offset_bottom = 613.0
 theme_override_font_sizes/font_size = 40
-text = "Run Practices"
-
-[node name="Button2" type="Button" parent="."]
-layout_mode = 0
-offset_left = 306.0
-offset_top = 396.0
-offset_right = 940.0
-offset_bottom = 459.0
-theme_override_font_sizes/font_size = 40
-text = "Simulate Second Week of Games"
+text = "Sim to Week 15"
 
 [node name="CoachButton" type="Button" parent="."]
 layout_mode = 0
@@ -67,9 +78,19 @@ offset_bottom = 71.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
 text = "Office"
-icon = ExtResource("2_nrnsh")
+icon = ExtResource("2_rurmd")
 flat = true
 
+[node name="Tree" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 282.0
+offset_right = 826.0
+offset_bottom = 539.0
+columns = 3
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="CoachButton" to="." method="_on_coach_button_pressed"]

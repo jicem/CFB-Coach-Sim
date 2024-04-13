@@ -6,9 +6,7 @@ var season = 2024 + Global.season
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var available_ids
 	var row_data
-	var awayCount
 	
 	# Open database from cfb.db file
 	database = SQLite.new()
@@ -25,101 +23,38 @@ func _ready():
 		# Number of teams in each conference
 		var teams = 10
 		
-		# Generate the (mostly) round-robin schedule
-		for i in range(9):
+		# Array to store matchups for each conference
+		var matchups = []
+		
+		# Generate the round-robin schedule
+		for i in range(8):
+			var conferenceMatchups = []
 			var conference = i + 1
 			var multiple = i * 10
-			for week in range(9):
-				# Reset the array for the new week
-				var played_teams = []
-				
+			for week in range(teams - 1):
 				# Variable for week that will be inserted into the database
 				var new_week = week + 4
-				
-				# Check if it's the sixth week
-				if week == 2:
-					# The seventh team in the conference will always play the ninth team this week
-					var home = 7 + multiple
-					var away = 9 + multiple
+				var weekMatchup = []
+				for j in range(teams / 2):
+					var team1 = (week + j) % (teams - 1) + 1
+					var team2 = (teams - 1 - j + week) % (teams - 1) + 1
+					if j == 0:
+						team2 = teams
+					weekMatchup.append(team1)
+					weekMatchup.append(team2)
+					# Insert the row into the schedule table
 					row_data = {
-						"homeTid": home,
-						"awayTid": away,
+						"homeTid": team1 + multiple,
+						"awayTid": team2 + multiple,
 						"conference": conference,
-						"week": 6,
-						"homeTeamWon": -1
-					}
-					# Add the matchup to the schedule table and array
-					database.insert_row("schedule", row_data)
-					played_teams.append(7)
-					played_teams.append(9)
-					
-				# Check if it's the seventh week
-				if week == 3:
-					# The seventh team in the conference will always play the tenth team this week
-					var home = 7 + multiple
-					var away = 10 + multiple
-					row_data = {
-						"homeTid": home,
-						"awayTid": away,
-						"conference": conference,
-						"week": 7,
-						"homeTeamWon": -1
-					}
-					# Add the matchup to the schedule table and array
-					database.insert_row("schedule", row_data)
-					played_teams.append(7)
-					played_teams.append(10)
-					
-				# Loop through each team as the home team
-				for t in range(teams):
-					var team = t + 1
-					
-					# Skip the teams that already have matchups
-					if (week == 2 and (team == 9 or team == 7)) or (week == 3 and (team == 7 or team == 10)):
-						continue
-					
-					# Calculate the away team index
-					var away_team = (team + week - 1) % (teams - 1) + 1
-					
-					# Adjust the away team index if it's the same as the home team
-					if away_team >= team:
-						away_team += 1
-						
-					var home = team + multiple
-					var away = away_team + multiple
-					
-					# Check if either the home or away team has already played this week
-					if !played_teams.has(team) and !played_teams.has(away_team):
-						row_data = {
-							"homeTid": home,
-							"awayTid": away,
-							"conference": conference,
-							"week": new_week,
-							"homeTeamWon": -1
-						}
-						# Add the matchup to the schedule table and array
-						database.insert_row("schedule", row_data)
-						played_teams.append(team)
-						played_teams.append(away_team)			
-						
-				# Check if there are teams without matchups for the current week
-				var teams_without_matchups = []
-				for index in range(1, 11):
-					if played_teams.has(index): continue
-					else: teams_without_matchups.append(index)
-				for no_matchup in teams_without_matchups:
-					var home = no_matchup + multiple
-					var away = randi_range(81, 100)
-					# Insert the matchup into the schedule table
-					row_data = {
-						"homeTid": home,
-						"awayTid": away,
-						"conference": 0,
 						"week": new_week,
 						"homeTeamWon": -1
 					}
-					# Add the matchup to the schedule table and array
-					database.insert_row("schedule", row_data)	
+				conferenceMatchups.append(weekMatchup)
+			matchups.append(conferenceMatchups)
+			
+			# Printing matchups to ensure that they're correct
+			print(matchups[i])
 					
 		Global.schedule3complete = true
 					

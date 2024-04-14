@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx2bkfs6tjti6"]
+
+[ext_resource type="Script" path="res://season/review.gd" id="1_hlngb"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hlngb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 1183.0
+offset_bottom = 675.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 100.0
+offset_top = 14.0
+offset_right = 258.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 50
+text = "Message from the Athletic Director"
+
+[node name="Label2" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 1093.0
+offset_bottom = 213.0
+theme_override_font_sizes/font_size = 30
+text = "Sorry we haven't chatted much this year, but I've been busy "
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 100.0
+offset_top = 240.0
+offset_right = 1093.0
+offset_bottom = 372.0
+theme_override_font_sizes/font_size = 30
+text = "Second Paragraph"
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 100.0
+offset_top = 380.0
+offset_right = 1093.0
+offset_bottom = 480.0
+theme_override_font_sizes/font_size = 30
+text = "Third Paragraph"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 505.0
+offset_right = 833.0
+offset_bottom = 555.0
+theme_override_font_sizes/font_size = 30
+text = "Start Over With Current School"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 568.0
+offset_right = 809.0
+offset_bottom = 618.0
+theme_override_font_sizes/font_size = 30
+text = "Start Over With New School"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

@@ -43,10 +43,19 @@ uri = "https://phreneticsports.com/"
 
 [node name="Button" type="Button" parent="."]
 offset_left = 765.0
-offset_top = 325.0
+offset_top = 280.0
 offset_right = 1090.0
-offset_bottom = 402.0
+offset_bottom = 357.0
 theme_override_font_sizes/font_size = 50
 text = "Select School"
 
+[node name="Guide" type="Button" parent="."]
+offset_left = 787.0
+offset_top = 380.0
+offset_right = 1065.0
+offset_bottom = 457.0
+theme_override_font_sizes/font_size = 50
+text = "View Guide"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Guide" to="." method="_on_guide_pressed"]

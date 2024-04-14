@@ -29,7 +29,6 @@ func _ready():
 	var array1 : Array = database.select_rows("teams", "tid == " + str(team), ["school"])
 	for row in array1:
 		label.text = row["school"] + " Roster"
-	print("Players:")
 	# Select all rows from the table with the specified team ID
 	var array2 : Array = database.select_rows("players", "tid == " + str(team), ["*"])
 	for row in array2:
@@ -39,12 +38,6 @@ func _ready():
 		var textJersey = str(row["jersey"])
 		# Convert rating to string
 		var textRating = str(row["rating"])
-		# Print data to console
-		print(row["firstname"])
-		print(row["lastname"])
-		print(row["position"])
-		print(row["jersey"])
-		print(row["rating"])
 		# Add data to tree
 		treerow.set_text(0, row["firstname"])
 		treerow.set_text(1, row["lastname"])

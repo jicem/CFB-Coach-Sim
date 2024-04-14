@@ -82,6 +82,7 @@ offset_right = 987.0
 offset_bottom = 595.0
 text = "Skip"
 
+[connection signal="item_selected" from="Tree" to="." method="_on_tree_item_selected"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="SubmitButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

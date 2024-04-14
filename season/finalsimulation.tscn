@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://nlwix7o4synp"]
+[gd_scene load_steps=3 format=3 uid="uid://b3je7aq6k6kb1"]
 
-[ext_resource type="Script" path="res://season/bowlsimulation.gd" id="1_fobff"]
-[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_rurmd"]
+[ext_resource type="Script" path="res://season/finalsimulation.gd" id="1_j06hn"]
+[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_psvo6"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_fobff")
+script = ExtResource("1_j06hn")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -58,16 +58,16 @@ offset_top = 220.0
 offset_right = 624.0
 offset_bottom = 262.0
 theme_override_font_sizes/font_size = 30
-text = "Full Bowl Week/First Round Results:"
+text = "Championship Game Results:"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 430.0
+offset_left = 380.0
 offset_top = 550.0
-offset_right = 732.0
+offset_right = 785.0
 offset_bottom = 613.0
 theme_override_font_sizes/font_size = 40
-text = "Sim to Week 15"
+text = "Performance Review"
 
 [node name="CoachButton" type="Button" parent="."]
 layout_mode = 0
@@ -78,7 +78,7 @@ offset_bottom = 71.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
 text = "Office"
-icon = ExtResource("2_rurmd")
+icon = ExtResource("2_psvo6")
 flat = true
 
 [node name="Tree" type="Tree" parent="."]

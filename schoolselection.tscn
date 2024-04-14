@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://hjq3408bja7u"]
+
+[ext_resource type="Script" path="res://schoolselection.gd" id="1_6pt88"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6pt88")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 1183.0
+offset_bottom = 675.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[node name="Tree" type="Tree" parent="."]
+offset_left = 96.0
+offset_top = 103.0
+offset_right = 799.0
+offset_bottom = 539.0
+columns = 4
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 100.0
+offset_top = 14.0
+offset_right = 258.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 50
+text = "Schools"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 802.0
+offset_top = 557.0
+offset_right = 882.0
+offset_bottom = 596.0
+theme_override_font_sizes/font_size = 20
+text = "Submit"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 103.0
+offset_top = 552.0
+offset_right = 746.0
+offset_bottom = 607.0
+theme_override_font_sizes/font_size = 30
+text = "Enter ID of the school you want to coach:"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 716.0
+offset_top = 558.0
+offset_right = 791.0
+offset_bottom = 596.0
+placeholder_text = "ID"
+
+[connection signal="item_selected" from="Tree" to="." method="_on_tree_item_selected"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

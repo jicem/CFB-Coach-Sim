@@ -66,5 +66,11 @@ func _process(delta):
 func _on_button_pressed():
 	if(Global.week == 13):
 		get_tree().change_scene_to_file("res://season/ccsimulation.tscn")
+	elif(Global.week == 14):
+		get_tree().change_scene_to_file("res://season/bowlsimulation.tscn")
+	elif(Global.week == 15):
+		get_tree().change_scene_to_file("res://season/semisimulation.tscn")
+	elif(Global.week == 16):
+		get_tree().change_scene_to_file("res://season/finalsimulation.tscn")
 	else:
 		get_tree().change_scene_to_file("res://season/simulation.tscn")

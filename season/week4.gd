@@ -50,12 +50,13 @@ func _ready():
 						"week": new_week,
 						"homeTeamWon": -1
 					}
+					database.insert_row("schedule", row_data)
 				conferenceMatchups.append(weekMatchup)
 			matchups.append(conferenceMatchups)
 			
 			# Printing matchups to ensure that they're correct
+			print("Matchups for conference " + str(i + 1) + ": ")
 			print(matchups[i])
-					
 		Global.schedule3complete = true
 					
 	else: pass

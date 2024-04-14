@@ -3,11 +3,13 @@ var season = 2024 + Global.season
 var database : SQLite
 var treerow : TreeItem
 @onready var tree = $Tree
+@onready var button = $Button
 @onready var label = %Label
 @onready var label2 = %Label2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	button.hide()
 	# Display the current season at the top of the screen and display next week's number in the button
 	label.text = str(season) + " Season"
 	# Add column names for tree
@@ -42,6 +44,14 @@ func _ready():
 		treerow.set_text(1, i["school"])
 		treerow.set_text(2, textWins)
 		treerow.set_text(3, textLosses)
+		
+		# If it's the regular season, you'll always show the practice button
+		if(Global.week < 13):
+			button.show()
+		else:
+			# Only show the practice button if the player's team is active this week
+			if Global.postseasonIds.has(Global.team):
+				button.show()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -51,7 +61,12 @@ func _on_button_pressed():
 	get_tree().change_scene_to_file("res://season/practice.tscn")
 
 func _on_button_2_pressed():
-	get_tree().change_scene_to_file("res://season/simulation.tscn")
+	if(Global.week == 13):
+		get_tree().change_scene_to_file("res://season/ccsimulation.tscn")
+	elif(Global.week == 14):
+		get_tree().change_scene_to_file("res://season/bowlsimulation.tscn")
+	else:
+		get_tree().change_scene_to_file("res://season/simulation.tscn")
 
 
 func _on_coach_button_pressed():

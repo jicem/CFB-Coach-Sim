@@ -20,7 +20,7 @@ func _ready():
 	# Display the current season at the top of the screen
 	label.text = str(season) + " Season"
 	# Add column names for tree
-	tree.set_column_title(0, "Bowl Game")
+	tree.set_column_title(0, "Game")
 	tree.set_column_title(1, "Winning Team")
 	tree.set_column_title(2, "Losing Team")
 	# The root node is hidden in the tree
@@ -304,14 +304,8 @@ func _ready():
 		label3.text = ""
 		
 	# Define conference names
-	var bowlNames = ['1v8 Game', '2v7 Game', '3v6 Game', '4v5 Game',
-						'Tulip Bowl', 'Apple Bowl', 'Honey Bowl', 'Silk Bowl',
-						'Pear Bowl', 'Piñata Bowl', 'Star Bowl', 'Croc Bowl',
-						'Mandarin Bowl', 'Freedom Bowl', 'Sin City Bowl', 'Texas Bowl',
-						'Potato Bowl', 'Country Bowl', 'Ketchup Bowl', 'Carolina Bowl']
-	var rowCounter = 0; # Initialize a counter for rows
 	var query = "SELECT s.homeTid, s.awayTid, s.homeTeamWon, t1.school AS homeSchool, t2.school AS awaySchool FROM schedule s
-				LEFT JOIN teams t1 ON s.homeTid = t1.tid LEFT JOIN teams t2 ON s.awayTid = t2.tid WHERE s.week = 14"
+				LEFT JOIN teams t1 ON s.homeTid = t1.tid LEFT JOIN teams t2 ON s.awayTid = t2.tid WHERE s.week = 16"
 	database.query(query)
 	for i in database.query_result:
 		# Create variable for tree row
@@ -326,14 +320,10 @@ func _ready():
 		var winningTeam = homeSchool if homeTeamWon == 1 else awaySchool
 		var losingTeam = homeSchool if homeTeamWon == 0 else awaySchool
 		
-		if rowCounter < 20:
-			# Add data to tree
-			treerow.set_text(0, bowlNames[rowCounter])
-			treerow.set_text(1, winningTeam)
-			treerow.set_text(2, losingTeam)
-			
-			# Increment the row counter
-			rowCounter += 1
+		# Add data to tree
+		treerow.set_text(0, "Final")
+		treerow.set_text(1, winningTeam)
+		treerow.set_text(2, losingTeam)
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -341,7 +331,7 @@ func _process(delta):
 
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://season/week15.tscn")
+	get_tree().change_scene_to_file("res://season/review.tscn")
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")

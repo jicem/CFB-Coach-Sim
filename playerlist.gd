@@ -62,7 +62,7 @@ func _on_button_pressed():
 
 func _on_back_pressed():
 	# Return to home screen when the back button is pressed
-	get_tree().change_scene_to_file("res://teamselect.tscn")
+	get_tree().change_scene_to_file("res://schoolselection.tscn")
 
 func _on_timer_timeout():
 	# Duplicate teams table when the "Choose School" button is pressed

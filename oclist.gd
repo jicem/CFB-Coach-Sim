@@ -126,3 +126,7 @@ func add_commas(number: int) -> String:
 func _on_skip_button_pressed():
 	database.update_rows("teams1", "tid == " + str(team), {"ocid": 0})
 	get_tree().change_scene_to_file("res://dclist.tscn")
+
+
+func _on_tree_item_selected():
+	selection.text = str(tree.get_selected().get_index() + 1)

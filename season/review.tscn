@@ -12,6 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_hlngb")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
 offset_right = 1183.0
@@ -20,6 +21,7 @@ color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 100.0
 offset_top = 14.0
 offset_right = 258.0
@@ -29,6 +31,7 @@ text = "Message from the Athletic Director"
 
 [node name="Label2" type="Label" parent="."]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 100.0
 offset_top = 100.0
 offset_right = 1093.0
@@ -39,6 +42,7 @@ autowrap_mode = 2
 
 [node name="Label3" type="Label" parent="."]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 100.0
 offset_top = 240.0
 offset_right = 1093.0
@@ -49,6 +53,7 @@ autowrap_mode = 2
 
 [node name="Label4" type="Label" parent="."]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 100.0
 offset_top = 380.0
 offset_right = 1093.0
@@ -59,21 +64,21 @@ autowrap_mode = 2
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 378.0
-offset_top = 505.0
-offset_right = 833.0
-offset_bottom = 555.0
-theme_override_font_sizes/font_size = 30
-text = "Start Over With Current School"
+offset_left = 373.0
+offset_top = 533.0
+offset_right = 878.0
+offset_bottom = 596.0
+theme_override_font_sizes/font_size = 40
+text = "Sim to Player Departures"
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 400.0
-offset_top = 568.0
-offset_right = 809.0
-offset_bottom = 618.0
-theme_override_font_sizes/font_size = 30
-text = "Start Over With New School"
+offset_left = 370.0
+offset_top = 533.0
+offset_right = 881.0
+offset_bottom = 596.0
+theme_override_font_sizes/font_size = 40
+text = "Return to School Selection"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

@@ -100,15 +100,15 @@ func _ready():
 	# Options for the third parageaph
 	if Global.admood < 1:
 		label4.text = "You've been an all-around disappointment. You're fired."
-	elif wins == expectedWins:
+	elif wins == expectedWins or wins == expectedWins - 1:
 		label4.text = "You bore me. Everything about you, it's just boring. Come talk to me when you've got that stadium paid for and won me a championship."
-	elif wins == expectedWins - 1:
+	elif wins == expectedWins - 2 or wins == expectedWins - 3:
 		label4.text = "Bye."
-	elif wins <= expectedWins - 2:
+	elif wins < expectedWins - 3:
 		label4.text = "I'm watching you. Seriously, one of your assistant coaches is a spy. Don't fuck up."
-	elif wins == expectedWins + 1:
+	elif wins == expectedWins + 1 or wins == expectedWins + 2:
 		label4.text = "Overall, I'm happy with the progress you've made."
-	elif wins >= expectedWins + 2:
+	elif wins > expectedWins + 2:
 		label4.text = "Good work. Let's keep it going. Championships don't win themselves."
 	if Global.admood < 1:
 		button.hide()

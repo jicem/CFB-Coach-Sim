@@ -23,8 +23,8 @@ color = Color(0.545098, 0.270588, 0.0745098, 1)
 layout_mode = 0
 offset_left = 96.0
 offset_top = 103.0
-offset_right = 799.0
-offset_bottom = 539.0
+offset_right = 1057.0
+offset_bottom = 458.0
 columns = 4
 column_titles_visible = true
 hide_root = true
@@ -38,33 +38,43 @@ offset_top = 14.0
 offset_right = 258.0
 offset_bottom = 83.0
 theme_override_font_sizes/font_size = 50
-text = "Schools"
+text = "Available Schools"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 802.0
-offset_top = 557.0
-offset_right = 882.0
-offset_bottom = 596.0
-theme_override_font_sizes/font_size = 20
-text = "Submit"
+offset_left = 158.0
+offset_top = 554.0
+offset_right = 434.0
+offset_bottom = 617.0
+theme_override_font_sizes/font_size = 40
+text = "Select School"
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 103.0
-offset_top = 552.0
-offset_right = 746.0
-offset_bottom = 607.0
+offset_left = 199.0
+offset_top = 481.0
+offset_right = 842.0
+offset_bottom = 536.0
 theme_override_font_sizes/font_size = 30
 text = "Enter ID of the school you want to coach:"
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 716.0
-offset_top = 558.0
-offset_right = 791.0
-offset_bottom = 596.0
+offset_left = 815.0
+offset_top = 487.0
+offset_right = 890.0
+offset_bottom = 525.0
 placeholder_text = "ID"
+
+[node name="Title" type="Button" parent="."]
+layout_mode = 0
+offset_left = 521.0
+offset_top = 555.0
+offset_right = 966.0
+offset_bottom = 618.0
+theme_override_font_sizes/font_size = 40
+text = "Return to Title Screen"
 
 [connection signal="item_selected" from="Tree" to="." method="_on_tree_item_selected"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Title" to="." method="_on_title_pressed"]

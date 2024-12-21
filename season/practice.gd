@@ -30,7 +30,7 @@ func _ready():
 	treerow.set_text(5, "Hidden")
 	# Open database from cfb.db file
 	database = SQLite.new()
-	database.path = "res://cfb.db"
+	database.path = "res://data/cfb.db"
 	database.open_db()
 	print("Players:")
 	# Select all rows from the table with the specified team ID

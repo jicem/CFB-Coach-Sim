@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://xvbcv541g7ag"]
+[gd_scene load_steps=5 format=3 uid="uid://xvbcv541g7ag"]
 
 [ext_resource type="Script" path="res://season/ccsimulation.gd" id="1_3d0bn"]
-[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_n0s2h"]
+[ext_resource type="Texture2D" uid="uid://d1ciegkviujnm" path="res://strategy.png" id="2_d48n7"]
+[ext_resource type="Texture2D" uid="uid://ddvnyfqq6tos6" path="res://hourglass.png" id="3_gwf84"]
+[ext_resource type="Texture2D" uid="uid://isxwddeubtqr" path="res://selectsmall.png" id="4_ma8kc"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -69,28 +71,61 @@ offset_bottom = 613.0
 theme_override_font_sizes/font_size = 40
 text = "Sim to Week 14"
 
-[node name="CoachButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1011.0
-offset_top = 8.0
-offset_right = 1141.0
-offset_bottom = 71.0
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 30
-text = "Office"
-icon = ExtResource("2_n0s2h")
-flat = true
-
 [node name="Tree" type="Tree" parent="."]
 layout_mode = 0
 offset_left = 102.0
 offset_top = 282.0
-offset_right = 826.0
-offset_bottom = 539.0
+offset_right = 1090.0
+offset_bottom = 394.0
 columns = 3
 column_titles_visible = true
 hide_root = true
 select_mode = 1
 
+[node name="Tree2" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 413.0
+offset_right = 1090.0
+offset_bottom = 525.0
+columns = 10
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+
+[node name="CoachButton" type="Button" parent="."]
+offset_left = 890.0
+offset_right = 1138.0
+offset_bottom = 63.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "Coach's Office"
+icon = ExtResource("2_d48n7")
+flat = true
+
+[node name="HistoryButton" type="Button" parent="."]
+offset_left = 882.0
+offset_top = 46.0
+offset_right = 1142.0
+offset_bottom = 109.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "League History"
+icon = ExtResource("3_gwf84")
+flat = true
+
+[node name="AchievementButton" type="Button" parent="."]
+offset_left = 895.0
+offset_top = 93.0
+offset_right = 1132.0
+offset_bottom = 156.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "Achivements"
+icon = ExtResource("4_ma8kc")
+flat = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CoachButton" to="." method="_on_coach_button_pressed"]
+[connection signal="pressed" from="HistoryButton" to="." method="_on_history_button_pressed"]
+[connection signal="pressed" from="AchievementButton" to="." method="_on_achievement_button_pressed"]

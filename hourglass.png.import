@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu708ebhdn8oe"
-path="res://.godot/imported/leftarrow.png-26914c7b52567a506b490fcfa9bb52be.ctex"
+uid="uid://ddvnyfqq6tos6"
+path="res://.godot/imported/hourglass.png-8fbb8f0ef6868c2e9af653b405bd461e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://leftarrow.png"
-dest_files=["res://.godot/imported/leftarrow.png-26914c7b52567a506b490fcfa9bb52be.ctex"]
+source_file="res://hourglass.png"
+dest_files=["res://.godot/imported/hourglass.png-8fbb8f0ef6868c2e9af653b405bd461e.ctex"]
 
 [params]
 

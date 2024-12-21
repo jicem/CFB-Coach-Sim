@@ -1,0 +1,88 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbeba7ud6gfqj"]
+
+[ext_resource type="Script" path="res://recruiting/krecruits.gd" id="1_lwkrt"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lwkrt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 1183.0
+offset_bottom = 675.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 14.0
+offset_right = 258.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 50
+text = "Kicker Recruiting"
+
+[node name="Tree" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 137.0
+offset_right = 1104.0
+offset_bottom = 540.0
+columns = 8
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+
+[node name="Budget" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 102.0
+offset_top = 74.0
+offset_right = 673.0
+offset_bottom = 129.0
+theme_override_font_sizes/font_size = 40
+text = "Budget: $0"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 552.0
+offset_right = 746.0
+offset_bottom = 607.0
+theme_override_font_sizes/font_size = 30
+text = "Enter ID of the kicker you want to sign:"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 691.0
+offset_top = 558.0
+offset_right = 766.0
+offset_bottom = 596.0
+placeholder_text = "ID"
+
+[node name="SubmitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 777.0
+offset_top = 558.0
+offset_right = 853.0
+offset_bottom = 595.0
+text = "Submit"
+
+[node name="SkipButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 558.0
+offset_right = 912.0
+offset_bottom = 595.0
+text = "Skip"
+
+[connection signal="item_selected" from="Tree" to="." method="_on_tree_item_selected"]
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

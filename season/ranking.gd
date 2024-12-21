@@ -25,7 +25,7 @@ func _ready():
 	treerow.set_text(3, "Hidden")
 	# Open database from cfb.db file
 	database = SQLite.new()
-	database.path = "res://cfb.db"
+	database.path = "res://data/cfb.db"
 	database.open_db()
 	# Query to retrieve the top 40 teams by wins
 	var query = "SELECT * FROM teams1 WHERE ranking > 0 ORDER BY ranking ASC LIMIT 40"
@@ -71,3 +71,11 @@ func _on_button_2_pressed():
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")
+
+
+func _on_history_button_pressed():
+	get_tree().change_scene_to_file("res://history.tscn")
+
+
+func _on_achievement_button_pressed():
+	get_tree().change_scene_to_file("res://achievements.tscn")

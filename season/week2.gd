@@ -11,7 +11,7 @@ func _ready():
 	
 	# Open database from cfb.db file
 	database = SQLite.new()
-	database.path = "res://cfb.db"
+	database.path = "res://data/cfb.db"
 	database.open_db()
 	
 	# Display the current season at the top of the screen
@@ -23,11 +23,11 @@ func _ready():
 		
 		# Create an array of numbers between 21 and 40
 		available_ids = []
-		for i in range(21, 41):
+		for i in range(31, 61):
 			available_ids.append(i)
 
 		# Create a loop that inserts a new row into the schedule table 20 times
-		for i in range(20):
+		for i in range(30):
 			
 			# Get the homeTid
 			var home_tid = i + 1
@@ -52,11 +52,11 @@ func _ready():
 			database.insert_row("schedule", row_data)
 		# Create an array of numbers between 61 and 80
 		available_ids = []
-		for i in range(61, 81):
+		for i in range(91, 121):
 			available_ids.append(i)
 
 		# Create a loop that inserts a new row into the schedule table 20 times
-		for i in range(41, 61):
+		for i in range(61, 91):
 			
 			# Get the homeTid
 			var home_tid = i
@@ -101,3 +101,11 @@ func _on_button_pressed():
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")
+
+
+func _on_history_button_pressed():
+	get_tree().change_scene_to_file("res://history.tscn")
+
+
+func _on_achievement_button_pressed():
+	get_tree().change_scene_to_file("res://achievements.tscn")

@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5v1ioqexpv7i"]
+
+[ext_resource type="Script" path="res://recruiting/transfers.gd" id="1_6dhyw"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6dhyw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 1183.0
+offset_bottom = 675.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 14.0
+offset_right = 258.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 50
+text = "Transfer Recruiting"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 548.0
+offset_right = 866.0
+offset_bottom = 611.0
+theme_override_font_sizes/font_size = 40
+text = "Sim to Coordinator Signing"
+
+[node name="Tree" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 190.0
+offset_right = 1104.0
+offset_bottom = 435.0
+columns = 9
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+
+[node name="Budget" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 102.0
+offset_top = 74.0
+offset_right = 673.0
+offset_bottom = 129.0
+theme_override_font_sizes/font_size = 40
+text = "Budget: $0"
+
+[node name="Needs" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 102.0
+offset_top = 125.0
+offset_right = 673.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 40
+text = "Needs: "
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 457.0
+offset_right = 746.0
+offset_bottom = 512.0
+theme_override_font_sizes/font_size = 30
+text = "Enter IDs of the transfers you want to sign:"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 742.0
+offset_top = 463.0
+offset_right = 817.0
+offset_bottom = 501.0
+placeholder_text = "ID"
+
+[node name="SubmitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 828.0
+offset_top = 463.0
+offset_right = 904.0
+offset_bottom = 500.0
+text = "Submit"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="item_selected" from="Tree" to="." method="_on_tree_item_selected"]
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="SubmitButton" to="." method="_on_submit_button_pressed"]

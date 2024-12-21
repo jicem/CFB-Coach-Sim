@@ -7,7 +7,9 @@ var hasPlayed = false
 var database : SQLite
 var score : String
 var treerow : TreeItem
+var treerow1 : TreeItem
 @onready var tree = $Tree
+@onready var tree2 = $Tree2
 @onready var label = %Label
 @onready var label2 = %Label2
 @onready var label3 = %Label3
@@ -28,9 +30,24 @@ func _ready():
 	treerow.set_text(0, "Hidden")
 	treerow.set_text(1, "Hidden")
 	treerow.set_text(2, "Hidden")
+	# Add column names for second tree2
+	tree2.set_column_title(0, "First Name")
+	tree2.set_column_title(1, "Last Name")
+	tree2.set_column_title(2, "Position")
+	tree2.set_column_title(3, "Completions")
+	tree2.set_column_title(4, "Attempts")
+	tree2.set_column_title(5, "Yards")
+	tree2.set_column_title(6, "Receptions")
+	tree2.set_column_title(7, "Targets")
+	tree2.set_column_title(8, "Tackles")
+	tree2.set_column_title(9, "Sacks")
+	# The root node is hidden in the tree2
+	treerow1 = tree2.create_item()
+	for i in range(10):
+		treerow1.set_text(i, "Hidden")
 	# Open database from cfb.db file
 	database = SQLite.new()
-	database.path = "res://cfb.db"
+	database.path = "res://data/cfb.db"
 	database.open_db()
 	# Initialize score variable
 	score = "0-0"
@@ -48,7 +65,7 @@ func _ready():
 			var home_result
 			var away_result
 			# Query to compare sums of player ratings in the players table
-			query = "SELECT SUM(rating) AS total_ratings FROM players WHERE tid = " + str(homeTid)
+			query = "SELECT SUM(rating) AS total_ratings FROM players1 WHERE tid = " + str(homeTid)
 			database.query(query)
 			for i in database.query_result:
 				if homeTid == team:
@@ -141,7 +158,7 @@ func _ready():
 					database.query(query)
 					for j in database.query_result:
 						home_result = i["total_ratings"] + j["coord_ratings"]
-			query = "SELECT SUM(rating) AS total_ratings FROM players WHERE tid = " + str(awayTid)
+			query = "SELECT SUM(rating) AS total_ratings FROM players1 WHERE tid = " + str(awayTid)
 			database.query(query)
 			for i in database.query_result:
 				if awayTid == team:
@@ -242,7 +259,6 @@ func _ready():
 				query = "UPDATE teams1 SET losses = losses + 1 WHERE tid = " + str(awayTid)
 				database.query(query)
 				print("Team " + str(homeTid) + " won")
-				print(away_result)
 			else:
 				team_won = 0
 				query = "UPDATE teams1 SET wins = wins + 1 WHERE tid = " + str(awayTid)
@@ -260,14 +276,20 @@ func _ready():
 				var score_query
 				# Select a random score based on the score difference
 				if score_difference > 400:
-					score_query = "SELECT Score FROM blowoutscores ORDER BY RANDOM() LIMIT 1"
+					score_query = "SELECT blowout FROM scores ORDER BY RANDOM() LIMIT 1"
+					database.query(score_query)
+					for i in database.query_result:
+						score = i["blowout"]
 				elif score_difference >= 100 && score_difference <= 400:
-					score_query = "SELECT Score FROM normalscores ORDER BY RANDOM() LIMIT 1"
+					score_query = "SELECT normal FROM scores ORDER BY RANDOM() LIMIT 1"
+					database.query(score_query)
+					for i in database.query_result:
+						score = i["normal"]
 				else:
-					score_query = "SELECT Score FROM closescores ORDER BY RANDOM() LIMIT 1"
-				database.query(score_query)
-				for i in database.query_result:
-					score = i["Score"]
+					score_query = "SELECT close FROM scores ORDER BY RANDOM() LIMIT 1"
+					database.query(score_query)
+					for i in database.query_result:
+						score = i["close"]
 				# Variables for displaying the result and other useful info
 				var opponent
 				var oppRanking
@@ -330,6 +352,276 @@ func _ready():
 		treerow.set_text(1, winningTeam)
 		treerow.set_text(2, losingTeam)
 		
+	var row_data
+	# Select all rows from the table with the current team ID
+	var array : Array = database.select_rows("players", "tid == " + str(team), ["*"])
+	for row in array:
+		var position = row["position"]
+		if(position == "OL"): continue
+		elif(position == "K"): continue
+		else:
+			# Create variable for tree row
+			treerow1 = tree2.create_item()
+			# Add data to tree
+			treerow1.set_text(0, row["firstname"])
+			treerow1.set_text(1, row["lastname"])
+			treerow1.set_text(2, row["position"])
+			
+			# Only generate stats if the player's team has played this week
+			if(hasPlayed):
+				# Filling rows for each position
+				if(position == "QB"):
+					
+					# Generate random numbers for pass attempts, pass completions, and yards
+					var completions = randi_range(19, 27)
+					var attempts = randi_range(completions, 41)
+					var yards = randi_range(150, 400)
+					
+					# Insert into the stats table
+					row_data = {
+						"sid": Global.season,
+						"pid": row["pid"],
+						"completions": completions,
+						"attempts": attempts,
+						"yards": yards,
+						"receptions": 0,
+						"targets": 0,
+						"tackles": 0,
+						"sacks": 0
+					}
+					database.insert_row("player_stats", row_data)
+					
+					# Print out the generated numbers
+					print("Pass Completions:", completions)
+					print("Pass Attempts:", attempts)
+					print("Yards Gained:", yards)
+					
+					# Add to table
+					treerow1.set_text(3, str(completions))
+					treerow1.set_text(4, str(attempts))
+					treerow1.set_text(5, str(yards))
+					treerow1.set_text(6, "0")
+					treerow1.set_text(7, "0")
+					treerow1.set_text(8, "0")
+					treerow1.set_text(9, "0")
+					
+				if(position == "WR"):
+					
+					# Generate random numbers
+					var yards = randi_range(36, 80)
+					var receptions = randi_range(2, 6)
+					var targets = randi_range(receptions, 8)
+					var tackles = 0 if randf() < 0.95 else 1
+					
+					# Insert into the stats table
+					row_data = {
+						"sid": Global.season,
+						"pid": row["pid"],
+						"completions": 0,
+						"attempts": 0,
+						"yards": yards,
+						"receptions": receptions,
+						"targets": targets,
+						"tackles": tackles,
+						"sacks": 0
+					}
+					database.insert_row("player_stats", row_data)
+					
+					# Add to table
+					treerow1.set_text(3, "0")
+					treerow1.set_text(4, "0")
+					treerow1.set_text(5, str(yards))
+					treerow1.set_text(6, str(receptions))
+					treerow1.set_text(7, str(targets))
+					treerow1.set_text(8, str(tackles))
+					treerow1.set_text(9, "0")
+					
+				if(position == "RB"):
+					
+					# Generate random numbers
+					var attempts = randi_range(10, 25)
+					var yards = randi_range(40, 200)
+					var receptions = randi_range(0, 2)
+					var targets = randi_range(receptions, 3)
+					var tackles = 0 if randf() < 0.9 else 1
+					
+					# Insert into the stats table
+					row_data = {
+						"sid": Global.season,
+						"pid": row["pid"],
+						"completions": 0,
+						"attempts": attempts,
+						"yards": yards,
+						"receptions": receptions,
+						"targets": targets,
+						"tackles": tackles,
+						"sacks": 0
+					}
+					database.insert_row("player_stats", row_data)
+					
+					# Add to table
+					treerow1.set_text(3, "0")
+					treerow1.set_text(4, str(attempts))
+					treerow1.set_text(5, str(yards))
+					treerow1.set_text(6, str(receptions))
+					treerow1.set_text(7, str(targets))
+					treerow1.set_text(8, str(tackles))
+					treerow1.set_text(9, "0")
+					
+				if(position == "TE"):
+					
+					# Generate random numbers
+					var yards = randi_range(18, 40)
+					var receptions = randi_range(1, 3)
+					var targets = randi_range(receptions, 5)
+					var tackles = 0 if randf() < 0.8 else 1
+					
+					# Insert into the stats table
+					row_data = {
+						"sid": Global.season,
+						"pid": row["pid"],
+						"completions": 0,
+						"attempts": 0,
+						"yards": yards,
+						"receptions": receptions,
+						"targets": targets,
+						"tackles": tackles,
+						"sacks": 0
+					}
+					database.insert_row("player_stats", row_data)
+					
+					# Add to table
+					treerow1.set_text(3, "0")
+					treerow1.set_text(4, "0")
+					treerow1.set_text(5, str(yards))
+					treerow1.set_text(6, str(receptions))
+					treerow1.set_text(7, str(targets))
+					treerow1.set_text(8, str(tackles))
+					treerow1.set_text(9, "0")
+					
+				if(position == "DL"):
+					
+					# Generate random numbers
+					var tackles = randi_range(1, 5)
+					var sacks = 0 if randf() < 0.9 else 1
+					
+					# Insert into the stats table
+					row_data = {
+						"sid": Global.season,
+						"pid": row["pid"],
+						"completions": 0,
+						"attempts": 0,
+						"yards": 0,
+						"receptions": 0,
+						"targets": 0,
+						"tackles": tackles,
+						"sacks": sacks
+					}
+					database.insert_row("player_stats", row_data)
+					
+					# Add to table
+					treerow1.set_text(3, "0")
+					treerow1.set_text(4, "0")
+					treerow1.set_text(5, "0")
+					treerow1.set_text(6, "0")
+					treerow1.set_text(7, "0")
+					treerow1.set_text(8, str(tackles))
+					treerow1.set_text(9, str(sacks))
+					
+				if(position == "LB"):
+					
+					# Generate random numbers
+					var tackles = randi_range(1, 6)
+					var sacks = 0 if randf() < 0.9 else 1
+					
+					# Insert into the stats table
+					row_data = {
+						"sid": Global.season,
+						"pid": row["pid"],
+						"completions": 0,
+						"attempts": 0,
+						"yards": 0,
+						"receptions": 0,
+						"targets": 0,
+						"tackles": tackles,
+						"sacks": sacks
+					}
+					database.insert_row("player_stats", row_data)
+					
+					# Add to table
+					treerow1.set_text(3, "0")
+					treerow1.set_text(4, "0")
+					treerow1.set_text(5, "0")
+					treerow1.set_text(6, "0")
+					treerow1.set_text(7, "0")
+					treerow1.set_text(8, str(tackles))
+					treerow1.set_text(9, str(sacks))
+
+				if(position == "CB"):
+					
+					# Generate random numbers
+					var tackles = randi_range(1, 5)
+					var sacks = 0 if randf() < 0.95 else 1
+					
+					# Insert into the stats table
+					row_data = {
+						"sid": Global.season,
+						"pid": row["pid"],
+						"completions": 0,
+						"attempts": 0,
+						"yards": 0,
+						"receptions": 0,
+						"targets": 0,
+						"tackles": tackles,
+						"sacks": sacks
+					}
+					database.insert_row("player_stats", row_data)
+					
+					# Add to table
+					treerow1.set_text(3, "0")
+					treerow1.set_text(4, "0")
+					treerow1.set_text(5, "0")
+					treerow1.set_text(6, "0")
+					treerow1.set_text(7, "0")
+					treerow1.set_text(8, str(tackles))
+					treerow1.set_text(9, str(sacks))
+
+				if(position == "S"):
+					
+					# Generate random numbers
+					var tackles = randi_range(1, 6)
+					
+					# Insert into the stats table
+					row_data = {
+						"sid": Global.season,
+						"pid": row["pid"],
+						"completions": 0,
+						"attempts": 0,
+						"yards": 0,
+						"receptions": 0,
+						"targets": 0,
+						"tackles": tackles,
+						"sacks": 0
+					}
+					database.insert_row("player_stats", row_data)
+					
+					# Add to table
+					treerow1.set_text(3, "0")
+					treerow1.set_text(4, "0")
+					treerow1.set_text(5, "0")
+					treerow1.set_text(6, "0")
+					treerow1.set_text(7, "0")
+					treerow1.set_text(8, str(tackles))
+					treerow1.set_text(9, "0")
+			else:
+				treerow1.set_text(3, "0")
+				treerow1.set_text(4, "0")
+				treerow1.set_text(5, "0")
+				treerow1.set_text(6, "0")
+				treerow1.set_text(7, "0")
+				treerow1.set_text(8, "0")
+				treerow1.set_text(9, "0")
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
@@ -340,3 +632,11 @@ func _on_button_pressed():
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")
+
+
+func _on_history_button_pressed():
+	get_tree().change_scene_to_file("res://history.tscn")
+
+
+func _on_achievement_button_pressed():
+	get_tree().change_scene_to_file("res://achievements.tscn")

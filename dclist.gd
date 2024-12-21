@@ -25,7 +25,7 @@ func _ready():
 	treerow.set_text(5, "Hidden")
 	# Open database from cfb.db file
 	database = SQLite.new()
-	database.path = "res://cfb.db"
+	database.path = "res://data/cfb.db"
 	database.open_db()
 	# Change label to include the current school's budget
 	var array1 : Array = database.select_rows("teams1", "tid == " + str(team), ["budget"])
@@ -82,7 +82,7 @@ func _on_line_edit_text_submitted(new_text):
 					database.update_rows("teams1", "tid == " + str(team), {"budget": newBudget})
 					print(newBudget)
 					# Go to new game screen
-					get_tree().change_scene_to_file("res://newgame.tscn")
+					get_tree().change_scene_to_file("res://newseason.tscn")
 				else:
 					# If newBudget is negative, give user an error
 					selection.text = "ERR"
@@ -93,6 +93,23 @@ func _on_button_pressed():
 	if selection.text != "":
 		var id = int(selection.text)
 		if id > 0 and id < 81:
+			# Create seasons table
+			var seasons_table = {
+				"sid" : {"data_type":"int", "primary_key":true, "not_null":true, "auto_increment":true},
+				"winner" : {"data_type":"text"},
+				"loser" : {"data_type":"text"},
+				"coachteam" : {"data_type":"int"},
+				"coachname" : {"data_type":"text"},
+				"coachface" : {"data_type":"int"},
+				"offense" : {"data_type":"int"},
+				"defense" : {"data_type":"int"},
+				"admood" : {"data_type":"int"},
+				"playhrs" : {"data_type":"int"},
+				"playmins" : {"data_type":"int"},
+				"streak" : {"data_type":"int"}
+			}
+			database.query("DROP TABLE IF EXISTS seasons")
+			database.create_table("seasons", seasons_table)
 			var salary = 0
 			var array1 : Array = database.select_rows("defcoordinators", "dcid == " + selection.text, ["salary"])
 			for row in array1:
@@ -107,7 +124,7 @@ func _on_button_pressed():
 					database.update_rows("teams1", "tid == " + str(team), {"budget": newBudget})
 					print(newBudget)
 					# Go to new game screen
-					get_tree().change_scene_to_file("res://newgame.tscn")
+					get_tree().change_scene_to_file("res://newseason.tscn")
 				else:
 					# If newBudget is negative, give user an error
 					selection.text = "ERR"
@@ -127,7 +144,7 @@ func add_commas(number: int) -> String:
 
 func _on_skip_button_pressed():
 	database.update_rows("teams1", "tid == " + str(team), {"dcid": 0})
-	get_tree().change_scene_to_file("res://newgame.tscn")
+	get_tree().change_scene_to_file("res://newseason.tscn")
 
 
 func _on_tree_item_selected():

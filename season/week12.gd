@@ -12,10 +12,10 @@ func _ready():
 	label2.text = "Here are your options for Week 12, Coach " + Global.coachname + ":"
 	# Open database from cfb.db file
 	database = SQLite.new()
-	database.path = "res://cfb.db"
+	database.path = "res://data/cfb.db"
 	database.open_db()
 	# Updating rankings
-	var query = "SELECT * FROM teams1 ORDER BY wins DESC, ranking ASC LIMIT 80"
+	var query = "SELECT * FROM teams1 ORDER BY wins DESC, ranking ASC"
 	database.query(query)
 	for i in database.query_result:
 		# Assign ranking to new team starting with 1 and ending with 80
@@ -43,3 +43,11 @@ func _on_button_3_pressed():
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")
+
+
+func _on_history_button_pressed():
+	get_tree().change_scene_to_file("res://history.tscn")
+
+
+func _on_achievement_button_pressed():
+	pass # Replace with function body.

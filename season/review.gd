@@ -16,7 +16,7 @@ func _ready():
 		"bringing out all the stops for football recruits, you know, booze, drugs, the usual.",
 		"planning my daughter's million dollar wedding with AD funds.",
 		"finding more of those professors who know how to give the right grades for our athletes.",
-		"covering up that..., well let's just say this conversation never took place.",
+		"covering up that... well, let's just say this conversation never took place.",
 		"going to conferences in Tahiti.",
 		"getting the city's biggest mob bosses to help fund our NIL collective.",
 		"buying cars and jewellery for middle school football prospects so they'll come here when they graduate."

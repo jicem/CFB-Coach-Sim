@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=3 uid="uid://csgfs34lmrwvw"]
+
+[ext_resource type="Script" path="res://season/departures.gd" id="1_vh70k"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vh70k")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 1183.0
+offset_bottom = 675.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 14.0
+offset_right = 258.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 50
+text = "Player Departures"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 118.0
+offset_right = 540.0
+offset_bottom = 187.0
+theme_override_font_sizes/font_size = 40
+text = "Graduations:"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 313.0
+offset_right = 540.0
+offset_bottom = 382.0
+theme_override_font_sizes/font_size = 40
+text = "Transfers:"
+
+[node name="Tree" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 190.0
+offset_right = 1090.0
+offset_bottom = 302.0
+columns = 6
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+
+[node name="Tree2" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 384.0
+offset_right = 1090.0
+offset_bottom = 496.0
+columns = 6
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 533.0
+offset_right = 906.0
+offset_bottom = 596.0
+theme_override_font_sizes/font_size = 40
+text = "Sim to High School Recruiting"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

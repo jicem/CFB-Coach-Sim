@@ -21,13 +21,14 @@ func _ready():
 	treerow.set_text(3, "Hidden")
 	# Open database from cfb.db file
 	database = SQLite.new()
-	database.path = "res://cfb.db"
+	database.path = "res://data/cfb.db"
 	database.open_db()
 	# Define conference names
-	var conferenceNames = ['Elite 10', 'Southeast', 'Big Dozen', 'Atlantic',
-						'National', 'Great Lakes', 'Southwest', 'Dixieland']
+	var conferenceNames = ['Elite 10 East', 'Elite 10 West', 'Big Dozen East', 'Big Dozen West',
+						'South East', 'South West', 'Atlantic Coast', 'Champions',
+						'National', 'Dixieland', 'Midwest', 'Great Lakes']
 	# Change label to include the name of the school
-	var array : Array = database.select_rows("teams", "tid < 81", ["*"])
+	var array : Array = database.select_rows("teams", "tid < 121", ["*"])
 	for row in array:
 		var button = LinkButton.new()
 		# Create variable for tree row
@@ -49,7 +50,7 @@ func _process(delta):
 func _on_button_pressed():
 	if selection.text != "":
 		var id = int(selection.text)
-		if id > 0 and id < 81:
+		if id > 0 and id < 121:
 			Global.team = selection.text
 			get_tree().change_scene_to_file("res://playerlist.tscn")
 	else: pass
@@ -57,10 +58,13 @@ func _on_button_pressed():
 func _on_line_edit_text_submitted(new_text):
 	if selection.text != "":
 		var id = int(selection.text)
-		if id > 0 and id < 81:
+		if id > 0 and id < 121:
 			Global.team = selection.text
 			get_tree().change_scene_to_file("res://playerlist.tscn")
 	else: pass
 	
 func _on_tree_item_selected():
 	selection.text = str(tree.get_selected().get_index() + 1)
+
+func _on_title_pressed():
+	get_tree().change_scene_to_file("res://titlescreen.tscn")

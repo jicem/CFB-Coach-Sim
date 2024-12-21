@@ -10,8 +10,9 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_title_pressed():
-	get_tree().change_scene_to_file("res://titlescreen.tscn")
-
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://guide1.tscn")
+
+
+func _on_next_pressed():
+	get_tree().change_scene_to_file("res://guide3.tscn")

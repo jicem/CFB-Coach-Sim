@@ -51,16 +51,16 @@ text = "Start Game"
 
 [node name="Button2" type="Button" parent="."]
 offset_left = 790.0
-offset_top = 276.0
+offset_top = 278.0
 offset_right = 1071.0
-offset_bottom = 353.0
+offset_bottom = 355.0
 theme_override_font_sizes/font_size = 50
 text = "Load Game"
 
 [node name="Guide" type="Button" parent="."]
-offset_left = 789.0
+offset_left = 790.0
 offset_top = 380.0
-offset_right = 1067.0
+offset_right = 1068.0
 offset_bottom = 457.0
 theme_override_font_sizes/font_size = 50
 text = "View Guide"

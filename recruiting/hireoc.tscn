@@ -1,0 +1,98 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxej3080e1nad"]
+
+[ext_resource type="Script" path="res://recruiting/hireoc.gd" id="1_h37o3"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h37o3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 1183.0
+offset_bottom = 675.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[node name="Tree" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 185.0
+offset_right = 1056.0
+offset_bottom = 537.0
+columns = 6
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 18.0
+offset_right = 673.0
+offset_bottom = 73.0
+theme_override_font_sizes/font_size = 40
+text = "Offensive Coordinator Signing"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 552.0
+offset_right = 746.0
+offset_bottom = 607.0
+theme_override_font_sizes/font_size = 30
+text = "Enter ID of the coordinator you want to sign:"
+
+[node name="Budget" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 102.0
+offset_top = 117.0
+offset_right = 673.0
+offset_bottom = 172.0
+theme_override_font_sizes/font_size = 30
+text = "New Budget: $0"
+
+[node name="Notify" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 102.0
+offset_top = 77.0
+offset_right = 673.0
+offset_bottom = 132.0
+theme_override_font_sizes/font_size = 30
+text = "The fired OC's salary has been returned to your team's budget."
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 766.0
+offset_top = 558.0
+offset_right = 841.0
+offset_bottom = 596.0
+placeholder_text = "ID"
+
+[node name="SubmitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 852.0
+offset_top = 558.0
+offset_right = 928.0
+offset_bottom = 595.0
+text = "Submit"
+
+[node name="SkipButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 939.0
+offset_top = 558.0
+offset_right = 987.0
+offset_bottom = 595.0
+text = "Skip"
+
+[connection signal="item_selected" from="Tree" to="." method="_on_tree_item_selected"]
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="SubmitButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

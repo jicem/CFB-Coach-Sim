@@ -14,7 +14,7 @@ func _ready():
 	label2.text = "Here are your options for Week 15, Coach " + Global.coachname + ":"
 	# Open database from cfb.db file
 	database = SQLite.new()
-	database.path = "res://cfb.db"
+	database.path = "res://data/cfb.db"
 	database.open_db()
 	if Global.semischedulecomplete == false:
 		# Reset the postseason ids array
@@ -66,3 +66,11 @@ func _on_button_2_pressed():
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")
+
+
+func _on_history_button_pressed():
+	get_tree().change_scene_to_file("res://history.tscn")
+
+
+func _on_achievement_button_pressed():
+	pass # Replace with function body.

@@ -1,0 +1,234 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm1f2eperjwcu"]
+
+[ext_resource type="Script" path="res://recruiting/hs.gd" id="1_r3r4r"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r3r4r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 1183.0
+offset_bottom = 675.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 14.0
+offset_right = 258.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 50
+text = "High School Recruiting"
+
+[node name="Label2" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 130.0
+offset_right = 624.0
+offset_bottom = 172.0
+theme_override_font_sizes/font_size = 30
+text = "Quarterbacks Needed: "
+
+[node name="Label3" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 166.0
+offset_right = 624.0
+offset_bottom = 208.0
+theme_override_font_sizes/font_size = 30
+text = "Running Backs Needed: "
+
+[node name="Label4" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 199.0
+offset_right = 624.0
+offset_bottom = 241.0
+theme_override_font_sizes/font_size = 30
+text = "Wide Recievers Needed: "
+
+[node name="Label5" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 231.0
+offset_right = 624.0
+offset_bottom = 273.0
+theme_override_font_sizes/font_size = 30
+text = "Tight Ends Needed: "
+
+[node name="Label6" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 267.0
+offset_right = 624.0
+offset_bottom = 309.0
+theme_override_font_sizes/font_size = 30
+text = "Offensive Linemen Needed: "
+
+[node name="Label7" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 302.0
+offset_right = 624.0
+offset_bottom = 344.0
+theme_override_font_sizes/font_size = 30
+text = "Defensive Linemen Needed: "
+
+[node name="Label8" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 335.0
+offset_right = 624.0
+offset_bottom = 377.0
+theme_override_font_sizes/font_size = 30
+text = "Linebackers Needed: "
+
+[node name="Label9" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 369.0
+offset_right = 624.0
+offset_bottom = 411.0
+theme_override_font_sizes/font_size = 30
+text = "Cornerbacks Needed: "
+
+[node name="Label10" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 401.0
+offset_right = 624.0
+offset_bottom = 443.0
+theme_override_font_sizes/font_size = 30
+text = "Safeties Needed: "
+
+[node name="Label11" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 433.0
+offset_right = 624.0
+offset_bottom = 475.0
+theme_override_font_sizes/font_size = 30
+text = "Kickers Needed: "
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 533.0
+offset_right = 873.0
+offset_bottom = 596.0
+theme_override_font_sizes/font_size = 40
+text = "Sim to Transfer Recruiting"
+
+[node name="QB_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 135.0
+offset_right = 575.0
+offset_bottom = 166.0
+text = "Recruit QB"
+
+[node name="RB_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 170.0
+offset_right = 587.0
+offset_bottom = 201.0
+text = "Recruit RB"
+
+[node name="WR_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 494.0
+offset_top = 205.0
+offset_right = 595.0
+offset_bottom = 236.0
+text = "Recruit WR"
+
+[node name="TE_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 426.0
+offset_top = 239.0
+offset_right = 524.0
+offset_bottom = 270.0
+text = "Recruit TE"
+
+[node name="OL_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 545.0
+offset_top = 272.0
+offset_right = 642.0
+offset_bottom = 303.0
+text = "Recruit OL"
+
+[node name="DL_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 309.0
+offset_right = 645.0
+offset_bottom = 340.0
+text = "Recruit DL"
+
+[node name="LB_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 453.0
+offset_top = 341.0
+offset_right = 551.0
+offset_bottom = 372.0
+text = "Recruit LB"
+
+[node name="CB_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 374.0
+offset_right = 558.0
+offset_bottom = 405.0
+text = "Recruit CB"
+
+[node name="S_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 388.0
+offset_top = 407.0
+offset_right = 517.0
+offset_bottom = 438.0
+text = "Recruit Safety"
+
+[node name="K_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 381.0
+offset_top = 440.0
+offset_right = 506.0
+offset_bottom = 471.0
+text = "Recruit Kicker"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="QB_button" to="." method="_on_qb_button_pressed"]
+[connection signal="pressed" from="RB_button" to="." method="_on_rb_button_pressed"]
+[connection signal="pressed" from="WR_button" to="." method="_on_wr_button_pressed"]
+[connection signal="pressed" from="TE_button" to="." method="_on_te_button_pressed"]
+[connection signal="pressed" from="OL_button" to="." method="_on_ol_button_pressed"]
+[connection signal="pressed" from="DL_button" to="." method="_on_dl_button_pressed"]
+[connection signal="pressed" from="LB_button" to="." method="_on_lb_button_pressed"]
+[connection signal="pressed" from="CB_button" to="." method="_on_cb_button_pressed"]
+[connection signal="pressed" from="S_button" to="." method="_on_s_button_pressed"]
+[connection signal="pressed" from="K_button" to="." method="_on_k_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

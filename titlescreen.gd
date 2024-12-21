@@ -27,11 +27,14 @@ func _on_button_2_pressed():
 	database.query(season_count_query)
 	for i in database.query_result:
 		Global.season = i["count"]
-		var array : Array = database.select_rows("seasons", "sid = 1", ["*"])
+		var array : Array = database.select_rows("seasons", "sid = " + str(Global.season), ["*"])
 		for row in array:
 			Global.team = row["coachteam"]
 			Global.coachname = row["coachname"]
 			Global.face = row["coachface"]
 			Global.offense = row["offense"]
 			Global.defense = row["defense"]
+			Global.admood = row["admood"]
+			Global.playhrs = row["playhrs"]
+			Global.playmins = row["playmins"]
 	get_tree().change_scene_to_file("res://newseason.tscn")

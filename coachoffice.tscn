@@ -152,6 +152,26 @@ offset_bottom = 249.0
 theme_override_font_sizes/font_size = 40
 text = "Defensive Scheme:"
 
+[node name="Label6" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 222.0
+offset_right = 461.0
+offset_bottom = 291.0
+theme_override_font_sizes/font_size = 40
+text = "AD Mood:"
+
+[node name="Label5" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 466.0
+offset_top = 295.0
+offset_right = 827.0
+offset_bottom = 364.0
+theme_override_font_sizes/font_size = 40
+text = "Season Stats:"
+
 [node name="Portrait" type="AnimatedSprite2D" parent="."]
 position = Vector2(1016, 144)
 scale = Vector2(0.365234, 0.365234)
@@ -160,10 +180,21 @@ sprite_frames = SubResource("SpriteFrames_dy511")
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 440.0
-offset_top = 550.0
-offset_right = 719.0
-offset_bottom = 613.0
+offset_top = 556.0
+offset_right = 753.0
+offset_bottom = 619.0
 theme_override_font_sizes/font_size = 40
 text = "Return to Game"
+
+[node name="Tree" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 359.0
+offset_right = 1090.0
+offset_bottom = 539.0
+columns = 10
+column_titles_visible = true
+hide_root = true
+select_mode = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

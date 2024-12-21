@@ -40,22 +40,23 @@ text = "When signing your offensive and defensive coordinators, the first thing 
 After signing your coordinators, you'll be able to view your roster again and then start the season. To progress through the season, you simply need to click the button at the bottom of the page that says \"Sim to Week 1\", \"Sim to Week 2\", etc. You'll also be able to run practices and, starting in the fifth week, view the rankings for the College Football Invitational. The CFI rankings after the conference championships will determine who plays for the national championship or in one of 16 bowl games."
 autowrap_mode = 2
 
-[node name="Title" type="Button" parent="."]
-offset_left = 47.0
-offset_top = 558.0
-offset_right = 331.0
-offset_bottom = 621.0
-theme_override_font_sizes/font_size = 40
-text = "Return to Title Scren"
-
 [node name="Back" type="Button" parent="."]
 layout_mode = 0
-offset_left = 722.0
+offset_left = 47.0
 offset_top = 558.0
-offset_right = 1111.0
+offset_right = 436.0
 offset_bottom = 621.0
 theme_override_font_sizes/font_size = 40
 text = "Go to Previous Page"
 
-[connection signal="pressed" from="Title" to="." method="_on_title_pressed"]
+[node name="Next" type="Button" parent="."]
+layout_mode = 0
+offset_left = 790.0
+offset_top = 558.0
+offset_right = 1106.0
+offset_bottom = 621.0
+theme_override_font_sizes/font_size = 40
+text = "Go to Next Page"
+
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]

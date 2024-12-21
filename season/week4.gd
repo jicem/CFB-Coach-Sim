@@ -10,7 +10,7 @@ func _ready():
 	
 	# Open database from cfb.db file
 	database = SQLite.new()
-	database.path = "res://cfb.db"
+	database.path = "res://data/cfb.db"
 	database.open_db()
 	
 	# Display the current season at the top of the screen
@@ -27,7 +27,7 @@ func _ready():
 		var matchups = []
 		
 		# Generate the round-robin schedule
-		for i in range(8):
+		for i in range(12):
 			var conferenceMatchups = []
 			var conference = i + 1
 			var multiple = i * 10
@@ -77,3 +77,11 @@ func _on_button_2_pressed():
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")
+
+
+func _on_history_button_pressed():
+	get_tree().change_scene_to_file("res://history.tscn")
+
+
+func _on_achievement_button_pressed():
+	get_tree().change_scene_to_file("res://achievements.tscn")

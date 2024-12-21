@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://weq7ye5drd5x"]
+[gd_scene load_steps=5 format=3 uid="uid://weq7ye5drd5x"]
 
 [ext_resource type="Script" path="res://season/ranking.gd" id="1_8vo2b"]
-[ext_resource type="Texture2D" uid="uid://bv3q5vrommeos" path="res://briefcase.png" id="2_6gwjn"]
+[ext_resource type="Texture2D" uid="uid://d1ciegkviujnm" path="res://strategy.png" id="2_f70p5"]
+[ext_resource type="Texture2D" uid="uid://ddvnyfqq6tos6" path="res://hourglass.png" id="3_1t2xe"]
+[ext_resource type="Texture2D" uid="uid://isxwddeubtqr" path="res://selectsmall.png" id="4_l5l2w"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -70,17 +72,39 @@ theme_override_font_sizes/font_size = 40
 text = "Simulate Next Week of Games"
 
 [node name="CoachButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1011.0
-offset_top = 8.0
-offset_right = 1141.0
-offset_bottom = 71.0
+offset_left = 890.0
+offset_right = 1138.0
+offset_bottom = 63.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
-text = "Office"
-icon = ExtResource("2_6gwjn")
+text = "Coach's Office"
+icon = ExtResource("2_f70p5")
+flat = true
+
+[node name="HistoryButton" type="Button" parent="."]
+offset_left = 882.0
+offset_top = 46.0
+offset_right = 1142.0
+offset_bottom = 109.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "League History"
+icon = ExtResource("3_1t2xe")
+flat = true
+
+[node name="AchievementButton" type="Button" parent="."]
+offset_left = 895.0
+offset_top = 93.0
+offset_right = 1132.0
+offset_bottom = 156.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "Achivements"
+icon = ExtResource("4_l5l2w")
 flat = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="CoachButton" to="." method="_on_coach_button_pressed"]
+[connection signal="pressed" from="HistoryButton" to="." method="_on_history_button_pressed"]
+[connection signal="pressed" from="AchievementButton" to="." method="_on_achievement_button_pressed"]

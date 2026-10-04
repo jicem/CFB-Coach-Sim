@@ -50,8 +50,8 @@ func _ready():
 			scheme = "Pass First"
 		else:
 			scheme = "Run First"
-		# Convert salary to string
-		var textSalary = str(row["salary"])
+		# Convert salary to formatted string
+		var textSalary = "$" + add_commas(int(row["salary"]))
 		# Add data to tree
 		treerow.set_text(0, textID)
 		treerow.set_text(1, row["firstname"])

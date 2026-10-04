@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bj6mip3yenxld"]
 
-[ext_resource type="Script" path="res://oclist.gd" id="1_3lfxp"]
+[ext_resource type="Script" uid="uid://b2g47ivwa8ajl" path="res://oclist.gd" id="1_3lfxp"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,16 +15,16 @@ script = ExtResource("1_3lfxp")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1300.0
+offset_bottom = 738.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Tree" type="Tree" parent="."]
 layout_mode = 0
 offset_left = 103.0
-offset_top = 123.0
-offset_right = 1056.0
-offset_bottom = 537.0
+offset_top = 128.0
+offset_right = 1151.0
+offset_bottom = 572.0
 columns = 6
 column_titles_visible = true
 hide_root = true
@@ -42,9 +42,9 @@ text = "Offensive Coordinator Signing"
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 103.0
-offset_top = 552.0
-offset_right = 746.0
-offset_bottom = 607.0
+offset_top = 608.0
+offset_right = 747.0
+offset_bottom = 663.0
 theme_override_font_sizes/font_size = 30
 text = "Enter ID of the coordinator you want to sign:"
 
@@ -61,25 +61,25 @@ text = "Budget: $0"
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 0
 offset_left = 766.0
-offset_top = 558.0
+offset_top = 606.0
 offset_right = 841.0
-offset_bottom = 596.0
+offset_bottom = 644.0
 placeholder_text = "ID"
 
 [node name="SubmitButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 852.0
-offset_top = 558.0
+offset_top = 606.0
 offset_right = 928.0
-offset_bottom = 595.0
+offset_bottom = 643.0
 text = "Submit"
 
 [node name="SkipButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 939.0
-offset_top = 558.0
+offset_top = 606.0
 offset_right = 987.0
-offset_bottom = 595.0
+offset_bottom = 643.0
 text = "Skip"
 
 [connection signal="item_selected" from="Tree" to="." method="_on_tree_item_selected"]

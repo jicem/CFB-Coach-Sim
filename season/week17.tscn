@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3 uid="uid://24khfj14ms0"]
+
+[ext_resource type="Script" uid="uid://cjx4628dm0we7" path="res://season/week17.gd" id="1_7tidj"]
+[ext_resource type="Texture2D" uid="uid://bh3r53sh6yavm" path="res://strategy.png" id="2_ll02q"]
+[ext_resource type="Texture2D" uid="uid://ddvnyfqq6tos6" path="res://hourglass.png" id="3_hphgu"]
+[ext_resource type="Texture2D" uid="uid://cs8u1xphn4wtg" path="res://selectsmall.png" id="4_g6d5u"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7tidj")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 1321.0
+offset_bottom = 757.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 14.0
+offset_right = 272.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 50
+text = "Season"
+
+[node name="Label2" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 130.0
+offset_right = 624.0
+offset_bottom = 172.0
+theme_override_font_sizes/font_size = 30
+text = "Here are your options for Week 17, Coach"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 471.0
+offset_top = 281.0
+offset_right = 739.0
+offset_bottom = 344.0
+theme_override_font_sizes/font_size = 40
+text = "Run Practices"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 396.0
+offset_right = 819.0
+offset_bottom = 459.0
+theme_override_font_sizes/font_size = 40
+text = "Simulate Playoff Final"
+
+[node name="CoachButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 990.0
+offset_right = 1239.0
+offset_bottom = 63.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "Coach's Office"
+icon = ExtResource("2_ll02q")
+flat = true
+
+[node name="HistoryButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 983.0
+offset_top = 46.0
+offset_right = 1243.0
+offset_bottom = 109.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "League History"
+icon = ExtResource("3_hphgu")
+flat = true
+
+[node name="AchievementButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 995.0
+offset_top = 93.0
+offset_right = 1232.0
+offset_bottom = 156.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
+text = "Achivements"
+icon = ExtResource("4_g6d5u")
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CoachButton" to="." method="_on_coach_button_pressed"]
+[connection signal="pressed" from="HistoryButton" to="." method="_on_history_button_pressed"]
+[connection signal="pressed" from="AchievementButton" to="." method="_on_achievement_button_pressed"]

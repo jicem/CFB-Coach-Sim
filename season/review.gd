@@ -19,7 +19,11 @@ func _ready():
 		"covering up that... well, let's just say this conversation never took place.",
 		"going to conferences in Tahiti.",
 		"getting the city's biggest mob bosses to help fund our NIL collective.",
-		"buying cars and jewellery for middle school football prospects so they'll come here when they graduate."
+		"buying cars and jewellery for middle school football prospects so they'll come here when they graduate.",
+		"trying to convince people that our quarterback doesn't only suck because he's betting on his own games.",
+		"recruiting lawyers to sue our conference for not letting us sign NFL players.",
+		"recruiting lawyers to sue our conference for not letting us sign NFL players.",
+		"having ChatGPT write the email I'll send to our basketball coach when I fire him."
 	]
 	var random = randi() % 7
 	# Select a random activity and display it
@@ -125,6 +129,7 @@ func _on_button_pressed():
 	Global.schedule3complete = false
 	Global.ccschedulecomplete = false
 	Global.bowlschedulecomplete = false
+	Global.quarterschedulecomplete = false
 	Global.semischedulecomplete = false
 	Global.finalschedulecomplete = false
 	Global.postseasonIds = []

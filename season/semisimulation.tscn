@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://d2385b0e1mobn"]
 
-[ext_resource type="Script" path="res://season/semisimulation.gd" id="1_32nx1"]
-[ext_resource type="Texture2D" uid="uid://d1ciegkviujnm" path="res://strategy.png" id="2_rskgo"]
+[ext_resource type="Script" uid="uid://bs7txb0rfxw42" path="res://season/semisimulation.gd" id="1_32nx1"]
+[ext_resource type="Texture2D" uid="uid://bh3r53sh6yavm" path="res://strategy.png" id="2_rskgo"]
 [ext_resource type="Texture2D" uid="uid://ddvnyfqq6tos6" path="res://hourglass.png" id="3_4367s"]
-[ext_resource type="Texture2D" uid="uid://isxwddeubtqr" path="res://selectsmall.png" id="4_ewjbd"]
+[ext_resource type="Texture2D" uid="uid://cs8u1xphn4wtg" path="res://selectsmall.png" id="4_ewjbd"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -18,8 +18,8 @@ script = ExtResource("1_32nx1")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1305.0
+offset_bottom = 750.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -64,19 +64,19 @@ text = "Full Semifinal Results:"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 430.0
-offset_top = 550.0
-offset_right = 732.0
-offset_bottom = 613.0
+offset_left = 492.0
+offset_top = 592.0
+offset_right = 795.0
+offset_bottom = 655.0
 theme_override_font_sizes/font_size = 40
-text = "Sim to Week 16"
+text = "Sim to Week 17"
 
 [node name="Tree" type="Tree" parent="."]
 layout_mode = 0
 offset_left = 102.0
 offset_top = 282.0
 offset_right = 1090.0
-offset_bottom = 394.0
+offset_bottom = 382.0
 columns = 3
 column_titles_visible = true
 hide_root = true
@@ -85,17 +85,18 @@ select_mode = 1
 [node name="Tree2" type="Tree" parent="."]
 layout_mode = 0
 offset_left = 102.0
-offset_top = 413.0
+offset_top = 394.0
 offset_right = 1090.0
-offset_bottom = 525.0
+offset_bottom = 556.0
 columns = 10
 column_titles_visible = true
 hide_root = true
 select_mode = 1
 
 [node name="CoachButton" type="Button" parent="."]
-offset_left = 890.0
-offset_right = 1138.0
+layout_mode = 0
+offset_left = 990.0
+offset_right = 1239.0
 offset_bottom = 63.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -104,9 +105,10 @@ icon = ExtResource("2_rskgo")
 flat = true
 
 [node name="HistoryButton" type="Button" parent="."]
-offset_left = 882.0
+layout_mode = 0
+offset_left = 983.0
 offset_top = 46.0
-offset_right = 1142.0
+offset_right = 1243.0
 offset_bottom = 109.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -115,9 +117,10 @@ icon = ExtResource("3_4367s")
 flat = true
 
 [node name="AchievementButton" type="Button" parent="."]
-offset_left = 895.0
+layout_mode = 0
+offset_left = 995.0
 offset_top = 93.0
-offset_right = 1132.0
+offset_right = 1232.0
 offset_bottom = 156.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30

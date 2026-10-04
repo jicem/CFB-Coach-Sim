@@ -14,10 +14,17 @@ func _ready():
 	tree.set_column_title(1, "First Name")
 	tree.set_column_title(2, "Last Name")
 	tree.set_column_title(3, "Age")
-	tree.set_column_title(4, "Jersey Number")
+	tree.set_column_title(4, "Jersey")
 	tree.set_column_title(5, "State")
 	tree.set_column_title(6, "Rating")
 	tree.set_column_title(7, "Cost to Sign")
+	tree.set_column_custom_minimum_width(1, 130)  # First Name
+	tree.set_column_custom_minimum_width(2, 130)  # Last Name
+	tree.set_column_custom_minimum_width(3, 50)   # Age
+	tree.set_column_custom_minimum_width(4, 50)   # Jersey Number
+	tree.set_column_custom_minimum_width(5, 50)   # State Abbreviation
+	tree.set_column_custom_minimum_width(6, 120)  # Rating
+	tree.set_column_custom_minimum_width(7, 120)  # Cost to Sign
 	# The root node is hidden in the tree
 	treerow = tree.create_item()
 	for i in range(8):
@@ -43,8 +50,8 @@ func _ready():
 		var textJersey = str(row["jersey"])
 		# Convert age to string
 		var age = str(season - row["birthyear"])
-		# Convert NIL to string
-		var nil = "%.2f" % float(row["nil"])
+		# Convert NIL to a formatted string
+		var nil = "$" + add_commas(int(row["nil"]))
 		# Determine star rating based on the value of "rating"
 		var rating = row["rating"]
 		var starRating = match_rating_to_stars(rating)

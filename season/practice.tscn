@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://frhnpjxk3af4"]
 
-[ext_resource type="Script" path="res://season/practice.gd" id="1_e8xu1"]
+[ext_resource type="Script" uid="uid://wsg748pl51gs" path="res://season/practice.gd" id="1_e8xu1"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,8 +15,8 @@ script = ExtResource("1_e8xu1")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1311.0
+offset_bottom = 745.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -33,7 +33,7 @@ text = "Season"
 layout_mode = 0
 offset_left = 96.0
 offset_top = 97.0
-offset_right = 1049.0
+offset_right = 1196.0
 offset_bottom = 539.0
 columns = 6
 column_titles_visible = true
@@ -42,10 +42,10 @@ select_mode = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 290.0
-offset_top = 560.0
-offset_right = 877.0
-offset_bottom = 623.0
+offset_left = 357.0
+offset_top = 577.0
+offset_right = 947.0
+offset_bottom = 640.0
 theme_override_font_sizes/font_size = 40
 text = "Simulate Next Week of Games"
 

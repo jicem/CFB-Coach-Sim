@@ -1,5 +1,5 @@
 extends Control
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 var team = Global.team
 var treerow : TreeItem
 var database : SQLite

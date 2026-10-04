@@ -10,7 +10,7 @@ var treerow : TreeItem
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var seasons = 0
-	var year = 2024
+	var year = 2026
 	# Add column names for tree
 	tree.set_column_title(0, "Season")
 	tree.set_column_title(1, "Champion")

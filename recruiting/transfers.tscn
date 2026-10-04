@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5v1ioqexpv7i"]
 
-[ext_resource type="Script" path="res://recruiting/transfers.gd" id="1_6dhyw"]
+[ext_resource type="Script" uid="uid://b7tu0250v5df5" path="res://recruiting/transfers.gd" id="1_6dhyw"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,8 +15,8 @@ script = ExtResource("1_6dhyw")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1307.0
+offset_bottom = 754.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -32,9 +32,9 @@ text = "Transfer Recruiting"
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 348.0
-offset_top = 548.0
-offset_right = 866.0
-offset_bottom = 611.0
+offset_top = 606.0
+offset_right = 872.0
+offset_bottom = 669.0
 theme_override_font_sizes/font_size = 40
 text = "Sim to Coordinator Signing"
 
@@ -42,8 +42,8 @@ text = "Sim to Coordinator Signing"
 layout_mode = 0
 offset_left = 96.0
 offset_top = 190.0
-offset_right = 1104.0
-offset_bottom = 435.0
+offset_right = 1182.0
+offset_bottom = 490.0
 columns = 9
 column_titles_visible = true
 hide_root = true
@@ -72,26 +72,26 @@ text = "Needs: "
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 103.0
-offset_top = 457.0
+offset_top = 511.0
 offset_right = 746.0
-offset_bottom = 512.0
+offset_bottom = 566.0
 theme_override_font_sizes/font_size = 30
 text = "Enter IDs of the transfers you want to sign:"
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 0
 offset_left = 742.0
-offset_top = 463.0
+offset_top = 511.0
 offset_right = 817.0
-offset_bottom = 501.0
+offset_bottom = 549.0
 placeholder_text = "ID"
 
 [node name="SubmitButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 828.0
-offset_top = 463.0
+offset_top = 511.0
 offset_right = 904.0
-offset_bottom = 500.0
+offset_bottom = 548.0
 text = "Submit"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

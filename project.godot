@@ -12,12 +12,17 @@ config_version=5
 
 config/name="College Football"
 run/main_scene="res://titlescreen.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://Global.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [editor_plugins]
 

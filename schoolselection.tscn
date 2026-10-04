@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://hjq3408bja7u"]
 
-[ext_resource type="Script" path="res://schoolselection.gd" id="1_6pt88"]
+[ext_resource type="Script" uid="uid://bbqiu1oow1nff" path="res://schoolselection.gd" id="1_6pt88"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,17 +15,17 @@ script = ExtResource("1_6pt88")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1314.0
+offset_bottom = 749.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Tree" type="Tree" parent="."]
 layout_mode = 0
 offset_left = 96.0
 offset_top = 103.0
-offset_right = 1057.0
+offset_right = 1168.0
 offset_bottom = 458.0
-columns = 4
+columns = 5
 column_titles_visible = true
 hide_root = true
 select_mode = 1
@@ -43,35 +43,36 @@ text = "Available Schools"
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 158.0
-offset_top = 554.0
+offset_top = 568.0
 offset_right = 434.0
-offset_bottom = 617.0
+offset_bottom = 631.0
 theme_override_font_sizes/font_size = 40
 text = "Select School"
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 199.0
+offset_left = 134.0
 offset_top = 481.0
-offset_right = 842.0
+offset_right = 923.0
 offset_bottom = 536.0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 text = "Enter ID of the school you want to coach:"
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 815.0
-offset_top = 487.0
-offset_right = 890.0
-offset_bottom = 525.0
+offset_left = 948.0
+offset_top = 486.0
+offset_right = 1068.0
+offset_bottom = 536.0
+theme_override_font_sizes/font_size = 30
 placeholder_text = "ID"
 
 [node name="Title" type="Button" parent="."]
 layout_mode = 0
-offset_left = 521.0
-offset_top = 555.0
-offset_right = 966.0
-offset_bottom = 618.0
+offset_left = 565.0
+offset_top = 568.0
+offset_right = 1010.0
+offset_bottom = 631.0
 theme_override_font_sizes/font_size = 40
 text = "Return to Title Screen"
 

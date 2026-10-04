@@ -1,5 +1,5 @@
 extends Control
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 var database : SQLite
 var treerow : TreeItem
 var team = Global.team
@@ -72,13 +72,13 @@ func _on_timer_timeout():
 	}
 	database.query("DROP TABLE IF EXISTS schedule")
 	database.create_table("schedule", schedule_table)
-	# Create an array of numbers between 41 and 80
+	# Create an array of numbers between 66 and 130
 	var available_ids = []
-	for i in range(61, 121):
+	for i in range(66, 131):
 		available_ids.append(i)
 
-	# Create a loop that inserts a new row into the schedule table 40 times
-	for i in range(60):
+	# Create a loop that inserts a new row into the schedule table 65 times
+	for i in range(65):
 		# Get the homeTid
 		var home_tid = i + 1
 		
@@ -100,4 +100,5 @@ func _on_timer_timeout():
 			"homeTeamWon": -1
 		}
 		database.insert_row("schedule", row_data)
+
 	get_tree().change_scene_to_file("res://season/week1.tscn")

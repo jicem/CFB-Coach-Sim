@@ -12,6 +12,7 @@ var schedule2complete : bool
 var schedule3complete : bool
 var ccschedulecomplete : bool
 var bowlschedulecomplete : bool
+var quarterschedulecomplete : bool
 var semischedulecomplete : bool
 var finalschedulecomplete : bool
 var postseasonIds : Array
@@ -53,6 +54,7 @@ func _ready():
 	schedule3complete = false
 	ccschedulecomplete = false
 	bowlschedulecomplete = false
+	quarterschedulecomplete = false
 	semischedulecomplete = false
 	finalschedulecomplete = false
 	postseasonIds = []

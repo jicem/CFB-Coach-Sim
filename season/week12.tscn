@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c78xa7td8y5f1"]
 
-[ext_resource type="Script" path="res://season/week12.gd" id="1_ig2e2"]
-[ext_resource type="Texture2D" uid="uid://d1ciegkviujnm" path="res://strategy.png" id="2_5hngv"]
+[ext_resource type="Script" uid="uid://d3dfiypqmuy7v" path="res://season/week12.gd" id="1_ig2e2"]
+[ext_resource type="Texture2D" uid="uid://bh3r53sh6yavm" path="res://strategy.png" id="2_5hngv"]
 [ext_resource type="Texture2D" uid="uid://ddvnyfqq6tos6" path="res://hourglass.png" id="3_abnmy"]
-[ext_resource type="Texture2D" uid="uid://isxwddeubtqr" path="res://selectsmall.png" id="4_rjhs5"]
+[ext_resource type="Texture2D" uid="uid://cs8u1xphn4wtg" path="res://selectsmall.png" id="4_rjhs5"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -18,8 +18,8 @@ script = ExtResource("1_ig2e2")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1310.0
+offset_bottom = 751.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -70,8 +70,9 @@ theme_override_font_sizes/font_size = 40
 text = "View CFI Rankings"
 
 [node name="CoachButton" type="Button" parent="."]
-offset_left = 890.0
-offset_right = 1138.0
+layout_mode = 0
+offset_left = 990.0
+offset_right = 1239.0
 offset_bottom = 63.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -80,9 +81,10 @@ icon = ExtResource("2_5hngv")
 flat = true
 
 [node name="HistoryButton" type="Button" parent="."]
-offset_left = 882.0
+layout_mode = 0
+offset_left = 983.0
 offset_top = 46.0
-offset_right = 1142.0
+offset_right = 1243.0
 offset_bottom = 109.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -91,9 +93,10 @@ icon = ExtResource("3_abnmy")
 flat = true
 
 [node name="AchievementButton" type="Button" parent="."]
-offset_left = 895.0
+layout_mode = 0
+offset_left = 995.0
 offset_top = 93.0
-offset_right = 1132.0
+offset_right = 1232.0
 offset_bottom = 156.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30

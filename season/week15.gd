@@ -1,52 +1,82 @@
 extends Control
 var ranking = 1
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 var database : SQLite
 @onready var button = $Button
 @onready var label = %Label
 @onready var label2 = %Label2
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	button.hide()
 	# Display the current season at the top of the screen
 	label.text = str(season) + " Season"
 	label2.text = "Here are your options for Week 15, Coach " + Global.coachname + ":"
-	# Open database from cfb.db file
+	# Open database
 	database = SQLite.new()
 	database.path = "res://data/cfb.db"
 	database.open_db()
-	if Global.semischedulecomplete == false:
-		# Reset the postseason ids array
+	if Global.quarterschedulecomplete == false:
+		# Reset postseason IDs
 		Global.postseasonIds = []
-		var homeTid
-		var awayTid
 		var row_data
-		var rowsArray = []
-		# Select the first four games from week 14
-		var top4query = "SELECT homeTid, awayTid, homeTeamWon FROM schedule WHERE week = 14 LIMIT 4"
-		database.query(top4query)
-		# Fetch and store the rows
-		for i in database.query_result:
-			if i['homeTeamWon'] == 1:
-				rowsArray.append(i["homeTid"])
-				Global.postseasonIds.append(i["homeTid"])
+		var playoff_winners = []
+
+		# ------------------------------------------------
+		# GET WINNERS FROM THE FOUR FIRST-ROUND GAMES
+		# ------------------------------------------------
+
+		var first_round_query = """
+			SELECT homeTid, awayTid, homeTeamWon
+			FROM schedule
+			WHERE week = 14
+			ORDER BY gid
+			LIMIT 4
+		"""
+
+		database.query(first_round_query)
+		for game in database.query_result:
+			var winner
+			if game["homeTeamWon"] == 1:
+				winner = game["homeTid"]
 			else:
-				rowsArray.append(i["awayTid"])
-				Global.postseasonIds.append(i["awayTid"])
-		# Insert new rows into the schedule table for the next round
-		for i in range(0, 3, 2):
-			homeTid = rowsArray[i]
-			awayTid = rowsArray[i + 1]
-			row_data = {
-				"homeTid": homeTid,
-				"awayTid": awayTid,
-				"conference": 0,
-				"week": 15,
-				"homeTeamWon": -1
-			}
-			database.insert_row("schedule", row_data)
-			
+				winner = game["awayTid"]
+			playoff_winners.append(winner)
+			Global.postseasonIds.append(winner)
+
+
+		# ------------------------------------------------
+		# GET THE TOP FOUR SEEDED TEAMS
+		# ------------------------------------------------
+
+		var top4query = """
+			SELECT tid
+			FROM teams1
+			ORDER BY ranking ASC
+			LIMIT 4
+		"""
+		database.query(top4query)
+		var top4 = []
+		for team_row in database.query_result:
+			top4.append(team_row["tid"])
+
+
+		# ------------------------------------------------
+		# CREATE QUARTERFINAL MATCHUPS
+		# ------------------------------------------------
+
+		if playoff_winners.size() == 4 and top4.size() == 4:
+			for i in range(4):
+				var homeTid = top4[i]
+				var awayTid = playoff_winners[i]
+				row_data = {
+					"homeTid": homeTid,
+					"awayTid": awayTid,
+					"conference": 0,
+					"week": 15,
+					"homeTeamWon": -1
+				}
+				database.insert_row("schedule", row_data)
+				Global.quarterschedulecomplete = true
 	# Only show the practice button if the player's team is active this week
 	if Global.postseasonIds.has(Global.team):
 		button.show()
@@ -61,7 +91,7 @@ func _on_button_pressed():
 
 func _on_button_2_pressed():
 	Global.week = 15
-	get_tree().change_scene_to_file("res://season/semisimulation.tscn")
+	get_tree().change_scene_to_file("res://season/quartersimulation.tscn")
 
 
 func _on_coach_button_pressed():
@@ -73,4 +103,4 @@ func _on_history_button_pressed():
 
 
 func _on_achievement_button_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://achievements.tscn")

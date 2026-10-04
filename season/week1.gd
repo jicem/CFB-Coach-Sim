@@ -1,5 +1,5 @@
 extends Control
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 var database : SQLite
 @onready var label = %Label
 @onready var label2 = %Label2

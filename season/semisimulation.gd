@@ -1,5 +1,5 @@
 extends Control
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 var team = Global.team
 var week = Global.week
 var nextWeek = week + 1
@@ -327,7 +327,7 @@ func _ready():
 		
 	# Define conference names
 	var query = "SELECT s.homeTid, s.awayTid, s.homeTeamWon, t1.school AS homeSchool, t2.school AS awaySchool FROM schedule s
-				LEFT JOIN teams t1 ON s.homeTid = t1.tid LEFT JOIN teams t2 ON s.awayTid = t2.tid WHERE s.week = 15"
+				LEFT JOIN teams t1 ON s.homeTid = t1.tid LEFT JOIN teams t2 ON s.awayTid = t2.tid WHERE s.week = 16"
 	database.query(query)
 	for i in database.query_result:
 		# Create variable for tree row
@@ -347,32 +347,130 @@ func _ready():
 		treerow.set_text(1, winningTeam)
 		treerow.set_text(2, losingTeam)
 		
-	var row_data
-	# Select all rows from the table with the current team ID
-	var array : Array = database.select_rows("players", "tid == " + str(team), ["*"])
-	for row in array:
-		var position = row["position"]
-		if(position == "OL"): continue
-		elif(position == "K"): continue
-		else:
-			# Create variable for tree row
-			treerow1 = tree2.create_item()
-			# Add data to tree
-			treerow1.set_text(0, row["firstname"])
-			treerow1.set_text(1, row["lastname"])
-			treerow1.set_text(2, row["position"])
-			
-			# Only generate stats if the player's team has played this week
-			if(hasPlayed):
-				# Filling rows for each position
-				if(position == "QB"):
-					
-					# Generate random numbers for pass attempts, pass completions, and yards
-					var completions = randi_range(19, 27)
-					var attempts = randi_range(completions, 41)
-					var yards = randi_range(150, 400)
-					
-					# Insert into the stats table
+	# Only generate stats if the player's team has played this week
+	if(hasPlayed):
+
+		var row_data
+
+		# Select all rows from the table with the current team ID
+		var array : Array = database.select_rows(
+			"players1",
+			"tid == " + str(team),
+			["*"]
+		)
+
+		var qb_completions = 0
+		var qb_yards = 0
+		var receiving_receptions = 0
+		var receiving_yards = 0
+
+
+		# --------------------------------
+		# GET OFFENSIVE LINE RATING
+		# --------------------------------
+
+		var offensive_line = database.select_rows(
+			"players1",
+			"tid = " + str(team) + " AND position = 'OL'",
+			["rating"]
+		)
+
+		var ol_rating = 0.0
+
+		if offensive_line.size() > 0:
+			for lineman in offensive_line:
+				ol_rating += lineman["rating"]
+
+			ol_rating /= offensive_line.size()
+
+
+		# --------------------------------
+		# POSITION ORDER
+		# --------------------------------
+
+		var position_order = [
+			"QB",
+			"WR",
+			"RB",
+			"TE",
+			"DL",
+			"LB",
+			"CB",
+			"S"
+		]
+
+
+		# --------------------------------
+		# PROCESS PLAYERS
+		# --------------------------------
+
+		for desired_position in position_order:
+
+			for row in array:
+
+				# Skip players who aren't the current position
+				if row["position"] != desired_position:
+					continue
+
+				var position = row["position"]
+
+				# Create tree row
+				treerow1 = tree2.create_item()
+
+				# Add player information
+				treerow1.set_text(0, row["firstname"])
+				treerow1.set_text(1, row["lastname"])
+				treerow1.set_text(2, row["position"])
+
+
+				# --------------------------------
+				# QB
+				# --------------------------------
+
+				if position == "QB":
+
+					var qb_rating = row["rating"]
+
+					# Get wide receivers
+					var wide_receivers = database.select_rows(
+						"players",
+						"tid = " + str(team) + " AND position = 'WR'",
+						["rating"]
+					)
+
+					var wr_rating = 0.0
+
+					if wide_receivers.size() > 0:
+						for receiver in wide_receivers:
+							wr_rating += receiver["rating"]
+
+						wr_rating /= wide_receivers.size()
+
+					# QB rating determines attempts
+					var attempts = randi_range(
+						20 + int(qb_rating / 10.0),
+						28 + int(qb_rating / 8.0)
+					)
+
+					# Offensive line determines completion percentage
+					var completion_percentage = 0.45 + (ol_rating / 100.0) * 0.20
+					completion_percentage += randf_range(-0.05, 0.05)
+					completion_percentage = clamp(completion_percentage, 0.40, 0.70)
+
+					var completions = int(attempts * completion_percentage)
+
+					# WR rating influences yards per completion
+					var yards_per_completion = 5.0 + (wr_rating / 10.0)
+					yards_per_completion += randf_range(-1.5, 1.5)
+
+					var yards = int(completions * yards_per_completion)
+					yards = max(yards, completions * 3)
+
+					# Save these for the receivers and tight ends
+					qb_completions = completions
+					qb_yards = yards
+
+					# Insert QB stats
 					row_data = {
 						"sid": Global.season,
 						"pid": row["pid"],
@@ -384,14 +482,9 @@ func _ready():
 						"tackles": 0,
 						"sacks": 0
 					}
+
 					database.insert_row("player_stats", row_data)
-					
-					# Print out the generated numbers
-					print("Pass Completions:", completions)
-					print("Pass Attempts:", attempts)
-					print("Yards Gained:", yards)
-					
-					# Add to table
+
 					treerow1.set_text(3, str(completions))
 					treerow1.set_text(4, str(attempts))
 					treerow1.set_text(5, str(yards))
@@ -399,16 +492,76 @@ func _ready():
 					treerow1.set_text(7, "0")
 					treerow1.set_text(8, "0")
 					treerow1.set_text(9, "0")
-					
-				if(position == "WR"):
-					
-					# Generate random numbers
-					var yards = randi_range(36, 80)
-					var receptions = randi_range(2, 6)
-					var targets = randi_range(receptions, 8)
+
+				# --------------------------------
+				# WR
+				# --------------------------------
+
+				elif position == "WR":
+
+					var rating = row["rating"]
+
+					# How many receptions are still available?
+					var remaining_receptions = qb_completions - receiving_receptions
+
+					# How many receiving yards are still available?
+					var remaining_yards = qb_yards - receiving_yards
+
+					# If there are no completions left, this receiver gets nothing
+					var receptions = 0
+					var yards = 0
+					var targets = 0
+
+					if remaining_receptions > 0 and remaining_yards > 0:
+
+						# Higher-rated WRs get more receptions
+						var max_receptions = 2 + int(rating / 12.0)
+
+						max_receptions = min(
+							max_receptions,
+							remaining_receptions
+						)
+
+						receptions = randi_range(
+							1,
+							max_receptions
+						)
+
+						# Targets must be at least receptions
+						var max_targets = receptions + 2 + int(rating / 24.0)
+
+						max_targets = min(
+							max_targets,
+							remaining_receptions + 5
+						)
+
+						targets = randi_range(
+							receptions,
+							max_targets
+						)
+
+						# Rating affects yards per reception
+						var yards_per_reception = 8.0 + (rating / 10.0)
+
+						yards_per_reception += randf_range(-2.0, 2.0)
+
+						yards = int(
+							receptions * yards_per_reception
+						)
+
+						# Never exceed remaining team passing yards
+						yards = min(
+							yards,
+							remaining_yards
+						)
+
+					# Update totals
+					receiving_receptions += receptions
+					receiving_yards += yards
+
 					var tackles = 0 if randf() < 0.95 else 1
-					
-					# Insert into the stats table
+
+					# Insert into stats table
 					row_data = {
 						"sid": Global.season,
 						"pid": row["pid"],
@@ -420,8 +573,9 @@ func _ready():
 						"tackles": tackles,
 						"sacks": 0
 					}
+
 					database.insert_row("player_stats", row_data)
-					
+
 					# Add to table
 					treerow1.set_text(3, "0")
 					treerow1.set_text(4, "0")
@@ -431,16 +585,96 @@ func _ready():
 					treerow1.set_text(8, str(tackles))
 					treerow1.set_text(9, "0")
 					
-				if(position == "RB"):
-					
-					# Generate random numbers
-					var attempts = randi_range(10, 25)
-					var yards = randi_range(40, 200)
-					var receptions = randi_range(0, 2)
-					var targets = randi_range(receptions, 3)
+				# --------------------------------
+				# RB
+				# --------------------------------
+
+				elif position == "RB":
+
+					# RB's rating
+					var rb_rating = row["rating"]
+
+					# Better RBs get more rushing attempts
+					var min_attempts = 8 + int(rb_rating / 15.0)
+					var max_attempts = 16 + int(rb_rating / 8.0)
+
+					# Better offensive lines increase rushing opportunities
+					min_attempts += int((ol_rating - 50.0) / 25.0)
+					max_attempts += int((ol_rating - 50.0) / 20.0)
+
+					min_attempts = max(min_attempts, 5)
+					max_attempts = max(max_attempts, min_attempts)
+
+					var attempts = randi_range(
+						min_attempts,
+						max_attempts
+					)
+
+					# RB rating + OL rating determine yards per carry
+					var yards_per_carry = 1.5
+
+					yards_per_carry += rb_rating / 35.0
+					yards_per_carry += ol_rating / 50.0
+
+					# Add some randomness
+					yards_per_carry += randf_range(-1.0, 1.0)
+
+					yards_per_carry = max(
+						yards_per_carry,
+						1.0
+					)
+
+					var yards = int(
+						attempts * yards_per_carry
+					)
+
+					# Completions still available from the QB
+					var remaining_receptions = qb_completions - receiving_receptions
+
+					var receptions = 0
+					var targets = 0
+
+					if remaining_receptions > 0:
+
+						# Better RBs are more likely to receive passes
+						var reception_chance = 0.05 + (rb_rating / 200.0)
+
+						# Limit chance
+						reception_chance = clamp(
+							reception_chance,
+							0.05,
+							0.50
+						)
+
+						if randf() < reception_chance:
+
+							var max_receptions = 1 + int(rb_rating / 35.0)
+
+							max_receptions = min(
+								max_receptions,
+								remaining_receptions
+							)
+
+							receptions = randi_range(
+								1,
+								max_receptions
+							)
+
+							# Targets are always >= receptions
+							targets = randi_range(
+								receptions,
+								receptions + 2
+							)
+
+					# Add RB receptions to team's total
+					receiving_receptions += receptions
+
 					var tackles = 0 if randf() < 0.9 else 1
-					
-					# Insert into the stats table
+
+					# --------------------------------
+					# INSERT STATS
+					# --------------------------------
+
 					row_data = {
 						"sid": Global.season,
 						"pid": row["pid"],
@@ -452,9 +686,13 @@ func _ready():
 						"tackles": tackles,
 						"sacks": 0
 					}
+
 					database.insert_row("player_stats", row_data)
-					
-					# Add to table
+
+					# --------------------------------
+					# DISPLAY
+					# --------------------------------
+
 					treerow1.set_text(3, "0")
 					treerow1.set_text(4, str(attempts))
 					treerow1.set_text(5, str(yards))
@@ -462,16 +700,73 @@ func _ready():
 					treerow1.set_text(7, str(targets))
 					treerow1.set_text(8, str(tackles))
 					treerow1.set_text(9, "0")
-					
-				if(position == "TE"):
-					
-					# Generate random numbers
-					var yards = randi_range(18, 40)
-					var receptions = randi_range(1, 3)
-					var targets = randi_range(receptions, 5)
-					var tackles = 0 if randf() < 0.8 else 1
-					
-					# Insert into the stats table
+
+
+				# --------------------------------
+				# TE
+				# --------------------------------
+
+				elif position == "TE":
+
+					var rating = row["rating"]
+
+					var remaining_receptions = qb_completions - receiving_receptions
+					var remaining_yards = qb_yards - receiving_yards
+
+					var receptions = 0
+					var yards = 0
+					var targets = 0
+
+					if remaining_receptions > 0 and remaining_yards > 0:
+
+						# TEs generally receive fewer catches than WRs
+						var max_receptions = 1 + int(rating / 20.0)
+
+						max_receptions = min(
+							max_receptions,
+							remaining_receptions
+						)
+
+						receptions = randi_range(
+							1,
+							max_receptions
+						)
+
+						# Targets
+						var max_targets = receptions + 2 + int(rating / 30.0)
+
+						targets = randi_range(
+							receptions,
+							max_targets
+						)
+
+						targets = min(
+							targets,
+							qb_completions
+						)
+
+						# Rating determines yards per reception
+						var yards_per_reception = 6.0 + (rating / 12.0)
+
+						yards_per_reception += randf_range(-1.5, 1.5)
+
+						yards = int(
+							receptions * yards_per_reception
+						)
+
+						# Never exceed remaining passing yards
+						yards = min(
+							yards,
+							remaining_yards
+						)
+
+					# Update team totals
+					receiving_receptions += receptions
+					receiving_yards += yards
+
+					var tackles = 0 if randf() < 0.80 else 1
+
+					# Insert into stats table
 					row_data = {
 						"sid": Global.season,
 						"pid": row["pid"],
@@ -483,8 +778,9 @@ func _ready():
 						"tackles": tackles,
 						"sacks": 0
 					}
+
 					database.insert_row("player_stats", row_data)
-					
+
 					# Add to table
 					treerow1.set_text(3, "0")
 					treerow1.set_text(4, "0")
@@ -493,14 +789,59 @@ func _ready():
 					treerow1.set_text(7, str(targets))
 					treerow1.set_text(8, str(tackles))
 					treerow1.set_text(9, "0")
-					
-				if(position == "DL"):
-					
-					# Generate random numbers
-					var tackles = randi_range(1, 5)
-					var sacks = 0 if randf() < 0.9 else 1
-					
-					# Insert into the stats table
+
+
+				# --------------------------------
+				# DL
+				# --------------------------------
+
+				elif position == "DL":
+
+					var dl_rating = row["rating"]
+
+					# --------------------------------
+					# TACKLES
+					# --------------------------------
+
+					# Higher-rated DL get slightly more tackles
+					var min_tackles = 1 + int(dl_rating / 30.0)
+					var max_tackles = 3 + int(dl_rating / 15.0)
+
+					# Keep tackle totals reasonable
+					min_tackles = clamp(min_tackles, 1, 4)
+					max_tackles = clamp(max_tackles, min_tackles, 7)
+
+					var tackles = randi_range(
+						min_tackles,
+						max_tackles
+					)
+
+					# --------------------------------
+					# SACKS
+					# --------------------------------
+
+					# Rating determines probability of a sack
+					var sack_chance = 0.03 + (dl_rating / 1000.0)
+
+					sack_chance = clamp(
+						sack_chance,
+						0.03,
+						0.15
+					)
+
+					var sacks = 0
+
+					if randf() < sack_chance:
+						sacks = 1
+
+					# Small chance of a second sack for elite DL
+					if dl_rating >= 85 and randf() < 0.05:
+						sacks += 1
+
+					# --------------------------------
+					# INSERT INTO STATS TABLE
+					# --------------------------------
+
 					row_data = {
 						"sid": Global.season,
 						"pid": row["pid"],
@@ -512,38 +853,13 @@ func _ready():
 						"tackles": tackles,
 						"sacks": sacks
 					}
+
 					database.insert_row("player_stats", row_data)
-					
-					# Add to table
-					treerow1.set_text(3, "0")
-					treerow1.set_text(4, "0")
-					treerow1.set_text(5, "0")
-					treerow1.set_text(6, "0")
-					treerow1.set_text(7, "0")
-					treerow1.set_text(8, str(tackles))
-					treerow1.set_text(9, str(sacks))
-					
-				if(position == "LB"):
-					
-					# Generate random numbers
-					var tackles = randi_range(1, 6)
-					var sacks = 0 if randf() < 0.9 else 1
-					
-					# Insert into the stats table
-					row_data = {
-						"sid": Global.season,
-						"pid": row["pid"],
-						"completions": 0,
-						"attempts": 0,
-						"yards": 0,
-						"receptions": 0,
-						"targets": 0,
-						"tackles": tackles,
-						"sacks": sacks
-					}
-					database.insert_row("player_stats", row_data)
-					
-					# Add to table
+
+					# --------------------------------
+					# DISPLAY
+					# --------------------------------
+
 					treerow1.set_text(3, "0")
 					treerow1.set_text(4, "0")
 					treerow1.set_text(5, "0")
@@ -552,13 +868,58 @@ func _ready():
 					treerow1.set_text(8, str(tackles))
 					treerow1.set_text(9, str(sacks))
 
-				if(position == "CB"):
-					
-					# Generate random numbers
-					var tackles = randi_range(1, 5)
-					var sacks = 0 if randf() < 0.95 else 1
-					
-					# Insert into the stats table
+
+				# --------------------------------
+				# LB
+				# --------------------------------
+
+				elif position == "LB":
+
+					var lb_rating = row["rating"]
+
+					# --------------------------------
+					# TACKLES
+					# --------------------------------
+
+					# Higher-rated LBs get more tackles
+					var min_tackles = 2 + int(lb_rating / 30.0)
+					var max_tackles = 4 + int(lb_rating / 12.0)
+
+					# Keep tackle totals reasonable
+					min_tackles = clamp(min_tackles, 2, 5)
+					max_tackles = clamp(max_tackles, min_tackles, 10)
+
+					var tackles = randi_range(
+						min_tackles,
+						max_tackles
+					)
+
+					# --------------------------------
+					# SACKS
+					# --------------------------------
+
+					# Higher-rated LBs are more likely to record a sack
+					var sack_chance = 0.04 + (lb_rating / 800.0)
+
+					sack_chance = clamp(
+						sack_chance,
+						0.04,
+						0.16
+					)
+
+					var sacks = 0
+
+					if randf() < sack_chance:
+						sacks = 1
+
+					# Small chance of multiple sacks for elite LBs
+					if lb_rating >= 85 and randf() < 0.05:
+						sacks += 1
+
+					# --------------------------------
+					# INSERT INTO STATS TABLE
+					# --------------------------------
+
 					row_data = {
 						"sid": Global.season,
 						"pid": row["pid"],
@@ -570,9 +931,13 @@ func _ready():
 						"tackles": tackles,
 						"sacks": sacks
 					}
+
 					database.insert_row("player_stats", row_data)
-					
-					# Add to table
+
+					# --------------------------------
+					# DISPLAY
+					# --------------------------------
+
 					treerow1.set_text(3, "0")
 					treerow1.set_text(4, "0")
 					treerow1.set_text(5, "0")
@@ -581,12 +946,36 @@ func _ready():
 					treerow1.set_text(8, str(tackles))
 					treerow1.set_text(9, str(sacks))
 
-				if(position == "S"):
-					
-					# Generate random numbers
-					var tackles = randi_range(1, 6)
-					
-					# Insert into the stats table
+
+				# --------------------------------
+				# CB
+				# --------------------------------
+
+				elif position == "CB":
+
+					var cb_rating = row["rating"]
+
+					# --------------------------------
+					# TACKLES
+					# --------------------------------
+
+					# Higher-rated CBs get slightly more tackles
+					var min_tackles = 1 + int(cb_rating / 35.0)
+					var max_tackles = 3 + int(cb_rating / 18.0)
+
+					# Keep tackle totals reasonable
+					min_tackles = clamp(min_tackles, 1, 4)
+					max_tackles = clamp(max_tackles, min_tackles, 7)
+
+					var tackles = randi_range(
+						min_tackles,
+						max_tackles
+					)
+
+					# --------------------------------
+					# INSERT INTO STATS TABLE
+					# --------------------------------
+
 					row_data = {
 						"sid": Global.season,
 						"pid": row["pid"],
@@ -598,9 +987,13 @@ func _ready():
 						"tackles": tackles,
 						"sacks": 0
 					}
+
 					database.insert_row("player_stats", row_data)
-					
-					# Add to table
+
+					# --------------------------------
+					# DISPLAY
+					# --------------------------------
+
 					treerow1.set_text(3, "0")
 					treerow1.set_text(4, "0")
 					treerow1.set_text(5, "0")
@@ -608,14 +1001,62 @@ func _ready():
 					treerow1.set_text(7, "0")
 					treerow1.set_text(8, str(tackles))
 					treerow1.set_text(9, "0")
-			else:
-				treerow1.set_text(3, "0")
-				treerow1.set_text(4, "0")
-				treerow1.set_text(5, "0")
-				treerow1.set_text(6, "0")
-				treerow1.set_text(7, "0")
-				treerow1.set_text(8, "0")
-				treerow1.set_text(9, "0")
+
+
+				# --------------------------------
+				# S
+				# --------------------------------
+
+				elif position == "S":
+
+					var s_rating = row["rating"]
+
+					# --------------------------------
+					# TACKLES
+					# --------------------------------
+
+					# Higher-rated safeties get slightly more tackles
+					var min_tackles = 1 + int(s_rating / 30.0)
+					var max_tackles = 3 + int(s_rating / 15.0)
+
+					# Keep tackle totals reasonable
+					min_tackles = clamp(min_tackles, 1, 4)
+					max_tackles = clamp(max_tackles, min_tackles, 8)
+
+					var tackles = randi_range(
+						min_tackles,
+						max_tackles
+					)
+
+					# --------------------------------
+					# INSERT INTO STATS TABLE
+					# --------------------------------
+
+					row_data = {
+						"sid": Global.season,
+						"pid": row["pid"],
+						"completions": 0,
+						"attempts": 0,
+						"yards": 0,
+						"receptions": 0,
+						"targets": 0,
+						"tackles": tackles,
+						"sacks": 0
+					}
+
+					database.insert_row("player_stats", row_data)
+
+					# --------------------------------
+					# DISPLAY
+					# --------------------------------
+
+					treerow1.set_text(3, "0")
+					treerow1.set_text(4, "0")
+					treerow1.set_text(5, "0")
+					treerow1.set_text(6, "0")
+					treerow1.set_text(7, "0")
+					treerow1.set_text(8, str(tackles))
+					treerow1.set_text(9, "0")
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -623,7 +1064,7 @@ func _process(delta):
 
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://season/week16.tscn")
+	get_tree().change_scene_to_file("res://season/week17.tscn")
 
 func _on_coach_button_pressed():
 	get_tree().change_scene_to_file("res://coachoffice.tscn")

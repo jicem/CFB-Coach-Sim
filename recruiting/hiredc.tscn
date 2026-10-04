@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjj1ethoatt8e"]
 
-[ext_resource type="Script" path="res://recruiting/hiredc.gd" id="1_2klln"]
+[ext_resource type="Script" uid="uid://i0dokwj3be8y" path="res://recruiting/hiredc.gd" id="1_2klln"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,8 +15,8 @@ script = ExtResource("1_2klln")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1315.0
+offset_bottom = 747.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -31,34 +31,34 @@ text = "Defensive Coordinator Signing"
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 103.0
-offset_top = 552.0
-offset_right = 746.0
-offset_bottom = 607.0
+offset_top = 606.0
+offset_right = 747.0
+offset_bottom = 661.0
 theme_override_font_sizes/font_size = 30
 text = "Enter ID of the coordinator you want to sign:"
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 0
 offset_left = 766.0
-offset_top = 558.0
+offset_top = 606.0
 offset_right = 841.0
-offset_bottom = 596.0
+offset_bottom = 644.0
 placeholder_text = "ID"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 851.0
-offset_top = 558.0
+offset_top = 606.0
 offset_right = 927.0
-offset_bottom = 595.0
+offset_bottom = 643.0
 text = "Submit"
 
 [node name="SkipButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 939.0
-offset_top = 558.0
+offset_top = 606.0
 offset_right = 987.0
-offset_bottom = 595.0
+offset_bottom = 643.0
 text = "Skip"
 
 [node name="Tree" type="Tree" parent="."]

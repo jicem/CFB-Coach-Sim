@@ -38,3 +38,7 @@ func _on_button_2_pressed():
 			Global.playhrs = row["playhrs"]
 			Global.playmins = row["playmins"]
 	get_tree().change_scene_to_file("res://newseason.tscn")
+
+
+func _on_quit_pressed():
+	get_tree().quit()

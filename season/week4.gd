@@ -1,6 +1,6 @@
 extends Control
 var database : SQLite
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 @onready var label = %Label
 @onready var label2 = %Label2
 
@@ -27,7 +27,7 @@ func _ready():
 		var matchups = []
 		
 		# Generate the round-robin schedule
-		for i in range(12):
+		for i in range(13):
 			var conferenceMatchups = []
 			var conference = i + 1
 			var multiple = i * 10

@@ -1,6 +1,6 @@
 extends Control
 var ranking = 1
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 var database : SQLite
 @onready var button = $Button
 @onready var label = %Label
@@ -25,39 +25,88 @@ func _ready():
 		# Increase ranking for next iteration
 		ranking += 1
 		
-	# If the bowl week schedules haven't been done yet, do them here
+	# If the playoff schedule hasn't been created yet, do it here
 	if Global.bowlschedulecomplete == false:
-		# Reset the postseason ids array
+
+		# Reset postseason IDs
 		Global.postseasonIds = []
 		var homeTid
 		var awayTid
 		var row_data
 		var rowsArray = []
-		# Select and sort the top 8 teams based on wins
-		var top8query = "SELECT * FROM teams1 ORDER BY wins DESC, ranking ASC LIMIT 8"
-		database.query(top8query)
-		# Fetch and store the rows
-		for i in database.query_result:
-			rowsArray.append(i["tid"])
-			Global.postseasonIds.append(i["tid"])
-		# Check if there are at least 8 rows
-		if rowsArray.size() >= 8:
-			# Iterate through the rows and insert into the schedule table
-			for i in range(4):
-				homeTid = rowsArray[i]
-				awayTid = rowsArray[7 - i]
-				row_data = {
-					"homeTid": homeTid,
-					"awayTid": awayTid,
-					"conference": 0,
-					"week": 14,
-					"homeTeamWon": -1
-				}
-				database.insert_row("schedule", row_data)
-				
+
+		# --------------------------------
+		# GET TOP 12 TEAMS
+		# --------------------------------
+
+		var playoff_query = """
+			SELECT *
+			FROM teams1
+			ORDER BY ranking ASC
+			LIMIT 12
+		"""
+
+		database.query(playoff_query)
+
+		# Store playoff teams in seed order
+		for row in database.query_result:
+			rowsArray.append(row["tid"])
+			Global.postseasonIds.append(row["tid"])
+
+
+		# --------------------------------
+		# MAKE SURE WE HAVE 12 TEAMS
+		# --------------------------------
+
+		if rowsArray.size() >= 12:
+
+			# --------------------------------
+			# FIRST ROUND
+			# --------------------------------
+
+			# #5 vs #12
+			row_data = {
+				"homeTid": rowsArray[4],
+				"awayTid": rowsArray[11],
+				"conference": 0,
+				"week": 14,
+				"homeTeamWon": -1
+			}
+			database.insert_row("schedule", row_data)
+
+			# #6 vs #11
+			row_data = {
+				"homeTid": rowsArray[5],
+				"awayTid": rowsArray[10],
+				"conference": 0,
+				"week": 14,
+				"homeTeamWon": -1
+			}
+			database.insert_row("schedule", row_data)
+
+			# #7 vs #10
+			row_data = {
+				"homeTid": rowsArray[6],
+				"awayTid": rowsArray[9],
+				"conference": 0,
+				"week": 14,
+				"homeTeamWon": -1
+			}
+			database.insert_row("schedule", row_data)
+
+			# #8 vs #9
+			row_data = {
+				"homeTid": rowsArray[7],
+				"awayTid": rowsArray[8],
+				"conference": 0,
+				"week": 14,
+				"homeTeamWon": -1
+			}
+			database.insert_row("schedule", row_data)
+
 		# Select the next 32 teams
 		var rowCounter = 1; # Initialize a counter for rows
-		var next32query = "SELECT * FROM teams1 ORDER BY wins DESC, ranking ASC LIMIT 32 OFFSET 8"
+		var next32query = "SELECT * FROM teams1 ORDER BY wins DESC, ranking ASC LIMIT 32 OFFSET 12"
 		database.query(next32query)
 		for i in database.query_result:
 			Global.postseasonIds.append(i["tid"])
@@ -108,4 +157,4 @@ func _on_history_button_pressed():
 
 
 func _on_achievement_button_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://achievements.tscn")

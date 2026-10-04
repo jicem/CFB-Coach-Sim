@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://du74fhycancn8"]
 
-[ext_resource type="Script" path="res://season/week15.gd" id="1_l5qgf"]
-[ext_resource type="Texture2D" uid="uid://d1ciegkviujnm" path="res://strategy.png" id="2_5abbl"]
+[ext_resource type="Script" uid="uid://c4ydek6y24bg8" path="res://season/week15.gd" id="1_l5qgf"]
+[ext_resource type="Texture2D" uid="uid://bh3r53sh6yavm" path="res://strategy.png" id="2_5abbl"]
 [ext_resource type="Texture2D" uid="uid://ddvnyfqq6tos6" path="res://hourglass.png" id="3_opjxf"]
-[ext_resource type="Texture2D" uid="uid://isxwddeubtqr" path="res://selectsmall.png" id="4_smhyb"]
+[ext_resource type="Texture2D" uid="uid://cs8u1xphn4wtg" path="res://selectsmall.png" id="4_smhyb"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -18,8 +18,8 @@ script = ExtResource("1_l5qgf")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1307.0
+offset_bottom = 733.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -53,16 +53,17 @@ text = "Run Practices"
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 343.0
+offset_left = 306.0
 offset_top = 396.0
-offset_right = 871.0
+offset_right = 897.0
 offset_bottom = 459.0
 theme_override_font_sizes/font_size = 40
-text = "Simulate Playoff Semifinals"
+text = "Simulate Playoff Quarterfinals"
 
 [node name="CoachButton" type="Button" parent="."]
-offset_left = 890.0
-offset_right = 1138.0
+layout_mode = 0
+offset_left = 990.0
+offset_right = 1239.0
 offset_bottom = 63.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -71,9 +72,10 @@ icon = ExtResource("2_5abbl")
 flat = true
 
 [node name="HistoryButton" type="Button" parent="."]
-offset_left = 882.0
+layout_mode = 0
+offset_left = 983.0
 offset_top = 46.0
-offset_right = 1142.0
+offset_right = 1243.0
 offset_bottom = 109.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -82,9 +84,10 @@ icon = ExtResource("3_opjxf")
 flat = true
 
 [node name="AchievementButton" type="Button" parent="."]
-offset_left = 895.0
+layout_mode = 0
+offset_left = 995.0
 offset_top = 93.0
-offset_right = 1132.0
+offset_right = 1232.0
 offset_bottom = 156.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30

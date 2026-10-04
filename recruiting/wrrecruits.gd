@@ -43,8 +43,8 @@ func _ready():
 		var textJersey = str(row["jersey"])
 		# Convert age to string
 		var age = str(season - row["birthyear"])
-		# Convert NIL to string
-		var nil = "%.2f" % float(row["nil"])
+		# Convert NIL to a formatted string
+		var nil = "$" + add_commas(int(row["nil"]))
 		# Determine star rating based on the value of "rating"
 		var rating = row["rating"]
 		var starRating = match_rating_to_stars(rating)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dm1f2eperjwcu"]
 
-[ext_resource type="Script" path="res://recruiting/hs.gd" id="1_r3r4r"]
+[ext_resource type="Script" uid="uid://bjnaws4ycqt80" path="res://recruiting/hs.gd" id="1_r3r4r"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,8 +15,8 @@ script = ExtResource("1_r3r4r")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1300.0
+offset_bottom = 739.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -43,9 +43,9 @@ text = "Quarterbacks Needed: "
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 100.0
-offset_top = 166.0
+offset_top = 169.0
 offset_right = 624.0
-offset_bottom = 208.0
+offset_bottom = 211.0
 theme_override_font_sizes/font_size = 30
 text = "Running Backs Needed: "
 
@@ -53,9 +53,9 @@ text = "Running Backs Needed: "
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 100.0
-offset_top = 199.0
+offset_top = 207.0
 offset_right = 624.0
-offset_bottom = 241.0
+offset_bottom = 249.0
 theme_override_font_sizes/font_size = 30
 text = "Wide Recievers Needed: "
 
@@ -63,9 +63,9 @@ text = "Wide Recievers Needed: "
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 100.0
-offset_top = 231.0
+offset_top = 244.0
 offset_right = 624.0
-offset_bottom = 273.0
+offset_bottom = 286.0
 theme_override_font_sizes/font_size = 30
 text = "Tight Ends Needed: "
 
@@ -73,9 +73,9 @@ text = "Tight Ends Needed: "
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 100.0
-offset_top = 267.0
+offset_top = 284.0
 offset_right = 624.0
-offset_bottom = 309.0
+offset_bottom = 326.0
 theme_override_font_sizes/font_size = 30
 text = "Offensive Linemen Needed: "
 
@@ -83,9 +83,9 @@ text = "Offensive Linemen Needed: "
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 100.0
-offset_top = 302.0
+offset_top = 322.0
 offset_right = 624.0
-offset_bottom = 344.0
+offset_bottom = 364.0
 theme_override_font_sizes/font_size = 30
 text = "Defensive Linemen Needed: "
 
@@ -93,9 +93,9 @@ text = "Defensive Linemen Needed: "
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 100.0
-offset_top = 335.0
+offset_top = 362.0
 offset_right = 624.0
-offset_bottom = 377.0
+offset_bottom = 404.0
 theme_override_font_sizes/font_size = 30
 text = "Linebackers Needed: "
 
@@ -103,9 +103,9 @@ text = "Linebackers Needed: "
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 100.0
-offset_top = 369.0
+offset_top = 403.0
 offset_right = 624.0
-offset_bottom = 411.0
+offset_bottom = 445.0
 theme_override_font_sizes/font_size = 30
 text = "Cornerbacks Needed: "
 
@@ -113,9 +113,9 @@ text = "Cornerbacks Needed: "
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 100.0
-offset_top = 401.0
+offset_top = 441.0
 offset_right = 624.0
-offset_bottom = 443.0
+offset_bottom = 483.0
 theme_override_font_sizes/font_size = 30
 text = "Safeties Needed: "
 
@@ -123,18 +123,18 @@ text = "Safeties Needed: "
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 100.0
-offset_top = 433.0
+offset_top = 479.0
 offset_right = 624.0
-offset_bottom = 475.0
+offset_bottom = 521.0
 theme_override_font_sizes/font_size = 30
 text = "Kickers Needed: "
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 350.0
-offset_top = 533.0
-offset_right = 873.0
-offset_bottom = 596.0
+offset_left = 357.0
+offset_top = 565.0
+offset_right = 880.0
+offset_bottom = 628.0
 theme_override_font_sizes/font_size = 40
 text = "Sim to Transfer Recruiting"
 
@@ -149,73 +149,73 @@ text = "Recruit QB"
 [node name="RB_button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 488.0
-offset_top = 170.0
+offset_top = 173.0
 offset_right = 587.0
-offset_bottom = 201.0
+offset_bottom = 204.0
 text = "Recruit RB"
 
 [node name="WR_button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 494.0
-offset_top = 205.0
+offset_top = 213.0
 offset_right = 595.0
-offset_bottom = 236.0
+offset_bottom = 244.0
 text = "Recruit WR"
 
 [node name="TE_button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 426.0
-offset_top = 239.0
+offset_top = 252.0
 offset_right = 524.0
-offset_bottom = 270.0
+offset_bottom = 283.0
 text = "Recruit TE"
 
 [node name="OL_button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 545.0
-offset_top = 272.0
+offset_top = 289.0
 offset_right = 642.0
-offset_bottom = 303.0
+offset_bottom = 320.0
 text = "Recruit OL"
 
 [node name="DL_button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 550.0
-offset_top = 309.0
+offset_top = 329.0
 offset_right = 645.0
-offset_bottom = 340.0
+offset_bottom = 360.0
 text = "Recruit DL"
 
 [node name="LB_button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 453.0
-offset_top = 341.0
+offset_top = 368.0
 offset_right = 551.0
-offset_bottom = 372.0
+offset_bottom = 399.0
 text = "Recruit LB"
 
 [node name="CB_button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 460.0
-offset_top = 374.0
+offset_top = 408.0
 offset_right = 558.0
-offset_bottom = 405.0
+offset_bottom = 439.0
 text = "Recruit CB"
 
 [node name="S_button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 388.0
-offset_top = 407.0
+offset_top = 447.0
 offset_right = 517.0
-offset_bottom = 438.0
+offset_bottom = 478.0
 text = "Recruit Safety"
 
 [node name="K_button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 381.0
-offset_top = 440.0
+offset_top = 486.0
 offset_right = 506.0
-offset_bottom = 471.0
+offset_bottom = 517.0
 text = "Recruit Kicker"
 
 [node name="Timer" type="Timer" parent="."]

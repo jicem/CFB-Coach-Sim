@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cphri3lg7lmnn"]
 
-[ext_resource type="Script" path="res://recruiting/qbrecruits.gd" id="1_6x3y0"]
+[ext_resource type="Script" uid="uid://cgqn2hcfvxhlh" path="res://recruiting/qbrecruits.gd" id="1_6x3y0"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,8 +15,8 @@ script = ExtResource("1_6x3y0")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1318.0
+offset_bottom = 756.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -31,9 +31,9 @@ text = "Quarterback Recruiting"
 [node name="Tree" type="Tree" parent="."]
 layout_mode = 0
 offset_left = 96.0
-offset_top = 137.0
-offset_right = 1104.0
-offset_bottom = 540.0
+offset_top = 141.0
+offset_right = 1182.0
+offset_bottom = 563.0
 columns = 8
 column_titles_visible = true
 hide_root = true
@@ -52,34 +52,34 @@ text = "Budget: $0"
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 103.0
-offset_top = 552.0
-offset_right = 746.0
-offset_bottom = 607.0
+offset_top = 586.0
+offset_right = 754.0
+offset_bottom = 641.0
 theme_override_font_sizes/font_size = 30
 text = "Enter ID of the quarterback you want to sign:"
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 0
 offset_left = 766.0
-offset_top = 558.0
+offset_top = 586.0
 offset_right = 841.0
-offset_bottom = 596.0
+offset_bottom = 624.0
 placeholder_text = "ID"
 
 [node name="SubmitButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 852.0
-offset_top = 558.0
+offset_top = 586.0
 offset_right = 928.0
-offset_bottom = 595.0
+offset_bottom = 623.0
 text = "Submit"
 
 [node name="SkipButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 939.0
-offset_top = 558.0
+offset_top = 586.0
 offset_right = 987.0
-offset_bottom = 595.0
+offset_bottom = 623.0
 text = "Skip"
 
 [connection signal="item_selected" from="Tree" to="." method="_on_tree_item_selected"]

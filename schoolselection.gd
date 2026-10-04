@@ -13,12 +13,14 @@ func _ready():
 	tree.set_column_title(1, "School")
 	tree.set_column_title(2, "State")
 	tree.set_column_title(3, "Conference")
+	tree.set_column_title(4, "Prestige")
 	# The root node is hidden in the tree
 	treerow = tree.create_item()
 	treerow.set_text(0, "Hidden")
 	treerow.set_text(1, "Hidden")
 	treerow.set_text(2, "Hidden")
 	treerow.set_text(3, "Hidden")
+	treerow.set_text(4, "Hidden")
 	# Open database from cfb.db file
 	database = SQLite.new()
 	database.path = "res://data/cfb.db"
@@ -26,9 +28,9 @@ func _ready():
 	# Define conference names
 	var conferenceNames = ['Elite 10 East', 'Elite 10 West', 'Big Dozen East', 'Big Dozen West',
 						'South East', 'South West', 'Atlantic Coast', 'Champions',
-						'National', 'Dixieland', 'Midwest', 'Great Lakes']
+						'National', 'Dixieland', 'Midwest', 'Great Lakes', 'Coast to Coast']
 	# Change label to include the name of the school
-	var array : Array = database.select_rows("teams", "tid < 121", ["*"])
+	var array : Array = database.select_rows("teams", "tid < 131", ["*"])
 	for row in array:
 		var button = LinkButton.new()
 		# Create variable for tree row
@@ -42,6 +44,7 @@ func _ready():
 		treerow.set_text(1, row["school"])
 		treerow.set_text(2, row["state"])
 		treerow.set_text(3, conferenceNames[row["cid"] - 1])
+		treerow.set_text(4, str(row["prestige"]))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -50,7 +53,7 @@ func _process(delta):
 func _on_button_pressed():
 	if selection.text != "":
 		var id = int(selection.text)
-		if id > 0 and id < 121:
+		if id > 0 and id < 131:
 			Global.team = selection.text
 			get_tree().change_scene_to_file("res://playerlist.tscn")
 	else: pass
@@ -58,7 +61,7 @@ func _on_button_pressed():
 func _on_line_edit_text_submitted(new_text):
 	if selection.text != "":
 		var id = int(selection.text)
-		if id > 0 and id < 121:
+		if id > 0 and id < 131:
 			Global.team = selection.text
 			get_tree().change_scene_to_file("res://playerlist.tscn")
 	else: pass

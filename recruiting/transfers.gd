@@ -1,5 +1,5 @@
 extends Control
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 var team = Global.team
 var database : SQLite
 var treerow : TreeItem
@@ -55,10 +55,17 @@ func generate_table():
 	tree.set_column_title(2, "Last Name")
 	tree.set_column_title(3, "Position")
 	tree.set_column_title(4, "Age")
-	tree.set_column_title(5, "Jersey Number")
+	tree.set_column_title(5, "Jersey")
 	tree.set_column_title(6, "State")
 	tree.set_column_title(7, "Rating")
 	tree.set_column_title(8, "Cost to Sign")
+	tree.set_column_custom_minimum_width(1, 130)  # First Name
+	tree.set_column_custom_minimum_width(2, 130)  # Last Name
+	tree.set_column_custom_minimum_width(3, 50)   # Age
+	tree.set_column_custom_minimum_width(4, 50)   # Jersey Number
+	tree.set_column_custom_minimum_width(5, 50)   # State Abbreviation
+	tree.set_column_custom_minimum_width(6, 120)  # Rating
+	tree.set_column_custom_minimum_width(7, 120)  # Cost to Sign
 	# The root node is hidden in the tree
 	treerow = tree.create_item()
 	for i in range(9):
@@ -75,8 +82,8 @@ func generate_table():
 		var textJersey = str(row["jersey"])
 		# Convert age to string
 		var age = str(season - row["birthyear"])
-		# Convert NIL to string
-		var nil = str("%0.2f" % row["nil"])
+		# Convert NIL to a formatted string
+		var nil = "$" + add_commas(int(row["nil"]))
 		# Convert rating to string
 		var rating = str(row["rating"])
 		# Add data to tree

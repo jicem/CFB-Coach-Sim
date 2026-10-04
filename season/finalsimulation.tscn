@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3je7aq6k6kb1"]
 
-[ext_resource type="Script" path="res://season/finalsimulation.gd" id="1_j06hn"]
-[ext_resource type="Texture2D" uid="uid://d1ciegkviujnm" path="res://strategy.png" id="2_1mut4"]
+[ext_resource type="Script" uid="uid://bkutf3g14kr0q" path="res://season/finalsimulation.gd" id="1_j06hn"]
+[ext_resource type="Texture2D" uid="uid://bh3r53sh6yavm" path="res://strategy.png" id="2_1mut4"]
 [ext_resource type="Texture2D" uid="uid://ddvnyfqq6tos6" path="res://hourglass.png" id="3_cjl1q"]
-[ext_resource type="Texture2D" uid="uid://isxwddeubtqr" path="res://selectsmall.png" id="4_1bm52"]
+[ext_resource type="Texture2D" uid="uid://cs8u1xphn4wtg" path="res://selectsmall.png" id="4_1bm52"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -18,8 +18,8 @@ script = ExtResource("1_j06hn")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1315.0
+offset_bottom = 747.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -64,10 +64,10 @@ text = "Championship Game Results:"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 380.0
-offset_top = 550.0
-offset_right = 785.0
-offset_bottom = 613.0
+offset_left = 408.0
+offset_top = 616.0
+offset_right = 814.0
+offset_bottom = 679.0
 theme_override_font_sizes/font_size = 40
 text = "Performance Review"
 
@@ -87,7 +87,7 @@ layout_mode = 0
 offset_left = 102.0
 offset_top = 369.0
 offset_right = 1090.0
-offset_bottom = 525.0
+offset_bottom = 594.0
 columns = 10
 column_titles_visible = true
 hide_root = true
@@ -95,8 +95,8 @@ select_mode = 1
 
 [node name="CoachButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 890.0
-offset_right = 1138.0
+offset_left = 990.0
+offset_right = 1239.0
 offset_bottom = 63.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -106,9 +106,9 @@ flat = true
 
 [node name="HistoryButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 882.0
+offset_left = 983.0
 offset_top = 46.0
-offset_right = 1142.0
+offset_right = 1243.0
 offset_bottom = 109.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -118,9 +118,9 @@ flat = true
 
 [node name="AchievementButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 895.0
+offset_left = 995.0
 offset_top = 93.0
-offset_right = 1132.0
+offset_right = 1232.0
 offset_bottom = 156.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30

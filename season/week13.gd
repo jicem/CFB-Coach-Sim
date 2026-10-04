@@ -1,6 +1,6 @@
 extends Control
 var ranking = 1
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 var database : SQLite
 @onready var button = $Button
 @onready var label = %Label
@@ -27,7 +27,7 @@ func _ready():
 		
 	# If the conference championship schedules haven't been done yet, do them here
 	if Global.ccschedulecomplete == false:
-		for i in range(8):
+		for i in range(13):
 			var teamIds: Array = [] # Create an empty array to store team IDs for each conference
 			var conference = i + 1
 			# Query to calculate wins for each team in the current conference and sort them
@@ -91,4 +91,4 @@ func _on_history_button_pressed():
 
 
 func _on_achievement_button_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://achievements.tscn")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://nlwix7o4synp"]
 
-[ext_resource type="Script" path="res://season/bowlsimulation.gd" id="1_fobff"]
-[ext_resource type="Texture2D" uid="uid://d1ciegkviujnm" path="res://strategy.png" id="2_ljdw2"]
+[ext_resource type="Script" uid="uid://dy06xdq3v00d0" path="res://season/bowlsimulation.gd" id="1_fobff"]
+[ext_resource type="Texture2D" uid="uid://bh3r53sh6yavm" path="res://strategy.png" id="2_ljdw2"]
 [ext_resource type="Texture2D" uid="uid://ddvnyfqq6tos6" path="res://hourglass.png" id="3_m7kor"]
-[ext_resource type="Texture2D" uid="uid://isxwddeubtqr" path="res://selectsmall.png" id="4_jpdms"]
+[ext_resource type="Texture2D" uid="uid://cs8u1xphn4wtg" path="res://selectsmall.png" id="4_jpdms"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -18,8 +18,8 @@ script = ExtResource("1_fobff")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1315.0
+offset_bottom = 752.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -64,10 +64,10 @@ text = "Full Bowl Week/First Round Results:"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 430.0
-offset_top = 550.0
-offset_right = 732.0
-offset_bottom = 613.0
+offset_left = 442.0
+offset_top = 592.0
+offset_right = 745.0
+offset_bottom = 655.0
 theme_override_font_sizes/font_size = 40
 text = "Sim to Week 15"
 
@@ -76,7 +76,7 @@ layout_mode = 0
 offset_left = 102.0
 offset_top = 282.0
 offset_right = 1090.0
-offset_bottom = 394.0
+offset_bottom = 412.0
 columns = 3
 column_titles_visible = true
 hide_root = true
@@ -85,17 +85,18 @@ select_mode = 1
 [node name="Tree2" type="Tree" parent="."]
 layout_mode = 0
 offset_left = 102.0
-offset_top = 413.0
+offset_top = 426.0
 offset_right = 1090.0
-offset_bottom = 525.0
+offset_bottom = 556.0
 columns = 10
 column_titles_visible = true
 hide_root = true
 select_mode = 1
 
 [node name="CoachButton" type="Button" parent="."]
-offset_left = 890.0
-offset_right = 1138.0
+layout_mode = 0
+offset_left = 990.0
+offset_right = 1239.0
 offset_bottom = 63.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -104,9 +105,10 @@ icon = ExtResource("2_ljdw2")
 flat = true
 
 [node name="HistoryButton" type="Button" parent="."]
-offset_left = 882.0
+layout_mode = 0
+offset_left = 983.0
 offset_top = 46.0
-offset_right = 1142.0
+offset_right = 1243.0
 offset_bottom = 109.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -115,9 +117,10 @@ icon = ExtResource("3_m7kor")
 flat = true
 
 [node name="AchievementButton" type="Button" parent="."]
-offset_left = 895.0
+layout_mode = 0
+offset_left = 995.0
 offset_top = 93.0
-offset_right = 1132.0
+offset_right = 1232.0
 offset_bottom = 156.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30

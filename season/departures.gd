@@ -1,5 +1,5 @@
 extends Control
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 var team = Global.team
 var database : SQLite
 var treerow : TreeItem
@@ -175,7 +175,15 @@ func _on_button_pressed():
 			var birth = season - 18
 			var jersey = randi() % 100
 			var state
-			var rating = randi() % 59 + 29
+			var rating
+			if p == "K":
+				# Kickers are usually lower rated
+				if randf() < 0.80:
+					rating = randi_range(29, 40)
+				else:
+					rating = randi_range(41, 75)
+			else:
+				rating = randi_range(29, 87)
 			database.query("SELECT firstname FROM players1 ORDER BY RANDOM() LIMIT 1")
 			for r in database.query_result:
 				first = r["firstname"]

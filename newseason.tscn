@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://br38lue2pd58o"]
 
-[ext_resource type="Script" path="res://newseason.gd" id="1_326hh"]
+[ext_resource type="Script" uid="uid://cuca4i5wmmf0" path="res://newseason.gd" id="1_326hh"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,15 +15,15 @@ script = ExtResource("1_326hh")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1303.0
+offset_bottom = 735.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Tree" type="Tree" parent="."]
 layout_mode = 0
 offset_left = 96.0
 offset_top = 97.0
-offset_right = 1049.0
+offset_right = 1199.0
 offset_bottom = 539.0
 columns = 6
 column_titles_visible = true
@@ -42,10 +42,10 @@ text = "Roster"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 440.0
-offset_top = 550.0
-offset_right = 719.0
-offset_bottom = 613.0
+offset_left = 500.0
+offset_top = 585.0
+offset_right = 780.0
+offset_bottom = 648.0
 theme_override_font_sizes/font_size = 40
 text = "Sim to Week 1"
 

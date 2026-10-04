@@ -120,7 +120,7 @@ func _process(delta):
 	pass
 
 func _draw():
-	draw_circle(Vector2(1014, 136), 120, white)
+	draw_circle(Vector2(1026, 136), 120, white)
 
 
 func _on_button_pressed():

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://mcrq5tv8y0tc"]
 
-[ext_resource type="Script" path="res://season/simulation.gd" id="1_upaho"]
-[ext_resource type="Texture2D" uid="uid://d1ciegkviujnm" path="res://strategy.png" id="2_34lnl"]
+[ext_resource type="Script" uid="uid://bqao340knnl8x" path="res://season/simulation.gd" id="1_upaho"]
+[ext_resource type="Texture2D" uid="uid://bh3r53sh6yavm" path="res://strategy.png" id="2_34lnl"]
 [ext_resource type="Texture2D" uid="uid://ddvnyfqq6tos6" path="res://hourglass.png" id="3_b5288"]
-[ext_resource type="Texture2D" uid="uid://isxwddeubtqr" path="res://selectsmall.png" id="4_ubx1i"]
+[ext_resource type="Texture2D" uid="uid://cs8u1xphn4wtg" path="res://selectsmall.png" id="4_ubx1i"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -18,8 +18,8 @@ script = ExtResource("1_upaho")
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1183.0
-offset_bottom = 675.0
+offset_right = 1306.0
+offset_bottom = 747.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -64,10 +64,10 @@ text = "Record:"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 440.0
-offset_top = 550.0
-offset_right = 719.0
-offset_bottom = 613.0
+offset_left = 492.0
+offset_top = 572.0
+offset_right = 772.0
+offset_bottom = 635.0
 theme_override_font_sizes/font_size = 40
 text = "Sim to Week 1"
 
@@ -75,7 +75,7 @@ text = "Sim to Week 1"
 layout_mode = 0
 offset_left = 102.0
 offset_top = 282.0
-offset_right = 1090.0
+offset_right = 1221.0
 offset_bottom = 539.0
 columns = 10
 column_titles_visible = true
@@ -83,8 +83,9 @@ hide_root = true
 select_mode = 1
 
 [node name="CoachButton" type="Button" parent="."]
-offset_left = 890.0
-offset_right = 1138.0
+layout_mode = 0
+offset_left = 990.0
+offset_right = 1239.0
 offset_bottom = 63.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -93,9 +94,10 @@ icon = ExtResource("2_34lnl")
 flat = true
 
 [node name="HistoryButton" type="Button" parent="."]
-offset_left = 882.0
+layout_mode = 0
+offset_left = 983.0
 offset_top = 46.0
-offset_right = 1142.0
+offset_right = 1243.0
 offset_bottom = 109.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30
@@ -104,9 +106,10 @@ icon = ExtResource("3_b5288")
 flat = true
 
 [node name="AchievementButton" type="Button" parent="."]
-offset_left = 895.0
+layout_mode = 0
+offset_left = 995.0
 offset_top = 93.0
-offset_right = 1132.0
+offset_right = 1232.0
 offset_bottom = 156.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 30

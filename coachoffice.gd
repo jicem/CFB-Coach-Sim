@@ -51,7 +51,7 @@ func _ready():
 	database.path = "res://data/cfb.db"
 	database.open_db()
 	# Select all rows from the table with the current team ID
-	var array1 : Array = database.select_rows("players", "tid == " + str(team), ["*"])
+	var array1 : Array = database.select_rows("players1", "tid == " + str(team), ["*"])
 	for row in array1:
 		var position = row["position"]
 		if(position == "OL"): continue

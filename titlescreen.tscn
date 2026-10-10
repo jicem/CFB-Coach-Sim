@@ -49,7 +49,7 @@ offset_bottom = 227.0
 theme_override_font_sizes/font_size = 50
 text = "Start Game"
 
-[node name="Button2" type="Button" parent="."]
+[node name="Load" type="Button" parent="."]
 offset_left = 790.0
 offset_top = 265.0
 offset_right = 1071.0
@@ -73,7 +73,42 @@ offset_bottom = 570.0
 theme_override_font_sizes/font_size = 50
 text = "Quit"
 
+[node name="SavedGames" type="Window" parent="."]
+oversampling_override = 1.0
+title = "Saved Games"
+size = Vector2i(600, 300)
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="SavedGames"]
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 871.0
+offset_bottom = 669.0
+color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[node name="ItemList" type="ItemList" parent="SavedGames"]
+offset_right = 599.0
+offset_bottom = 235.0
+
+[node name="Button1" type="Button" parent="SavedGames"]
+offset_left = 72.0
+offset_top = 244.0
+offset_right = 252.0
+offset_bottom = 294.0
+theme_override_font_sizes/font_size = 30
+text = "Open Game"
+
+[node name="Button2" type="Button" parent="SavedGames"]
+offset_left = 309.0
+offset_top = 244.0
+offset_right = 520.0
+offset_bottom = 294.0
+theme_override_font_sizes/font_size = 30
+text = "Close Window"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="Guide" to="." method="_on_guide_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="SavedGames/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="SavedGames/Button2" to="." method="_on_button_2_pressed"]

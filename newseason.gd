@@ -72,26 +72,79 @@ func _on_timer_timeout():
 	}
 	database.query("DROP TABLE IF EXISTS schedule")
 	database.create_table("schedule", schedule_table)
-	# Create an array of numbers between 66 and 130
-	var available_ids = []
-	for i in range(66, 131):
-		available_ids.append(i)
 
-	# Create a loop that inserts a new row into the schedule table 65 times
-	for i in range(65):
-		# Get the homeTid
-		var home_tid = i + 1
-		
-		# Select a random index from the available_ids array
-		var random_index = randi() % available_ids.size()
-		
-		# Get the awayTid from the selected index
-		var away_tid = available_ids[random_index]
-		
-		# Remove the used value from the array
-		available_ids.remove_at(random_index)
+	# -----------------------------------------
+	# FORCED WEEK 1 MATCHUPS
+	# -----------------------------------------
 
-		# Insert the row into the schedule table
+	var forced_matchups = [
+		[44, 67], # South Carolina vs Clemson
+		[45, 68], # Georgia vs Georgia Tech
+		[46, 69], # Florida vs Florida State
+		[47, 70], # USF vs Miami
+		[48, 61], # Ole Miss vs Virginia
+		[49, 62], # Mississippi State vs Virginia Tech
+		[50, 63], # Missouri vs Wake Forest
+		[41, 66], # Kentucky vs NC State
+		[42, 65], # Tennessee vs UNC
+		[43, 64]  # Vanderbilt vs Duke
+	]
+
+	# Insert the forced games
+	for matchup in forced_matchups:
+
+		var row_data = {
+			"homeTid": matchup[0],
+			"awayTid": matchup[1],
+			"conference": 0,
+			"week": 1,
+			"homeTeamWon": -1
+		}
+
+		database.insert_row("schedule", row_data)
+
+
+	# -----------------------------------------
+	# REMAINING TEAMS
+	# -----------------------------------------
+
+	# Teams that still need a Week 1 opponent
+	var home_ids = []
+
+	# 1-40
+	for i in range(1, 41):
+		home_ids.append(i)
+
+	# 51-60
+	for i in range(51, 61):
+		home_ids.append(i)
+
+	# 71-80
+	for i in range(71, 81):
+		home_ids.append(i)
+
+
+	# Teams 81-140 are their opponents
+	var away_ids = []
+
+	for i in range(81, 141):
+		away_ids.append(i)
+
+
+	# -----------------------------------------
+	# RANDOMLY MATCH THE REMAINING TEAMS
+	# -----------------------------------------
+
+	for home_tid in home_ids:
+
+		# Pick a random opponent
+		var random_index = randi() % away_ids.size()
+		var away_tid = away_ids[random_index]
+
+		# Remove that team so it cannot be used again
+		away_ids.remove_at(random_index)
+
+		# Insert the matchup
 		var row_data = {
 			"homeTid": home_tid,
 			"awayTid": away_tid,
@@ -99,6 +152,7 @@ func _on_timer_timeout():
 			"week": 1,
 			"homeTeamWon": -1
 		}
+
 		database.insert_row("schedule", row_data)
 
 	get_tree().change_scene_to_file("res://season/week1.tscn")

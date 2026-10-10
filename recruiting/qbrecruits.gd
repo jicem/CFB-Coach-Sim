@@ -1,8 +1,9 @@
 extends Control
-var season = 2024 + Global.season
+var season = 2026 + Global.season
 var team = Global.team
 var database : SQLite
 var treerow : TreeItem
+@onready var option = $OptionButton
 @onready var tree = $Tree
 @onready var budget = %Budget
 @onready var selection = $LineEdit
@@ -39,31 +40,10 @@ func _ready():
 		# Convert budget to formatted string
 		var textBudget = add_commas(row["budget"])
 		budget.text = "Budget: $" + textBudget
-	# Select all rows from the table with the current team ID
-	var array2 : Array = database.select_rows("recruits", "position == 'QB'", ["*"])
-	for row in array2:
-		# Create variable for tree row
-		treerow = tree.create_item()
-		# Convert jersey number to string
-		var textID = str(row["pid"])
-		# Convert jersey number to string
-		var textJersey = str(row["jersey"])
-		# Convert age to string
-		var age = str(season - row["birthyear"])
-		# Convert NIL to a formatted string
-		var nil = "$" + add_commas(int(row["nil"]))
-		# Determine star rating based on the value of "rating"
-		var rating = row["rating"]
-		var starRating = match_rating_to_stars(rating)
-		# Add data to tree
-		treerow.set_text(0, textID)
-		treerow.set_text(1, row["firstname"])
-		treerow.set_text(2, row["lastname"])
-		treerow.set_text(3, age)
-		treerow.set_text(4, textJersey)
-		treerow.set_text(5, row["state"])
-		treerow.set_text(6, starRating)
-		treerow.set_text(7, nil)
+	# Populate the state dropdown
+	populate_state_filter()
+	# Populate the recruit table
+	populate_recruits()
 		
 func add_commas(number: int) -> String:
 	var formatted_number = str(number)  # Convert integer to string
@@ -93,10 +73,65 @@ func _process(delta):
 	pass
 
 
+func populate_state_filter():
+	option.clear()
+
+	# Add an option to show all recruits
+	option.add_item("All States")
+
+	# Get all state abbreviations in alphabetical order
+	database.query("SELECT DISTINCT abbrev FROM states ORDER BY abbrev ASC")
+
+	for row in database.query_result:
+		option.add_item(row["abbrev"])
+
+	# Default to All States
+	option.select(0)
+
+
+func populate_recruits():
+	# Clear existing recruit rows but keep the hidden root
+	tree.clear()
+	treerow = tree.create_item()
+
+	for i in range(8):
+		treerow.set_text(i, "Hidden")
+
+	# Get the selected state
+	var selected_state = option.get_item_text(option.selected)
+
+	var query = "SELECT * FROM recruits WHERE position = 'QB'"
+
+	# Apply the state filter unless All States is selected
+	if selected_state != "All States":
+		query += " AND state = '" + selected_state + "'"
+
+	query += " ORDER BY pid ASC"
+
+	database.query(query)
+
+	for row in database.query_result:
+		treerow = tree.create_item()
+
+		var text_id = str(row["pid"])
+		var text_jersey = str(row["jersey"])
+		var age = str(season - row["birthyear"])
+		var nil_value = "$" + add_commas(int(row["nil"]))
+		var star_rating = match_rating_to_stars(row["rating"])
+
+		treerow.set_text(0, text_id)
+		treerow.set_text(1, row["firstname"])
+		treerow.set_text(2, row["lastname"])
+		treerow.set_text(3, age)
+		treerow.set_text(4, text_jersey)
+		treerow.set_text(5, row["state"])
+		treerow.set_text(6, star_rating)
+		treerow.set_text(7, nil_value)
+
 func _on_submit_button_pressed():
 	if selection.text != "":
 		var id = int(selection.text)
-		if id > 0 and id < 41:
+		if id > 0 and id < 51:
 			var salary = 0
 			var array1 : Array = database.select_rows("recruits", "pid == " + selection.text, ["nil"])
 			for row in array1:
@@ -135,7 +170,7 @@ func _on_submit_button_pressed():
 func _on_line_edit_text_submitted(new_text):
 	if selection.text != "":
 		var id = int(selection.text)
-		if id > 0 and id < 41:
+		if id > 0 and id < 51:
 			var salary = 0
 			var array1 : Array = database.select_rows("recruits", "pid == " + selection.text, ["nil"])
 			for row in array1:
@@ -178,3 +213,7 @@ func _on_skip_button_pressed():
 
 func _on_tree_item_selected():
 	selection.text = tree.get_selected().get_text(0)
+
+
+func _on_option_button_item_selected(index):
+	populate_recruits()

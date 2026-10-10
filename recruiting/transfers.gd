@@ -594,7 +594,7 @@ func _on_line_edit_text_submitted(new_text):
 	else: pass
 
 func _on_button_pressed():
-	for i in range(6):
+	for i in range(7):
 		# Add players to each team with less than 23 roster spots
 		var array : Array = database.select_rows("teams1", "prestige > 80", ["*"])
 		for row in array:
@@ -621,7 +621,7 @@ func _on_button_pressed():
 					print(row["school"], " has ", r["count"], " players.")
 					var delete_query = "DELETE FROM transfers WHERE pid = %d" % p[0]["pid"]
 					database.query(delete_query)
-	for i in range(6):
+	for i in range(7):
 		# Add players to each team with less than 22 roster spots
 		var array : Array = database.select_rows("teams1", "prestige <= 80", ["*"])
 		for row in array:

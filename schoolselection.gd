@@ -27,10 +27,10 @@ func _ready():
 	database.open_db()
 	# Define conference names
 	var conferenceNames = ['Elite 10 East', 'Elite 10 West', 'Big Dozen East', 'Big Dozen West',
-						'South East', 'South West', 'Atlantic Coast', 'Champions',
-						'National', 'Dixieland', 'Midwest', 'Great Lakes', 'Coast to Coast']
+						'South East', 'South West', 'Atlantic Coast', 'Champions', 'National',
+						'Dixieland', 'Midwest', 'Great Lakes', 'Coast to Coast', 'Deep South']
 	# Change label to include the name of the school
-	var array : Array = database.select_rows("teams", "tid < 131", ["*"])
+	var array : Array = database.select_rows("teams", "tid < 141", ["*"])
 	for row in array:
 		var button = LinkButton.new()
 		# Create variable for tree row
@@ -53,7 +53,7 @@ func _process(delta):
 func _on_button_pressed():
 	if selection.text != "":
 		var id = int(selection.text)
-		if id > 0 and id < 131:
+		if id > 0 and id < 141:
 			Global.team = selection.text
 			get_tree().change_scene_to_file("res://playerlist.tscn")
 	else: pass
@@ -61,7 +61,7 @@ func _on_button_pressed():
 func _on_line_edit_text_submitted(new_text):
 	if selection.text != "":
 		var id = int(selection.text)
-		if id > 0 and id < 131:
+		if id > 0 and id < 141:
 			Global.team = selection.text
 			get_tree().change_scene_to_file("res://playerlist.tscn")
 	else: pass

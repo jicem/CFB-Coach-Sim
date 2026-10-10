@@ -14,6 +14,25 @@ func _ready():
 	database = SQLite.new()
 	database.path = "res://data/cfb.db"
 	database.open_db()
+	# Get players by pid, excluding the user's team
+	database.query("""
+		SELECT pid, rating
+		FROM players1
+		WHERE tid != %d
+		ORDER BY pid ASC
+		LIMIT 640 OFFSET 1280
+	""" % Global.team)
+	var other_players : Array = database.query_result
+	# Increase every selected player's rating by 1
+	for row in other_players:
+		var rating = int(row["rating"])
+		if rating < 99:
+			rating += 1
+			database.update_rows(
+				"players1",
+				"pid == " + str(row["pid"]),
+				{"rating": rating}
+			)
 	# Updating rankings
 	var query = "SELECT * FROM teams1 ORDER BY wins DESC, ranking ASC"
 	database.query(query)

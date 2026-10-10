@@ -104,10 +104,10 @@ func _ready():
 			}
 			database.insert_row("schedule", row_data)
 
-		# Select the next 32 teams
+		# Select the next 52 teams
 		var rowCounter = 1; # Initialize a counter for rows
-		var next32query = "SELECT * FROM teams1 ORDER BY wins DESC, ranking ASC LIMIT 32 OFFSET 12"
-		database.query(next32query)
+		var next52query = "SELECT * FROM teams1 ORDER BY wins DESC, ranking ASC LIMIT 52 OFFSET 12"
+		database.query(next52query)
 		for i in database.query_result:
 			Global.postseasonIds.append(i["tid"])
 			print(rowCounter)

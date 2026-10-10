@@ -31,7 +31,7 @@ text = "Offensive Line Recruiting"
 [node name="Tree" type="Tree" parent="."]
 layout_mode = 0
 offset_left = 96.0
-offset_top = 141.0
+offset_top = 184.0
 offset_right = 1182.0
 offset_bottom = 563.0
 columns = 8
@@ -48,6 +48,23 @@ offset_right = 673.0
 offset_bottom = 129.0
 theme_override_font_sizes/font_size = 40
 text = "Budget: $0"
+
+[node name="StateFilter" type="Label" parent="."]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 122.0
+offset_right = 323.0
+offset_bottom = 177.0
+theme_override_font_sizes/font_size = 40
+text = "Filter State:"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 342.0
+offset_top = 131.0
+offset_right = 387.0
+offset_bottom = 151.0
+theme_override_font_sizes/font_size = 30
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
@@ -83,6 +100,7 @@ offset_bottom = 623.0
 text = "Skip"
 
 [connection signal="item_selected" from="Tree" to="." method="_on_tree_item_selected"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="SubmitButton" to="." method="_on_submit_button_pressed"]
 [connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]

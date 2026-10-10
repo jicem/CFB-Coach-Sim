@@ -27,7 +27,7 @@ func _ready():
 		
 	# If the conference championship schedules haven't been done yet, do them here
 	if Global.ccschedulecomplete == false:
-		for i in range(13):
+		for i in range(14):
 			var teamIds: Array = [] # Create an empty array to store team IDs for each conference
 			var conference = i + 1
 			# Query to calculate wins for each team in the current conference and sort them

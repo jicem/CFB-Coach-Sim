@@ -58,6 +58,34 @@ text = "No"
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="SaveGame" type="Window" parent="."]
+oversampling_override = 1.0
+title = "Save Game"
+size = Vector2i(400, 200)
+visible = false
+
+[node name="Label" type="Label" parent="SaveGame"]
+offset_left = 20.0
+offset_top = 36.0
+offset_right = 379.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 24
+text = "Enter the name of this save file"
+
+[node name="LineEdit" type="LineEdit" parent="SaveGame"]
+offset_left = 26.0
+offset_top = 81.0
+offset_right = 377.0
+offset_bottom = 112.0
+
+[node name="Button" type="Button" parent="SaveGame"]
+offset_left = 167.0
+offset_top = 121.0
+offset_right = 230.0
+offset_bottom = 152.0
+text = "Submit"
+
 [connection signal="pressed" from="Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="No" to="." method="_on_no_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="SaveGame/Button" to="." method="_on_button_pressed"]

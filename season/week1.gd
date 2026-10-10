@@ -17,8 +17,190 @@ func _ready():
 	database.open_db()
 	# Set wins and losses to 0 for every team
 	database.query("UPDATE teams1 SET wins = 0, losses = 0")
-	# Assign random offensive and defensive coordinators to other teams and empty player stats table
-	database.query("UPDATE teams1 SET dcid = abs(RANDOM()) % (80 - 1) + 1, ocid = abs(RANDOM()) % (80 - 1) + 1 WHERE tid <> " + t)
+
+	# --------------------------------------------------
+	# ASSIGN OFFENSIVE COORDINATORS
+	# --------------------------------------------------
+
+	# Get teams sorted by prestige, highest first
+	var teams_by_prestige = database.select_rows(
+		"teams1",
+		"tid <> " + t,
+		["*"]
+	)
+
+	# Sort the teams by prestige descending
+	teams_by_prestige.sort_custom(
+		func(a, b):
+			if a["prestige"] == b["prestige"]:
+				return a["tid"] < b["tid"]
+			return a["prestige"] > b["prestige"]
+	)
+
+	# Get offensive coordinators sorted by rating
+	var offensive_coordinators = database.select_rows(
+		"offcoordinators",
+		"",
+		["*"]
+	)
+
+	offensive_coordinators.sort_custom(
+		func(a, b):
+			if a["rating"] == b["rating"]:
+				return a["ocid"] < b["ocid"]
+			return a["rating"] > b["rating"]
+	)
+
+	# Assign coordinators
+	for rank in range(teams_by_prestige.size()):
+
+		var team_row = teams_by_prestige[rank]
+		var tid = team_row["tid"]
+
+		# Every four teams, decrease the elite-coordinator
+		# probability by 1 percentage point.
+		#
+		# #1-4   = 32%
+		# #5-8   = 31%
+		# #9-12  = 30%
+		# ...
+		# #125-128 = 1%
+		# #129      = 0%
+		var top_probability = 32 - int(rank / 4)
+
+		top_probability = clamp(
+			top_probability,
+			0,
+			32
+		)
+
+		var ocid
+
+		# Random number from 0 to 99
+		var roll = randi_range(0, 99)
+
+		if roll < top_probability:
+
+			# ------------------------------------------
+			# TOP 20 OFFENSIVE COORDINATORS
+			# ------------------------------------------
+
+			var index = randi_range(
+				0,
+				min(19, offensive_coordinators.size() - 1)
+			)
+
+			ocid = offensive_coordinators[index]["ocid"]
+
+		else:
+
+			# ------------------------------------------
+			# BOTTOM 60 OFFENSIVE COORDINATORS
+			# ------------------------------------------
+
+			var bottom_start = min(
+				20,
+				offensive_coordinators.size()
+			)
+
+			var bottom_end = offensive_coordinators.size() - 1
+
+			var index = randi_range(
+				bottom_start,
+				bottom_end
+			)
+
+			ocid = offensive_coordinators[index]["ocid"]
+
+		# Assign coordinator
+		database.update_rows(
+			"teams1",
+			"tid = " + str(tid),
+			{"ocid": ocid}
+		)
+
+	# --------------------------------------------------
+	# ASSIGN DEFENSIVE COORDINATORS
+	# --------------------------------------------------
+
+	# Get defensive coordinators sorted by rating
+	var defensive_coordinators = database.select_rows(
+		"defcoordinators",
+		"",
+		["*"]
+	)
+	
+	defensive_coordinators.sort_custom(
+		func(a, b):
+			if a["rating"] == b["rating"]:
+				return a["dcid"] < b["dcid"]
+			return a["rating"] > b["rating"]
+	)
+	
+	# Assign coordinators
+	for rank in range(teams_by_prestige.size()):
+
+		var team_row = teams_by_prestige[rank]
+		var tid = team_row["tid"]
+
+		# #1-4 = 32%
+		# #5-8 = 31%
+		# ...
+		# #125-128 = 1%
+		# #129 = 0%
+		var top_probability = 32 - int(rank / 4)
+
+		top_probability = clamp(
+			top_probability,
+			0,
+			32
+		)
+
+		var dcid
+
+		var roll = randi_range(0, 99)
+
+		if roll < top_probability:
+
+			# ------------------------------------------
+			# TOP 20 DEFENSIVE COORDINATORS
+			# ------------------------------------------
+
+			var index = randi_range(
+				0,
+				min(19, defensive_coordinators.size() - 1)
+			)
+
+			dcid = defensive_coordinators[index]["dcid"]
+
+		else:
+
+			# ------------------------------------------
+			# BOTTOM 60 DEFENSIVE COORDINATORS
+			# ------------------------------------------
+
+			var bottom_start = min(
+				20,
+				defensive_coordinators.size()
+			)
+
+			var bottom_end = defensive_coordinators.size() - 1
+
+			var index = randi_range(
+				bottom_start,
+				bottom_end
+			)
+
+			dcid = defensive_coordinators[index]["dcid"]
+
+		# Assign coordinator
+		database.update_rows(
+			"teams1",
+			"tid = " + str(tid),
+			{"dcid": dcid}
+		)
+
+	# Empty player stats table
 	database.query("DELETE FROM player_stats")
 	var season_count_query = "SELECT COUNT(*) as count FROM seasons"
 	database.query(season_count_query)

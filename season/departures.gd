@@ -169,7 +169,7 @@ func _on_button_pressed():
 	database.create_table("recruits", player_table)
 	var positiions = ["QB", "RB", "RB", "WR", "WR", "TE", "OL", "OL", "OL", "OL", "OL", "DL", "DL", "DL", "DL", "LB", "LB", "LB", "CB", "CB", "S", "S", "K"]
 	for p in positiions:
-		for i in range(40):
+		for i in range(50):
 			var first
 			var last
 			var birth = season - 18

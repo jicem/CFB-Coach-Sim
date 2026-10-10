@@ -22,10 +22,11 @@ func _ready():
 		"buying cars and jewellery for middle school football prospects so they'll come here when they graduate.",
 		"trying to convince people that our quarterback doesn't only suck because he's betting on his own games.",
 		"recruiting lawyers to sue our conference for not letting us sign NFL players.",
-		"recruiting lawyers to sue our conference for not letting us sign NFL players.",
+		"paying people to record our opponents' practices on their cell phones.",
+		"liking all of the number one high schoool prospect's posts on Instagram.",
 		"having ChatGPT write the email I'll send to our basketball coach when I fire him."
 	]
-	var random = randi() % 7
+	var random = randi() % 12
 	# Select a random activity and display it
 	var activity = activities[random]
 	label2.text += activity

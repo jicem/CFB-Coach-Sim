@@ -88,7 +88,7 @@ func _ready():
 							# If the scheme for the coordinator and head coach are the same, double the rating
 							if j["scheme"] == Global.offense:
 								# Query to add the ratings of the offensive and defensive coordinators
-								var newRating = j["rating"] * 2
+								var newRating = j["rating"] * 1.1
 								home_result = i["total_ratings"] + newRating
 							# If the scheme for the coordinator and head coach are not the same, use the normal rating
 							else:
@@ -100,7 +100,7 @@ func _ready():
 						for j in database.query_result:
 							# If the scheme for the coordinator and head coach are the same, double the rating
 							if j["scheme"] == Global.defense:
-								var newRating = j["rating"] * 2
+								var newRating = j["rating"] * 1.1
 								home_result = i["total_ratings"] + newRating
 							# If the scheme for the coordinator and head coach are not the same, use the normal rating
 							else:
@@ -116,7 +116,7 @@ func _ready():
 								for k in database.query_result:
 									if k["scheme"] == Global.defense:
 										# If both schemes are equal to the player's schemes, both ratings will be doubled
-										query = "SELECT (o.rating + d.rating) * 2 AS coord_ratings FROM teams1 t
+										query = "SELECT (o.rating + d.rating) * 1.1 AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(homeTid)
 										database.query(query)
@@ -124,7 +124,7 @@ func _ready():
 											home_result = i["total_ratings"] + l["coord_ratings"]
 									else:
 										# If only the offensive coordinator's scheme is equal to the player's, double one rating
-										query = "SELECT (o.rating * 2) + d.rating AS coord_ratings FROM teams1 t
+										query = "SELECT (o.rating * 1.1) + d.rating AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(homeTid)
 										database.query(query)
@@ -136,7 +136,7 @@ func _ready():
 								for k in database.query_result:
 									if k["scheme"] == Global.defense:
 										# If only the defensive coordinator's scheme is equal to the player's, double one rating
-										query = "SELECT o.rating + (d.rating * 2) AS coord_ratings FROM teams1 t
+										query = "SELECT o.rating + (d.rating * 1.1) AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(homeTid)
 										database.query(query)
@@ -181,7 +181,7 @@ func _ready():
 							# If the scheme for the coordinator and head coach are the same, double the rating
 							if j["scheme"] == Global.offense:
 								# Query to add the ratings of the offensive and defensive coordinators
-								var newRating = j["rating"] * 2
+								var newRating = j["rating"] * 1.1
 								away_result = i["total_ratings"] + newRating
 							# If the scheme for the coordinator and head coach are not the same, use the normal rating
 							else:
@@ -193,7 +193,7 @@ func _ready():
 						for j in database.query_result:
 							# If the scheme for the coordinator and head coach are the same, double the rating
 							if j["scheme"] == Global.defense:
-								var newRating = j["rating"] * 2
+								var newRating = j["rating"] * 1.1
 								away_result = i["total_ratings"] + newRating
 							# If the scheme for the coordinator and head coach are not the same, use the normal rating
 							else:
@@ -209,7 +209,7 @@ func _ready():
 								for k in database.query_result:
 									if k["scheme"] == Global.defense:
 										# If both schemes are equal to the player's schemes, both ratings will be doubled
-										query = "SELECT (o.rating + d.rating) * 2 AS coord_ratings FROM teams1 t
+										query = "SELECT (o.rating + d.rating) * 1.1 AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(awayTid)
 										database.query(query)
@@ -217,7 +217,7 @@ func _ready():
 											away_result = i["total_ratings"] + l["coord_ratings"]
 									else:
 										# If only the offensive coordinator's scheme is equal to the player's, double one rating
-										query = "SELECT (o.rating * 2) + d.rating AS coord_ratings FROM teams1 t
+										query = "SELECT (o.rating * 1.1) + d.rating AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(awayTid)
 										database.query(query)
@@ -229,7 +229,7 @@ func _ready():
 								for k in database.query_result:
 									if k["scheme"] == Global.defense:
 										# If only the defensive coordinator's scheme is equal to the player's, double one rating
-										query = "SELECT o.rating + (d.rating * 2) AS coord_ratings FROM teams1 t
+										query = "SELECT o.rating + (d.rating * 1.1) AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(awayTid)
 										database.query(query)
@@ -344,7 +344,17 @@ func _ready():
 		'Potato Bowl',
 		'Country Bowl',
 		'Ketchup Bowl',
-		'Carolina Bowl'
+		'Carolina Bowl',
+		'Mexico City Bowl',
+		'Vancouver Bowl',
+		'Alaska Bowl',
+		'Burlington Bowl',
+		'Manchester Bowl',
+		'Providence Bowl',
+		'Nike Bol Bol Bowl',
+		'Kellogg\'s Cereal Bowl',
+		'P.F. Chang\'s Noodle Bowl',
+		'Chipotle Slop Bowl'
 	]
 	var rowCounter = 0; # Initialize a counter for rows
 	var query = "SELECT s.homeTid, s.awayTid, s.homeTeamWon, t1.school AS homeSchool, t2.school AS awaySchool FROM schedule s
@@ -363,7 +373,7 @@ func _ready():
 		var winningTeam = homeSchool if homeTeamWon == 1 else awaySchool
 		var losingTeam = homeSchool if homeTeamWon == 0 else awaySchool
 		
-		if rowCounter < 20:
+		if rowCounter < 30:
 			# Add data to tree
 			treerow.set_text(0, bowlNames[rowCounter])
 			treerow.set_text(1, winningTeam)

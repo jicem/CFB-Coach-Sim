@@ -28,7 +28,7 @@ func _ready():
 	database.path = "res://data/cfb.db"
 	database.open_db()
 	# Query to retrieve the top 40 teams by wins
-	var query = "SELECT * FROM teams1 WHERE ranking > 0 ORDER BY ranking ASC LIMIT 40"
+	var query = "SELECT * FROM teams1 WHERE ranking > 0 ORDER BY ranking ASC LIMIT 65"
 	database.query(query)
 	for i in database.query_result:
 		# Create variable for tree row

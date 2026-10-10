@@ -93,7 +93,7 @@ func _on_timer_timeout():
 	database = SQLite.new()
 	database.path = "res://data/cfb.db"
 	database.open_db()
-	for i in range(8):
+	for i in range(9):
 		# Add players to each team with less than 22 roster spots
 		var array : Array = database.select_rows("teams1", "prestige > 80", ["*"])
 		for row in array:
@@ -120,7 +120,7 @@ func _on_timer_timeout():
 					print(row["school"], " has ", r["count"], " players.")
 					var delete_query = "DELETE FROM recruits WHERE pid = %d" % p[0]["pid"]
 					database.query(delete_query)
-	for i in range(7):
+	for i in range(8):
 		# Add players to each team with less than 22 roster spots
 		var array : Array = database.select_rows("teams1", "prestige <= 80", ["*"])
 		for row in array:

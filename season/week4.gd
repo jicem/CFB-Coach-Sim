@@ -17,6 +17,30 @@ func _ready():
 	label.text = str(season) + " Season"
 	label2.text = "Here are your options for Week 4, Coach " + Global.coachname + ":"
 	
+	# Get players by pid, excluding the user's team
+	database.query("""
+		SELECT pid, rating
+		FROM players1
+		WHERE tid != %d
+		ORDER BY pid ASC
+		LIMIT 640 OFFSET 1280
+	""" % Global.team)
+
+	var other_players : Array = database.query_result
+
+	# Increase every selected player's rating by 1
+	for row in other_players:
+		var rating = int(row["rating"])
+
+		if rating < 99:
+			rating += 1
+
+			database.update_rows(
+				"players1",
+				"pid == " + str(row["pid"]),
+				{"rating": rating}
+			)
+
 	# If the conference schedules haven't been done yet, do them here
 	if Global.schedule3complete == false:
 	
@@ -27,7 +51,7 @@ func _ready():
 		var matchups = []
 		
 		# Generate the round-robin schedule
-		for i in range(13):
+		for i in range(14):
 			var conferenceMatchups = []
 			var conference = i + 1
 			var multiple = i * 10

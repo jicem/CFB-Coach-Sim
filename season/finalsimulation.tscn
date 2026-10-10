@@ -64,12 +64,12 @@ text = "Championship Game Results:"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 408.0
+offset_left = 452.0
 offset_top = 616.0
-offset_right = 814.0
+offset_right = 790.0
 offset_bottom = 679.0
 theme_override_font_sizes/font_size = 40
-text = "Performance Review"
+text = "Final Player Stats"
 
 [node name="Tree" type="Tree" parent="."]
 layout_mode = 0

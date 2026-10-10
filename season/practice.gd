@@ -16,10 +16,11 @@ func _ready():
 	# Add column names for tree
 	tree.set_column_title(0, "First Name")
 	tree.set_column_title(1, "Last Name")
-	tree.set_column_title(2, "Position")
-	tree.set_column_title(3, "Jersey Number")
-	tree.set_column_title(4, "Old Rating")
-	tree.set_column_title(5, "New Rating")
+	tree.set_column_title(2, "Age")
+	tree.set_column_title(3, "Position")
+	tree.set_column_title(4, "Jersey Number")
+	tree.set_column_title(5, "Old Rating")
+	tree.set_column_title(6, "New Rating")
 	# The root node is hidden in the tree
 	treerow = tree.create_item()
 	treerow.set_text(0, "Hidden")
@@ -28,6 +29,7 @@ func _ready():
 	treerow.set_text(3, "Hidden")
 	treerow.set_text(4, "Hidden")
 	treerow.set_text(5, "Hidden")
+	treerow.set_text(6, "Hidden")
 	# Open database from cfb.db file
 	database = SQLite.new()
 	database.path = "res://data/cfb.db"
@@ -39,25 +41,26 @@ func _ready():
 		var rating = row["rating"]
 		# Create variable for tree row
 		treerow = tree.create_item()
+		# Convert age to string
+		var age = str(season - row["birthyear"])
 		# Convert jersey number to string
 		var textJersey = str(row["jersey"])
 		# Convert rating to string
 		var textRating = str(rating)
-		print("Old Rating: " + textRating)
 		# Add data to tree
 		treerow.set_text(0, row["firstname"])
 		treerow.set_text(1, row["lastname"])
-		treerow.set_text(2, row["position"])
-		treerow.set_text(3, textJersey)
-		treerow.set_text(4, textRating)
+		treerow.set_text(2, age)
+		treerow.set_text(3, row["position"])
+		treerow.set_text(4, textJersey)
+		treerow.set_text(5, textRating)
 		# Determine whether to increase the rating by 1
 		if rng.randf() < 0.5 and rating < 99:
 			rating += 1
 		textRating = str(rating)
-		print("New Rating: " + textRating)
 		database.update_rows("players1", "pid == " + str(row["pid"]), {"rating": rating})
 		# Display the new rating in the table
-		treerow.set_text(5, textRating)
+		treerow.set_text(6, textRating)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

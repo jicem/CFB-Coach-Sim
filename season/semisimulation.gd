@@ -88,7 +88,7 @@ func _ready():
 							# If the scheme for the coordinator and head coach are the same, double the rating
 							if j["scheme"] == Global.offense:
 								# Query to add the ratings of the offensive and defensive coordinators
-								var newRating = j["rating"] * 2
+								var newRating = j["rating"] * 1.1
 								home_result = i["total_ratings"] + newRating
 							# If the scheme for the coordinator and head coach are not the same, use the normal rating
 							else:
@@ -100,7 +100,7 @@ func _ready():
 						for j in database.query_result:
 							# If the scheme for the coordinator and head coach are the same, double the rating
 							if j["scheme"] == Global.defense:
-								var newRating = j["rating"] * 2
+								var newRating = j["rating"] * 1.1
 								home_result = i["total_ratings"] + newRating
 							# If the scheme for the coordinator and head coach are not the same, use the normal rating
 							else:
@@ -116,7 +116,7 @@ func _ready():
 								for k in database.query_result:
 									if k["scheme"] == Global.defense:
 										# If both schemes are equal to the player's schemes, both ratings will be doubled
-										query = "SELECT (o.rating + d.rating) * 2 AS coord_ratings FROM teams1 t
+										query = "SELECT (o.rating + d.rating) * 1.1 AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(homeTid)
 										database.query(query)
@@ -124,7 +124,7 @@ func _ready():
 											home_result = i["total_ratings"] + l["coord_ratings"]
 									else:
 										# If only the offensive coordinator's scheme is equal to the player's, double one rating
-										query = "SELECT (o.rating * 2) + d.rating AS coord_ratings FROM teams1 t
+										query = "SELECT (o.rating * 1.1) + d.rating AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(homeTid)
 										database.query(query)
@@ -136,7 +136,7 @@ func _ready():
 								for k in database.query_result:
 									if k["scheme"] == Global.defense:
 										# If only the defensive coordinator's scheme is equal to the player's, double one rating
-										query = "SELECT o.rating + (d.rating * 2) AS coord_ratings FROM teams1 t
+										query = "SELECT o.rating + (d.rating * 1.1) AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(homeTid)
 										database.query(query)
@@ -181,7 +181,7 @@ func _ready():
 							# If the scheme for the coordinator and head coach are the same, double the rating
 							if j["scheme"] == Global.offense:
 								# Query to add the ratings of the offensive and defensive coordinators
-								var newRating = j["rating"] * 2
+								var newRating = j["rating"] * 1.1
 								away_result = i["total_ratings"] + newRating
 							# If the scheme for the coordinator and head coach are not the same, use the normal rating
 							else:
@@ -193,7 +193,7 @@ func _ready():
 						for j in database.query_result:
 							# If the scheme for the coordinator and head coach are the same, double the rating
 							if j["scheme"] == Global.defense:
-								var newRating = j["rating"] * 2
+								var newRating = j["rating"] * 1.1
 								away_result = i["total_ratings"] + newRating
 							# If the scheme for the coordinator and head coach are not the same, use the normal rating
 							else:
@@ -209,7 +209,7 @@ func _ready():
 								for k in database.query_result:
 									if k["scheme"] == Global.defense:
 										# If both schemes are equal to the player's schemes, both ratings will be doubled
-										query = "SELECT (o.rating + d.rating) * 2 AS coord_ratings FROM teams1 t
+										query = "SELECT (o.rating + d.rating) * 1.1 AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(awayTid)
 										database.query(query)
@@ -217,7 +217,7 @@ func _ready():
 											away_result = i["total_ratings"] + l["coord_ratings"]
 									else:
 										# If only the offensive coordinator's scheme is equal to the player's, double one rating
-										query = "SELECT (o.rating * 2) + d.rating AS coord_ratings FROM teams1 t
+										query = "SELECT (o.rating * 1.1) + d.rating AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(awayTid)
 										database.query(query)
@@ -229,7 +229,7 @@ func _ready():
 								for k in database.query_result:
 									if k["scheme"] == Global.defense:
 										# If only the defensive coordinator's scheme is equal to the player's, double one rating
-										query = "SELECT o.rating + (d.rating * 2) AS coord_ratings FROM teams1 t
+										query = "SELECT o.rating + (d.rating * 1.1) AS coord_ratings FROM teams1 t
 												JOIN offcoordinators o ON o.ocid = t.ocid
 												JOIN defcoordinators d ON d.dcid = t.dcid WHERE t.tid = " + str(awayTid)
 										database.query(query)

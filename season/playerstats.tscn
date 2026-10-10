@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://frhnpjxk3af4"]
+[gd_scene load_steps=2 format=3 uid="uid://b5irse8f2nll0"]
 
-[ext_resource type="Script" uid="uid://wsg748pl51gs" path="res://season/practice.gd" id="1_e8xu1"]
+[ext_resource type="Script" uid="uid://bohvr17rp1f6c" path="res://season/playerstats.gd" id="1_pi2md"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,14 +9,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_e8xu1")
+script = ExtResource("1_pi2md")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
 layout_mode = 0
 offset_left = -29.0
 offset_top = -31.0
-offset_right = 1311.0
-offset_bottom = 745.0
+offset_right = 1308.0
+offset_bottom = 743.0
 color = Color(0.545098, 0.270588, 0.0745098, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -27,26 +28,26 @@ offset_top = 14.0
 offset_right = 272.0
 offset_bottom = 83.0
 theme_override_font_sizes/font_size = 50
-text = "Season"
-
-[node name="Tree" type="Tree" parent="."]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 97.0
-offset_right = 1196.0
-offset_bottom = 539.0
-columns = 7
-column_titles_visible = true
-hide_root = true
-select_mode = 1
+text = "Final Player Stats"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 357.0
-offset_top = 577.0
-offset_right = 947.0
-offset_bottom = 640.0
+offset_left = 452.0
+offset_top = 600.0
+offset_right = 858.0
+offset_bottom = 663.0
 theme_override_font_sizes/font_size = 40
-text = "Simulate Next Week of Games"
+text = "Performance Review"
+
+[node name="Tree" type="Tree" parent="."]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 118.0
+offset_right = 1159.0
+offset_bottom = 558.0
+columns = 10
+column_titles_visible = true
+hide_root = true
+select_mode = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
